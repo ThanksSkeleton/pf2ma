@@ -1,50 +1,58 @@
 :root {
+  --tone-burgundy: #522e2c;
+  --tone-blue: #1b2550;
+  --tone-green: #315638;
+  --tone-yellow: #6d5932;
   font-family: Arial, Helvetica, sans-serif;
-  color: #1d2225;
-  background: #f5f4f1;
+  color: #f2eee4;
+  background: #1b1917;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
 * { box-sizing: border-box; }
 body { margin: 0; }
-.creature-sheet { width: min(100%, 850px); min-height: 100vh; margin: 0 auto; border-top: 7px solid #c61823; background: #fff; box-shadow: 0 12px 50px #20202012; }
+.creature-sheet { width: min(100%, 850px); min-height: 100vh; margin: 0 auto; border-top: 7px solid var(--tone-burgundy); background: #0f0f0f; box-shadow: 0 12px 50px #0008; }
 .top-grid { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 28px; width: min(100% - 48px, 610px); margin: 0 auto 20px; padding-top: 28px; }
-.identity { display: flex; flex-direction: column; min-width: 0; color: #bd101b; }
+.identity { display: flex; flex-direction: column; min-width: 0; color: #cbc18f; }
 .role-row { display: flex; align-items: center; justify-content: flex-start; gap: 10px; margin-bottom: 8px; }
 h1 { margin: 0; font-size: clamp(48px, 7vw, 66px); font-weight: 900; letter-spacing: -.045em; line-height: .95; text-transform: uppercase; }
-.role { margin: 0; font-size: 14px; letter-spacing: .13em; text-align: left; text-transform: uppercase; }
+.role { margin: 0; color: #e0d1a9; font-size: 14px; letter-spacing: .13em; text-align: left; text-transform: uppercase; }
 .crest { display: block; flex: none; width: 35px; height: 40px; }
 .size-row { margin: auto 0 0; }
 .sheet-body { width: min(100% - 48px, 610px); margin: 0 auto; padding-bottom: 70px; }
 .description { margin-bottom: 30px; }
 .description p { margin: 0; font-size: 15px; line-height: 1.52; }
-.section-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; margin-bottom: 11px; border-bottom: 2px solid #25292a; }
-.section-heading h2 { margin: 0 0 6px; font-size: 20px; font-weight: 900; letter-spacing: -.035em; line-height: 1.1; text-transform: uppercase; }
+.section-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; margin-bottom: 11px; padding: 5px 9px; border-bottom: 2px solid #8e7854; background: var(--tone-burgundy); }
+.section-heading h2 { margin: 0; color: #cbc18f; font-size: 20px; font-weight: 900; letter-spacing: -.035em; line-height: 1.1; text-transform: uppercase; }
 .stat-list { padding: 0; }
 .stat-group { display: grid; margin: 0; }
 .stat-group + .stat-group { margin-top: 9px; }
-.stat-row { display: flex; align-items: center; justify-content: space-between; min-height: 34px; padding: 6px 12px; border-left: 4px solid var(--stat-color); background: var(--stat-wash); color: var(--stat-color); }
+.stat-row { display: flex; align-items: center; justify-content: space-between; min-height: 34px; padding: 6px 12px; border-left: 4px solid var(--stat-accent); background: var(--stat-wash); color: var(--stat-ink); }
 .stat-row dt { font-size: 13px; font-weight: 800; letter-spacing: .025em; }
 .stat-row dd { margin: 0; font-size: 15px; font-weight: 800; font-variant-numeric: tabular-nums; }
-.stat-row--blue { --stat-color: #2265a7; --stat-wash: #edf4fa; }
-.stat-row--red { --stat-color: #bc1e2b; --stat-wash: #faeff0; }
-.stat-row--green { --stat-color: #277044; --stat-wash: #eef6f0; }
-.stat-row--yellow { --stat-color: #806000; --stat-wash: #fff8dd; }
-.stat-row--purple { --stat-color: #70479a; --stat-wash: #f5f0fa; }
-.stat-row--black { --stat-color: #25292a; --stat-wash: #f0f1f1; }
+.stat-row--blue { --stat-accent: #8396da; --stat-wash: var(--tone-blue); --stat-ink: #e2e8ff; }
+.stat-row--red { --stat-accent: #bd786f; --stat-wash: var(--tone-burgundy); --stat-ink: #ffebe4; }
+.stat-row--green { --stat-accent: #82b47a; --stat-wash: var(--tone-green); --stat-ink: #e3f2dc; }
+.stat-row--yellow { --stat-accent: #d5c489; --stat-wash: var(--tone-yellow); --stat-ink: #fff1c7; }
+.stat-row--purple { --stat-accent: #ad92c9; --stat-wash: #4a3c5d; --stat-ink: #f1e8ff; }
+.stat-row--black { --stat-accent: #080808; --stat-wash: #292929; --stat-ink: #f2eee4; }
 .tactics { margin: 0 0 30px; }
 .tactics p { margin: 0; font-size: 15px; line-height: 1.52; }
 .abilities .section-heading { margin-bottom: 14px; }
 .ability-list { display: grid; gap: 13px; }
-.ability { --ability-color: #212324; --ability-tint: #f0f1f1; }
-.ability--technique { --ability-color: #087d80; --ability-tint: #e7f2f2; }
-.ability--passive { --ability-color: #c51e28; --ability-tint: #faebec; }
-.ability-head { position: relative; padding: 9px 14px 8px; background: var(--ability-color); clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); color: white; }
+.ability { --ability-color: var(--tone-burgundy); --ability-tint: #292321; }
+.ability--strike { --ability-color: var(--tone-yellow); --ability-tint: #2e281f; }
+.ability--spell { --ability-color: var(--tone-blue); --ability-tint: #202438; }
+.ability--passive { --ability-color: var(--tone-green); --ability-tint: #222b22; }
+.ability-head { position: relative; padding: 9px 14px 8px; background: var(--ability-color); clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); color: #f2eee4; }
 .ability-name-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-.ability-head h3 { margin: 0; font-size: 17px; font-weight: 800; line-height: 1.1; }
+.ability-title { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.ability-icon { display: block; flex: none; width: 21px; height: 21px; }
+.ability-head h3 { margin: 0; color: #f2e8c3; font-size: 17px; font-weight: 800; line-height: 1.1; }
 .action-mark { font-size: 18px; font-weight: 800; letter-spacing: -.2em; padding-right: 4px; white-space: nowrap; }
 .ability-meta { margin: 3px 0 0; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 11px; letter-spacing: .015em; line-height: 1.3; }
-.ability-text { margin: 0; padding: 9px 14px 11px; background: var(--ability-tint); font-size: 14px; line-height: 1.45; }
+.ability-text { margin: 0; padding: 9px 14px 11px; background: var(--ability-tint); color: #f2eee4; font-size: 14px; line-height: 1.45; }
+.ability-line { display: block; }
 .ability-text strong { font-weight: 800; }
 @media (max-width: 570px) {
   .top-grid { width: min(100% - 34px, 610px); gap: 14px; padding-top: 22px; }
