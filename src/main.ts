@@ -3,8 +3,14 @@ import './style.css'
 type AbilityCard = {
   name: string
   type: 'attack' | 'spell' | 'passive' | 'reaction'
-  actionCount: number
-  meta?: string
+  actionCost: 1 | 2 | 3 | 'free' | 'reaction' | 'passive'
+  requirements?: string
+  trigger?: string
+  targets?: string
+  area?: string
+  savingThrow?: string
+  dc?: number
+  basicSave?: boolean
   attackType?: 'Ranged' | 'Melee'
   range?: string
   attack?: string
@@ -31,7 +37,7 @@ type Archetype = {
 
 const engineerLevel = 1
 
-// Retained as a reference example; the Engineer is the only creature rendered.
+// Reference archetype available through the archetype tabs.
 export const ace: Archetype = {
   name: 'Ace', level: 1, role: 'Striker', size: 'Medium',
   description: 'placeholder',
@@ -48,10 +54,10 @@ export const ace: Archetype = {
     ],
     [{ label: 'Speed', value: '40 feet' }],
   ],
-  attack: { name: 'Ranged Strike', type: 'attack', actionCount: 1, attackType: 'Ranged', range: '60 feet', attack: '+9', damage: '1d6+2', damageType: 'piercing' },
+  attack: { name: 'Ranged Strike', type: 'attack', actionCost: 1, attackType: 'Ranged', range: '60 feet', attack: '+9', damage: '1d6+2', damageType: 'piercing' },
   tactics: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
   abilities: [
-    { name: 'Mirror Image', type: 'spell', actionCount: 2, traits: ['Illusion'], frequency: 'once per encounter', duration: '1 minute', text: 'Three illusory copies surround the Ace. When an attack would hit, it hits the Ace only on a 1 in 4 chance with three copies, 1 in 3 with two, or 1 in 2 with one; otherwise it destroys a copy. A miss that is not a critical failure also destroys a copy. A critical hit assigned to a copy destroys it and hits the Ace as a normal success.' },
+    { name: 'Mirror Image', type: 'spell', actionCost: 2, traits: ['Illusion'], frequency: 'once per encounter', duration: '1 minute', text: 'Three illusory copies surround the Ace. When an attack would hit, it hits the Ace only on a 1 in 4 chance with three copies, 1 in 3 with two, or 1 in 2 with one; otherwise it destroys a copy. A miss that is not a critical failure also destroys a copy. A critical hit assigned to a copy destroys it and hits the Ace as a normal success.' },
   ],
   minions: [],
 }
@@ -72,7 +78,7 @@ const rangedMinion: Archetype = {
     ],
     [{ label: 'Speed', value: '0 feet' }],
   ],
-  attack: { name: 'Ranged Strike', type: 'attack', actionCount: 1, attackType: 'Ranged', range: '30 feet', attack: '+7', damage: '2' },
+  attack: { name: 'Ranged Strike', type: 'attack', actionCost: 1, attackType: 'Ranged', range: '30 feet', attack: '+7', damage: '2' },
   tactics: 'The Ranged Minion cannot move. It attacks a creature within 30 feet.',
   abilities: [],
   minions: [],
@@ -94,7 +100,7 @@ const meleeMinion: Archetype = {
     ],
     [{ label: 'Speed', value: '15 feet' }],
   ],
-  attack: { name: 'Melee Strike', type: 'attack', actionCount: 1, attackType: 'Melee', attack: '+7', damage: '2' },
+  attack: { name: 'Melee Strike', type: 'attack', actionCost: 1, attackType: 'Melee', attack: '+7', damage: '2' },
   tactics: 'The Melee Minion moves toward an enemy and attacks when it can reach one.',
   abilities: [],
   minions: [],
@@ -117,12 +123,31 @@ const engineer: Archetype = {
     ],
     [{ label: 'Speed', value: '25 feet' }],
   ],
-  attack: { name: 'Ranged Strike', type: 'attack', actionCount: 1, attackType: 'Ranged', range: '30 feet', attack: '+5', damage: '1d4+2', damageType: 'piercing' },
+  attack: { name: 'Ranged Strike', type: 'attack', actionCost: 1, attackType: 'Ranged', range: '30 feet', attack: '+5', damage: '1d4+2', damageType: 'piercing' },
   tactics: 'The Engineer uses cover and creates ranged minions in nearby open spaces. Each minion acts immediately after the Engineer, adding attacks while the Engineer makes ranged Strikes or creates more minions, up to the limit of six.',
   abilities: [
-    { name: 'Minion Master', type: 'spell', actionCount: 1, meta: 'Requires fewer than six active minions', traits: ['Concentrate', 'Manipulate'], frequency: 'once per turn', text: 'Create one minion in an unoccupied square adjacent to you. The minion uses the Ranged Minion roadmap at your level. You can have up to six minions created by this ability at a time. All of them take their turns immediately after yours, including a minion created this turn.' },
+    { name: 'Minion Master', type: 'spell', actionCost: 1, requirements: 'Fewer than six active minions', traits: ['Concentrate', 'Manipulate'], frequency: 'once per turn', text: 'Create one minion in an unoccupied square adjacent to you. The minion uses the Ranged Minion roadmap at your level. You can have up to six minions created by this ability at a time. All of them take their turns immediately after yours, including a minion created this turn.' },
   ],
   minions: [rangedMinion, meleeMinion],
+}
+
+// Display examples only; these abilities are not a balanced creature.
+const demo: Archetype = {
+  name: 'Ability Demo', level: 1, role: 'Demo', size: 'Medium',
+  description: 'A collection of varied abilities for reviewing the ability box.',
+  statGroups: engineer.statGroups,
+  attack: { name: 'Practice Strike', type: 'attack', actionCost: 1, attackType: 'Melee', traits: ['Agile'], attack: '+7', damage: '1d6+2', damageType: 'slashing' },
+  tactics: 'Review the action symbols and optional fields across the examples below.',
+  abilities: [
+    { name: 'Flame Fan', type: 'spell', actionCost: 2, traits: ['Fire', 'Manipulate'], requirements: 'Holding a charged focus', frequency: 'once per encounter', area: '15-foot cone', savingThrow: 'Reflex', basicSave: true, dc: 17, damage: '2d6', damageType: 'fire', text: 'Release a fan of flame through the area.' },
+    { name: 'Binding Field', type: 'spell', actionCost: 3, traits: ['Concentrate'], range: '60 feet', area: '10-foot burst', targets: 'Up to three creatures in the area', savingThrow: 'Fortitude', dc: 18, duration: '1 minute', text: 'On a failed save, a target is immobilized until the end of its next turn.' },
+    { name: 'Protective Interruption', type: 'reaction', actionCost: 'reaction', traits: ['Concentrate'], trigger: 'An ally within range takes damage', requirements: 'You can see the ally', range: '30 feet', targets: 'The triggering ally', frequency: 'once per round', duration: 'Until the triggering damage is resolved', text: 'Reduce the triggering damage by 3.' },
+    { name: 'Quick Calibration', type: 'spell', actionCost: 'free', trigger: 'Your turn begins', requirements: 'Holding a weapon', frequency: 'once per turn', duration: 'Until the end of your turn', text: 'Your next Strike gains a +1 circumstance bonus to its attack roll.' },
+    { name: 'Steady Presence', type: 'passive', actionCost: 'passive', traits: ['Aura'], area: '10-foot emanation', targets: 'Allies in the aura', text: 'Affected allies gain a +1 circumstance bonus to saves against fear.' },
+    { name: 'Shared Defense', type: 'spell', actionCost: 1, range: '30 feet', targets: 'One ally', duration: '1 round', text: 'The target can use DC 16 in place of its own DC against attempts to Shove it.' },
+    { name: 'Borrowed Element', type: 'spell', actionCost: 1, text: 'Your next damaging ability deals cold damage instead of its normal damage type.' },
+  ],
+  minions: [],
 }
 
 // Presentation mappings stay separate from the creature content.
@@ -150,10 +175,13 @@ const cardPresentationByType = {
   },
 } as const
 
-const actionMarkByCount: Record<number, string> = {
-  1: '◆',
-  2: '◆◆',
-  3: '◆◆◆',
+const actionPresentation: Record<AbilityCard['actionCost'], { symbol: string; label: string } | null> = {
+  1: { symbol: '◆', label: '1 action' },
+  2: { symbol: '◆◆', label: '2 actions' },
+  3: { symbol: '◆◆◆', label: '3 actions' },
+  free: { symbol: '◇', label: 'Free action' },
+  reaction: { symbol: '↶', label: 'Reaction' },
+  passive: null,
 }
 
 const statStyleByLabel: Record<string, string> = {
@@ -167,36 +195,40 @@ const statStyleByLabel: Record<string, string> = {
   Size: 'black',
 }
 
-const renderCard = (card: {
-  name: string
-  type: keyof typeof cardPresentationByType
-  actionCount: number
-  meta?: string
-  attackType?: 'Ranged' | 'Melee'
-  range?: string
-  attack?: string
-  damage?: string
-  damageType?: string
-  traits?: readonly string[]
-  frequency?: string
-  duration?: string
-  text?: string
-}) => {
-  const actionMark = actionMarkByCount[card.actionCount] ?? ''
-  const actionLabel = `${card.actionCount} ${card.actionCount === 1 ? 'action' : 'actions'}`
-  const metaItems = [card.meta, card.range ? `Range ${card.range}` : undefined, card.traits?.join(', '), card.frequency, card.duration].filter(Boolean)
+const renderCard = (card: AbilityCard) => {
+  const action = actionPresentation[card.actionCost]
+  const targetingLine = [
+    card.range ? `Range: ${card.range}` : undefined,
+    card.targets ? `Targets: ${card.targets}` : undefined,
+    card.area ? `Area: ${card.area}` : undefined,
+  ].filter(Boolean).join(' · ')
+  const metaLines = [
+    card.traits?.join(', '),
+    card.frequency,
+    targetingLine,
+    card.duration ? `Duration ${card.duration}` : undefined,
+  ].filter(Boolean)
   const presentation = cardPresentationByType[card.type]
   const icon = card.type === 'attack' && card.attackType
     ? attackIconBySubtype[card.attackType]
     : presentation.icon
-  const attackAndDamage = [
-    card.attack ? `<span class="ability-line"><strong>Attack</strong> ${card.attack}</span>` : '',
-    card.damage ? `<span class="ability-line"><strong>Damage</strong> ${card.damage}${card.damageType ? ` ${card.damageType}` : ''}</span>` : '',
-  ].join('')
+  const details: [string, string | number | undefined][] = [
+    ['Requirements', card.requirements],
+    ['Trigger', card.trigger],
+    ['Saving Throw', card.savingThrow ? `${card.dc !== undefined ? `DC ${card.dc} ` : ''}${card.basicSave ? 'Basic ' : ''}${card.savingThrow}` : undefined],
+    ['DC', card.savingThrow ? undefined : card.dc],
+    ['Attack', card.attack],
+    ['Damage', card.damage ? `${card.damage}${card.damageType ? ` ${card.damageType}` : ''}` : undefined],
+    ['Damage Type', card.damage ? undefined : card.damageType],
+  ]
+  const detailLines = details
+    .filter(([, value]) => value !== undefined && value !== '')
+    .map(([label, value]) => `<span class="ability-line"><strong>${label}</strong> ${value}</span>`)
+    .join('')
   return `
   <section class="ability ${presentation.style}" aria-label="${card.name}">
-    <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${card.name}</h3></div><span class="action-mark" role="img" aria-label="${actionLabel}">${actionMark}</span></div>${metaItems.length ? `<p class="ability-meta">${metaItems.join(' · ')}</p>` : ''}</div>
-    <p class="ability-text">${attackAndDamage}${card.text ?? ''}</p>
+    <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${card.name}</h3></div>${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${action.symbol}</span>` : ''}</div>${metaLines.map((line) => `<p class="ability-meta">${line}</p>`).join('')}</div>
+    <p class="ability-text">${detailLines}${card.text ?? ''}</p>
   </section>`
 }
 
@@ -252,6 +284,7 @@ if (!app) throw new Error('App root is missing')
 app.innerHTML = `
   <div class="archetype-tabs" role="tablist" aria-label="Choose archetype">
     <button class="archetype-tab" id="tab-ace" type="button" role="tab" aria-selected="false" aria-controls="archetype-panel" tabindex="-1" data-archetype="ace">Ace</button>
+    <button class="archetype-tab" id="tab-demo" type="button" role="tab" aria-selected="false" aria-controls="archetype-panel" tabindex="-1" data-archetype="demo">Ability Demo</button>
     <button class="archetype-tab" id="tab-engineer" type="button" role="tab" aria-selected="true" aria-controls="archetype-panel" tabindex="0" data-archetype="engineer">Engineer</button>
   </div>
   <div id="archetype-panel" role="tabpanel" aria-labelledby="tab-engineer" tabindex="0">
@@ -264,7 +297,7 @@ if (!panel) throw new Error('Archetype panel is missing')
 
 const tabs = Array.from(app.querySelectorAll<HTMLButtonElement>('[role="tab"]'))
 const selectTab = (tab: HTMLButtonElement, moveFocus = false) => {
-  const archetype = tab.dataset.archetype === 'ace' ? ace : engineer
+  const archetype = tab.dataset.archetype === 'ace' ? ace : tab.dataset.archetype === 'demo' ? demo : engineer
   panel.innerHTML = `<div class="monster-box">${renderCreatureSheet(archetype)}</div>`
   panel.setAttribute('aria-labelledby', tab.id)
   tabs.forEach((candidate) => {
