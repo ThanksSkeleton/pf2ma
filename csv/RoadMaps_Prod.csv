@@ -1,0 +1,34 @@
+Road Map,Role,Size,Perception,Athletics,Stealth/Acrobatics,Escape,AC,HP,Fortitude,Reflex,Will,Speed,Ranged Or Melee,Ranged Attack,Ranged Damage,Range,Melee Attack,Melee Damage,Spell Attack,Spell DC,Special Abilities
+Ace,Striker,Medium,High,Low,Low,Low,Low,Low,Low,,,High,R,High,Moderate,Low,-,-,,,Mirror Image
+Aegis,Support,Medium,,Low,Low,Low,,Moderate,Low,Low,High,,R,Low,Low,Low,-,-,,,Aegis Ward
+Archer,Controller,Medium,High,Low,High,High,Low,Low,Low,,,,R,High,Moderate,Moderate,-,-,,,Moving Target Shot
+Assassin,Striker,Medium,,Low,High,High,Moderate,Low,Low,Moderate,Low,High,M,Low,Low,Low,High,Moderate,,,Leaping Knockdown; Downed Prey
+Assault,Striker,Medium,,High,High,High,,Moderate,,,Low,,M,Low,Low,Low,Low,Moderate,,,Glancing Fire; Push
+Barricade,Controller,Medium,Moderate,Low,Low,Low,Moderate,Moderate,Low,Moderate,Moderate,,R,High,Low,Low,-,-,,High,Repelling Strike; Hazardous Scatter; Walking Hazard
+Bastion,Defender,Medium,Low,High,Low,High,Moderate,High,,Terrible,,Low,R,Moderate,Moderate,Low,Moderate,Moderate,,,Guardian Field; Grab
+Berserker,Striker,Medium,Low,Low,Low,Low,Low,Moderate,Low,Low,Low,Moderate,M,Low,Low,Low,High,High,,,Berserker; Mindless Rush; Battle-Mad Swing
+Bombard,Artillery,Medium,Low,Low,Low,Low,Low,Moderate,Moderate,High,Low,,R,Moderate,Low,Low,-,-,,High,Aim and Fire Artillery
+Breacher,Striker,Medium,,High,High,High,,Moderate,,,Low,,M,Low,Low,Low,Moderate,Moderate,,,Breach Ram; Breaching Strikes; Knockdown
+Cataphract,Striker,Medium,,High,High,High,,Moderate,,,Low,,M,Low,Low,Low,Moderate,Moderate,,,Grab; Abduct
+Demolisher,Defender,Medium,Low,High,Low,High,Low,High,,Low,Low,Low,M,Low,Low,Low,Moderate,High,,,Committed Blow
+Engineer,Striker,Medium,,Low,Low,Low,Low,Low,Low,,High,,R,Low,Low,Low,-,-,,,Minion Master
+Goliath,Defender,Medium,Low,High,Low,High,Moderate,High,,Terrible,,Low,M,Low,Low,Low,Moderate,Low,,,Chosen Rival; Siege Resilience
+Hive,Controller,Medium,Moderate,Low,Low,High,High,Low,Moderate,Moderate,Moderate,,M,Low,Low,Low,High,Moderate,,High,Elemental Upheaval
+Hornet,Controller,Medium,,Low,Low,Low,Extreme,Low,Low,Low,Low,High,M,Low,Low,Low,High,Low,,,
+Mirage,Support,Medium,High,Low,Low,Low,,,High,,High,,Nil,-,-,-,-,-,,,Collective Transposition; Shared Veil
+Operator,Artillery,Medium,Extreme,Low,High,Low,Low,Low,Low,Low,Low,Low,R,Extreme,Moderate,High,-,-,,,Translocate
+Priest,Support,Medium,High,Low,Low,Low,Low,High,High,Low,High,,Nil,-,-,-,-,-,,,Pariah Aura; Lifelink
+Pyro,Defender,Medium,,Low,Low,Low,,Moderate,,,Low,,Spell,-,-,-,-,-,,,Breathe Fire; Fiery Rebuke
+Rainmaker,Artillery,Medium,High,Low,Low,Low,Low,Low,Low,,,,R,High,Moderate,Moderate,-,-,,,Delayed Magic Missile
+Ronin,Striker,Medium,,Extreme,High,Extreme,High,Moderate,Low,High,Low,High,M,Low,Low,Low,High,Moderate,,,Chosen Rival; Push; Knockdown
+Scourer,Striker,Medium,,Low,Low,Low,,Moderate,,Low,Low,Low,M,Low,Low,Low,Moderate,Moderate,,,Escalating Strike
+Scout,Support,Medium,Extreme,Low,Low,Low,,Low,Low,,High,High,R,Low,,Low,-,-,,,Revealing Light; Dispel Magic
+Trapper,Controller,Medium,Moderate,Low,High,High,High,Moderate,Low,High,Moderate,,R,Moderate,Low,Low,-,-,,High,Instant Trap; Prepared Trap
+Saboteur,Controller,Medium,Moderate,Low,High,High,Moderate,Moderate,Moderate,High,Terrible,,R,,,Moderate,-,-,,High,Mine; Thrown Burst; Final Burst
+Sentinel,Defender,Medium,Low,Extreme,Low,High,Moderate,High,,Terrible,,Low,M,Low,Low,Low,Moderate,Moderate,,,Reactive Strike; Tactical Reflexes; Push; Grab
+Sniper,Artillery,Medium,Extreme,Low,High,Low,Low,Low,Low,Low,Low,Low,R,Extreme,Moderate,High,-,-,,,In the Crosshairs; Sniper Strike
+Specter,Striker,Medium,,Low,High,Low,Moderate,Low,Low,Moderate,Low,High,M,Low,Low,Low,High,Moderate,,,Shadow Prowl; Isolated Prey
+Support,Support,Medium,Low,Low,Low,Low,Low,Moderate,Moderate,Moderate,Low,,Nil,-,-,-,-,-,,Moderate,"Heal (once per day, rank half the creature's level rounded up, minimum 1, maximum 10); Buff: Force; Buff: Guard; Buff: Motion"
+Witch,Controller,Medium,,Low,Low,Low,,Low,Low,Low,High,,R,Low,Low,Low,-,-,,,Blood Curse; Dazzling Flash
+Special: Melee Minion,N/A,Small,Terrible,Low,Low,Low,Low,Terrible,Terrible,Terrible,Terrible,15 feet,M,Low,Low,Low,Moderate,Terrible,,,
+Special: Ranged Minion,N/A,Small,Terrible,Low,Low,Low,Low,Superterrible,Terrible,Terrible,Terrible,0 feet,R,Moderate,Terrible,Low,-,-,,,

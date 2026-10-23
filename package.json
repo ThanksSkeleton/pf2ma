@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "compare:ace": "node --experimental-strip-types scripts/compare-ace.mjs",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
