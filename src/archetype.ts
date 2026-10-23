@@ -1,12 +1,13 @@
 export type AbilityCard = {
   name: string
   type: 'attack' | 'spell' | 'passive' | 'reaction'
-  actionCost: 1 | 2 | 3 | 'free' | 'reaction' | 'passive'
+  actionCost: 1 | 2 | 3 | '1–3' | 'free' | 'reaction' | 'passive'
   requirements?: string
   trigger?: string
   targets?: string
   area?: string
   savingThrow?: string
+  targetDC?: string
   dc?: number
   basicSave?: boolean
   attackType?: 'Ranged' | 'Melee'
@@ -27,7 +28,10 @@ export type Archetype = {
   size: string
   description: string
   statGroups: { label: string; value: string }[][]
-  attack: AbilityCard
+  attack?: AbilityCard
+  secondaryAttacks?: AbilityCard[]
+  skills?: Record<string, string>
+  spellRank?: number
   tactics: string
   abilities: AbilityCard[]
   minions: Archetype[]
