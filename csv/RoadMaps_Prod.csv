@@ -1,7 +1,7 @@
 Road Map,Role,Size,Perception,Athletics,Stealth/Acrobatics,Escape,AC,HP,Fortitude,Reflex,Will,Speed,Ranged Or Melee,Ranged Attack,Ranged Damage,Range,Melee Attack,Melee Damage,Spell Attack,Spell DC,Special Abilities
 Ace,Striker,Medium,High,Low,Low,Low,Low,Low,Low,,,High,R,High,Moderate,Low,-,-,,,Mirror Image
 Aegis,Support,Medium,,Low,Low,Low,,Moderate,Low,Low,High,,R,Low,Low,Low,-,-,,,Aegis Ward; Sustain
-Archer,Controller,Medium,High,Low,High,High,Low,Low,Low,,,,R,High,Moderate,Moderate,-,-,,,Moving Target Shot
+Archer,Controller,Medium,High,Low,High,High,Low,Low,Low,,,,R,High,Moderate,Moderate,-,-,,,Overwatch
 Assassin,Striker,Medium,,Low,High,High,Moderate,Low,Low,Moderate,Low,High,M,Low,Low,Low,High,Moderate,,,Leaping Knockdown; Downed Prey; Prone
 Assault,Striker,Medium,,High,High,High,,Moderate,,,Low,,Spell,Low,Low,Low,Low,Moderate,,,Glancing Blow; Glancing Shot
 Barricade,Controller,Medium,Moderate,Low,Low,Low,Moderate,Moderate,Low,Moderate,Moderate,,-,High,Low,Low,-,-,,High,Repelling Strike; Hazardous Scatter

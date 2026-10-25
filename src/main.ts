@@ -12,56 +12,63 @@ const escapeHtml = (value: string | number) => String(value).replace(/[&<>"']/g,
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[char]!)
 
-// Presentation mappings stay separate from the creature content.
-const attackIconBySubtype = {
-  Ranged: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Ranged attack" focusable="false"><path d="M8 3c10 3 10 15 0 18M8 3v18M3 12h18m-4-4 4 4-4 4M5 10l3 2-3 2" fill="none" stroke="#f2e8c3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  Melee: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Melee attack" focusable="false"><path d="m15 2 7 7-11 11-5-5L17 4l-2-2ZM6 14l4 4m-6-1-2 2 3 3 2-2" fill="#f2e8c3"/></svg>',
-} as const
-
-const cardPresentationByType = {
-  attack: {
-    style: 'ability--strike',
-    icon: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Attack" focusable="false"><circle cx="12" cy="12" r="8" fill="none" stroke="#f2e8c3" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="#f2e8c3"/></svg>',
-  },
-  spell: {
-    style: 'ability--spell',
-    icon: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Spell" focusable="false"><path d="m12 2 2.2 7.4L22 12l-7.8 2.6L12 22l-2.2-7.4L2 12l7.8-2.6L12 2Z" fill="#f2e8c3"/></svg>',
-  },
-  passive: {
-    style: 'ability--passive',
-    icon: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Passive ability" focusable="false"><path d="M12 21s-9-5.6-9-12a4.8 4.8 0 0 1 9-2.4A4.8 4.8 0 0 1 21 9c0 6.4-9 12-9 12Z" fill="#f2e8c3"/></svg>',
-  },
-  action: {
-    style: 'ability--action',
-    icon: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Action" focusable="false"><path d="M13 2c1 5-4 6-2 10 1-2 3-3 4-5 4 4 5 8 2 12-3 4-10 3-12-1-2-4 1-8 4-10 0 3 1 4 2 4 2-3 1-6 2-10Z" fill="#f2e8c3"/></svg>',
-  },
-  status: {
-    style: 'ability--status',
-    icon: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Status" focusable="false"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Zm0 5v6m0 3v.1" fill="none" stroke="#f2e8c3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  },
-  reaction: {
-    style: 'ability--reaction',
-    icon: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Reaction" focusable="false"><path d="M12 4V1L7 6l5 5V8a6 6 0 1 1-5.7 8H3.2A9 9 0 1 0 12 4Z" fill="#f2e8c3"/></svg>',
-  },
+// Generated transparent raster symbols replace the former inline SVG artwork.
+const symbolAssets = {
+  roleDefender: new URL('../symbols/role-defender.png', import.meta.url).href,
+  sword: new URL('../symbols/sword.png', import.meta.url).href,
+  bow: new URL('../symbols/bow.png', import.meta.url).href,
+  starburst: new URL('../symbols/starburst.png', import.meta.url).href,
+  circle: new URL('../symbols/circle.png', import.meta.url).href,
+  heart: new URL('../symbols/heart.png', import.meta.url).href,
+  reaction: new URL('../symbols/reaction.png', import.meta.url).href,
+  status: new URL('../symbols/status.png', import.meta.url).href,
+  action: new URL('../symbols/action.png', import.meta.url).href,
+  freeAction: new URL('../symbols/free-action.png', import.meta.url).href,
+  roleStriker: new URL('../symbols/role-striker.png', import.meta.url).href,
+  roleSupport: new URL('../symbols/role-support.png', import.meta.url).href,
+  roleController: new URL('../symbols/role-controller.png', import.meta.url).href,
+  roleArtillery: new URL('../symbols/role-artillery.png', import.meta.url).href,
 } as const
 
 const iconBySymbol = {
-  sword: attackIconBySubtype.Melee,
-  bow: attackIconBySubtype.Ranged,
-  circle: cardPresentationByType.attack.icon,
-  starburst: cardPresentationByType.spell.icon,
-  heart: cardPresentationByType.passive.icon,
-  reaction: cardPresentationByType.reaction.icon,
-  status: '<span class="ability-icon ability-icon--status-symbol" role="img" aria-label="Status" focusable="false">⊕</span>',
+  sword: symbolAssets.sword,
+  bow: symbolAssets.bow,
+  circle: symbolAssets.circle,
+  starburst: symbolAssets.starburst,
+  heart: symbolAssets.heart,
+  reaction: symbolAssets.reaction,
+  status: symbolAssets.status,
 } as const
 
-const actionPresentation: Record<AbilityCard['actionCost'], { symbol: string; label: string } | null> = {
-  1: { symbol: '◆', label: '1 action' },
-  2: { symbol: '◆◆', label: '2 actions' },
-  3: { symbol: '◆◆◆', label: '3 actions' },
-  '1–3': { symbol: '◆–◆◆◆', label: '1 to 3 actions' },
-  free: { symbol: '◇', label: 'Free action' },
-  reaction: { symbol: '↶', label: 'Reaction' },
+const cardPresentationByType = {
+  attack: { style: 'ability--strike' },
+  spell: { style: 'ability--spell' },
+  passive: { style: 'ability--passive' },
+  action: { style: 'ability--action' },
+  status: { style: 'ability--status' },
+  reaction: { style: 'ability--reaction' },
+} as const
+
+const fallbackSymbolByType: Record<AbilityCard['type'], keyof typeof iconBySymbol> = {
+  attack: 'circle', spell: 'starburst', passive: 'heart', action: 'starburst',
+  status: 'status', reaction: 'reaction',
+}
+
+const roleIconByName: Record<string, string> = {
+  Striker: symbolAssets.roleStriker,
+  Support: symbolAssets.roleSupport,
+  Controller: symbolAssets.roleController,
+  Defender: symbolAssets.roleDefender,
+  Artillery: symbolAssets.roleArtillery,
+}
+
+const actionPresentation: Record<AbilityCard['actionCost'], { symbols: ('action' | 'freeAction' | 'reaction' | 'range')[]; label: string } | null> = {
+  1: { symbols: ['action'], label: '1 action' },
+  2: { symbols: ['action', 'action'], label: '2 actions' },
+  3: { symbols: ['action', 'action', 'action'], label: '3 actions' },
+  '1–3': { symbols: ['action', 'range', 'action', 'action', 'action'], label: '1 to 3 actions' },
+  free: { symbols: ['freeAction'], label: 'Free action' },
+  reaction: { symbols: ['reaction'], label: 'Reaction' },
   passive: null,
 }
 
@@ -95,8 +102,11 @@ const renderCard = (card: AbilityCard) => {
       : card.type === 'status' ? 'status'
         : card.symbol ?? (card.type === 'attack' && card.attackType
           ? card.attackType === 'Melee' ? 'sword' : 'bow'
-          : undefined)
-  const icon = symbol ? iconBySymbol[symbol] : presentation.icon
+          : fallbackSymbolByType[card.type])
+  const icon = `<img class="ability-icon" src="${iconBySymbol[symbol]}" alt="" aria-hidden="true">`
+  const actionMark = action?.symbols.map((item) => item === 'range'
+    ? '–'
+    : `<img class="action-mark__icon" src="${symbolAssets[item]}" alt="" aria-hidden="true">`).join('')
   const details: [string, string | number | undefined][] = [
     ['Requirements', card.requirements],
     ['Trigger', card.trigger],
@@ -113,7 +123,7 @@ const renderCard = (card: AbilityCard) => {
     .join('')
   return `
   <section class="ability ${presentation.style}" aria-label="${escapeHtml(card.name)}">
-    <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${escapeHtml(card.name)}</h3></div>${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${action.symbol}</span>` : ''}</div>${metaLines.map((line) => `<p class="ability-meta">${escapeHtml(line ?? '')}</p>`).join('')}</div>
+    <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${escapeHtml(card.name)}</h3></div>${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${actionMark}</span>` : ''}</div>${metaLines.map((line) => `<p class="ability-meta">${escapeHtml(line ?? '')}</p>`).join('')}</div>
     <p class="ability-text">${detailLines}${escapeHtml(card.text ?? '')}</p>
   </section>`
 }
@@ -121,15 +131,13 @@ const renderCard = (card: AbilityCard) => {
 const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): string => {
   const slug = creature.name.toLowerCase().replaceAll(' ', '-')
   const id = parentId ? `${parentId}-${slug}` : slug
+  const roleIcon = roleIconByName[creature.role]
   return `
   <article class="creature-sheet${depth > 0 ? ' creature-sheet--minion' : ''}" aria-labelledby="${id}-name">
     <div class="top-grid">
       <header class="identity">
         <div class="role-row">
-          <svg class="crest" viewBox="0 0 48 54" fill="none" aria-hidden="true">
-            <path d="M24 2C17 7 9 8 3 8v18c0 13 9 21 21 26 12-5 21-13 21-26V8C39 8 31 7 24 2Z" fill="currentColor"/>
-            <path d="M24 9v35c-9-5-14-11-14-20V14c5-.5 10-2 14-5Z" fill="white"/>
-          </svg>
+          ${roleIcon ? `<img class="crest" src="${roleIcon}" alt="" aria-hidden="true">` : ''}
           <p class="role">${escapeHtml(creature.role)}</p>
         </div>
         <p class="creature-level">Level ${creature.level}${creature.spellRank ? ` · Spell rank ${creature.spellRank}` : ''}</p>
