@@ -3,6 +3,7 @@ import './style.css'
 import type { AbilityCard, Archetype } from './archetype.ts'
 import { buildArchetype, listArchetypes } from './data-builder.ts'
 import { buildEngineerMinions } from './engineer-minions.ts'
+import { buildTraps } from './traps.ts'
 
 const rawCsv = import.meta.glob<string>('../csv/*.csv', { query: '?raw', import: 'default', eager: true })
 const sources = Object.fromEntries(Object.entries(rawCsv).map(([path, contents]) => [path.split('/').pop()!, contents]))
@@ -30,10 +31,28 @@ const cardPresentationByType = {
     style: 'ability--passive',
     icon: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Passive ability" focusable="false"><path d="M12 21s-9-5.6-9-12a4.8 4.8 0 0 1 9-2.4A4.8 4.8 0 0 1 21 9c0 6.4-9 12-9 12Z" fill="#f2e8c3"/></svg>',
   },
+  action: {
+    style: 'ability--action',
+    icon: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Action" focusable="false"><path d="M13 2c1 5-4 6-2 10 1-2 3-3 4-5 4 4 5 8 2 12-3 4-10 3-12-1-2-4 1-8 4-10 0 3 1 4 2 4 2-3 1-6 2-10Z" fill="#f2e8c3"/></svg>',
+  },
+  status: {
+    style: 'ability--status',
+    icon: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Status" focusable="false"><path d="M12 2 21 7v10l-9 5-9-5V7l9-5Zm0 5v6m0 3v.1" fill="none" stroke="#f2e8c3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  },
   reaction: {
     style: 'ability--reaction',
     icon: '<svg class="ability-icon" viewBox="0 0 24 24" role="img" aria-label="Reaction" focusable="false"><path d="M12 4V1L7 6l5 5V8a6 6 0 1 1-5.7 8H3.2A9 9 0 1 0 12 4Z" fill="#f2e8c3"/></svg>',
   },
+} as const
+
+const iconBySymbol = {
+  sword: attackIconBySubtype.Melee,
+  bow: attackIconBySubtype.Ranged,
+  circle: cardPresentationByType.attack.icon,
+  starburst: cardPresentationByType.spell.icon,
+  heart: cardPresentationByType.passive.icon,
+  reaction: cardPresentationByType.reaction.icon,
+  status: '<span class="ability-icon ability-icon--status-symbol" role="img" aria-label="Status" focusable="false">⊕</span>',
 } as const
 
 const actionPresentation: Record<AbilityCard['actionCost'], { symbol: string; label: string } | null> = {
@@ -71,9 +90,13 @@ const renderCard = (card: AbilityCard) => {
     card.duration ? `Duration ${card.duration}` : undefined,
   ].filter(Boolean)
   const presentation = cardPresentationByType[card.type]
-  const icon = card.type === 'attack' && card.attackType
-    ? attackIconBySubtype[card.attackType]
-    : presentation.icon
+  const symbol = card.type === 'reaction' ? 'reaction'
+    : card.type === 'passive' ? 'heart'
+      : card.type === 'status' ? 'status'
+        : card.symbol ?? (card.type === 'attack' && card.attackType
+          ? card.attackType === 'Melee' ? 'sword' : 'bow'
+          : undefined)
+  const icon = symbol ? iconBySymbol[symbol] : presentation.icon
   const details: [string, string | number | undefined][] = [
     ['Requirements', card.requirements],
     ['Trigger', card.trigger],
@@ -146,12 +169,14 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): str
 const app = document.querySelector<HTMLDivElement>('#app')
 if (!app) throw new Error('App root is missing')
 
-const damageTypes = ['piercing', 'slashing', 'bludgeoning', 'acid', 'cold', 'electricity', 'fire', 'sonic', 'force', 'mental', 'poison', 'bleed', 'spirit', 'vitality', 'void']
+const physicalDamageTypes = ['piercing', 'slashing', 'bludgeoning']
+const nonphysicalDamageTypes = ['acid', 'cold', 'electricity', 'fire', 'sonic', 'force', 'mental', 'poison', 'bleed', 'spirit', 'vitality', 'void']
 let selectedIndex = 0
 
 app.innerHTML = `
   <div class="builder-controls" aria-label="Creature options">
-    <label for="damage-type">Damage type<select id="damage-type">${damageTypes.map((type) => `<option value="${type}">${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
+    <label for="physical-damage-type">Physical damage<select id="physical-damage-type">${physicalDamageTypes.map((type) => `<option value="${type}">${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
+    <label for="nonphysical-damage-type">Nonphysical damage<select id="nonphysical-damage-type">${nonphysicalDamageTypes.map((type) => `<option value="${type}"${type === 'fire' ? ' selected' : ''}>${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
     <label for="creature-level">Level<select id="creature-level">${Array.from({ length: 26 }, (_, index) => index - 1).map((level) => `<option value="${level}"${level === 1 ? ' selected' : ''}>${level}</option>`).join('')}</select></label>
   </div>
   <section class="archetype-carousel" aria-roledescription="carousel" aria-label="Archetypes" tabindex="0">
@@ -167,15 +192,17 @@ app.innerHTML = `
 
 const panel = app.querySelector<HTMLDivElement>('#archetype-panel')!
 const levelInput = app.querySelector<HTMLSelectElement>('#creature-level')!
-const damageInput = app.querySelector<HTMLSelectElement>('#damage-type')!
+const physicalDamageInput = app.querySelector<HTMLSelectElement>('#physical-damage-type')!
+const nonphysicalDamageInput = app.querySelector<HTMLSelectElement>('#nonphysical-damage-type')!
 const choices = Array.from(app.querySelectorAll<HTMLButtonElement>('.archetype-choice'))
 const carousel = app.querySelector<HTMLElement>('.archetype-carousel')!
 const position = app.querySelector<HTMLElement>('#carousel-position')!
 
 const renderSelected = () => {
   const level = Number(levelInput.value)
-  const creature = buildArchetype(sources, names[selectedIndex], level, damageInput.value)
-  if (creature.name === 'Engineer') creature.minions = buildEngineerMinions(sources, level, damageInput.value)
+  const creature = buildArchetype(sources, names[selectedIndex], level, physicalDamageInput.value, nonphysicalDamageInput.value)
+  if (creature.name === 'Engineer') creature.minions = buildEngineerMinions(sources, level, physicalDamageInput.value)
+  if (creature.name === 'Trapper' || creature.name === 'Saboteur') creature.minions = buildTraps(sources, creature.name, level, physicalDamageInput.value, nonphysicalDamageInput.value)
   panel.innerHTML = `<div class="monster-box">${renderCreatureSheet(creature)}</div>`
   panel.setAttribute('aria-label', `${creature.name}, level ${level}`)
   document.title = `${creature.name} · Level ${level} | PF2E Monster Archetype Bank`
@@ -200,5 +227,6 @@ carousel.addEventListener('keydown', (event) => {
   selectArchetype(index, true)
 })
 levelInput.addEventListener('change', renderSelected)
-damageInput.addEventListener('change', renderSelected)
+physicalDamageInput.addEventListener('change', renderSelected)
+nonphysicalDamageInput.addEventListener('change', renderSelected)
 renderSelected()

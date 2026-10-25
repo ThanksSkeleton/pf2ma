@@ -24,7 +24,7 @@ export function buildEngineerMinions(sources: CsvSources, level: number, damageT
         [{ label: 'Speed', value: ranged ? '0 feet' : '15 feet' }],
       ],
       attack: {
-        name: `${subtype} Strike`, type: 'attack', actionCost: 1, attackType: ranged ? 'Ranged' : 'Melee',
+        name: `${subtype} Strike`, type: 'attack', actionCost: 1, symbol: ranged ? 'bow' : 'sword', attackType: ranged ? 'Ranged' : 'Melee',
         ...(ranged ? { range: '30 feet' } : {}),
         attack: lookup('table-2-9-strike-attack-bonus.csv', 'Moderate'),
         damage: lookup('table-2-10-strike-damage.csv', 'Terrible'), damageType,

@@ -40,7 +40,7 @@ export function listArchetypes(sources: CsvSources): string[] {
 
 /** Build from CSV benchmarks and ability templates. Damage type defaults are temporary. */
 export function buildArchetype(
-  sources: CsvSources, name: string, level = 1, damageType = 'piercing',
+  sources: CsvSources, name: string, level = 1, physicalDamageType = 'piercing', nonphysicalDamageType = 'fire',
 ): Archetype {
   if (!Number.isInteger(level) || level < -1 || level > 24) throw new Error('Level must be an integer from -1 through 24')
   if (name.startsWith('Special:')) throw new Error('Minions are handled separately by Engineer')
@@ -75,7 +75,8 @@ export function buildArchetype(
     minimumResistance: benchmark('table-2-8-resistances-weaknesses.csv', 'Minimum'),
     athletics: benchmark('table-2-3-skills.csv', roadmap.Athletics),
     speed: `${speed} feet`, halfSpeed: `${Math.floor(speed / 10) * 5} feet`, doubleSpeed: `${speed * 2} feet`,
-    meleeDamageType: damageType, rangedDamageType: damageType,
+    nonphysicalDamageType,
+    physicalDamageType, meleeDamageType: physicalDamageType, rangedDamageType: physicalDamageType,
     breatheFireDamage: `${2 * spellRank}d6`, healDice: `${healRank}d8`, healBonus: 8 * healRank,
     dartCount: 2 + 2 * Math.floor((spellRank - 1) / 2),
   }
@@ -84,26 +85,36 @@ export function buildArchetype(
   }
   const strikes: AbilityCard[] = []
   for (const subtype of ['Melee', 'Ranged'] as const) {
-    if (roadmap[`${subtype} Attack`] === '-' || roadmap[`${subtype} Damage`] === '-') continue
+    if (roadmap['Ranged Or Melee'] === 'Spell' || roadmap['Ranged Or Melee'] === '-' || roadmap[`${subtype} Attack`] === '-' || roadmap[`${subtype} Damage`] === '-') continue
     const attack = benchmark('table-2-9-strike-attack-bonus.csv', roadmap[`${subtype} Attack`])
     const damage = benchmark('table-2-10-strike-damage.csv', roadmap[`${subtype} Damage`])
     const prefix = subtype.toLowerCase()
     variables[`${prefix}Attack`] = attack
     variables[`${prefix}Damage`] = damage
-    const strike: AbilityCard = { name: `${subtype} Strike`, type: 'attack', actionCost: 1, attackType: subtype, attack, damage, damageType }
+    const strike: AbilityCard = { name: `${subtype} Strike`, type: 'attack', actionCost: 1, symbol: subtype === 'Melee' ? 'sword' : 'bow', attackType: subtype, attack, damage, damageType: physicalDamageType }
     if (subtype === 'Ranged') {
       strike.range = `${benchmark('range-per-level.csv', roadmap.Range, ' (feet)')} feet`
       variables.rangedRange = strike.range
     }
     strikes.push(strike)
   }
-  const primaryType = roadmap['Ranged Or Melee'] === 'R' ? 'Ranged' : 'Melee'
-  const primary = strikes.find((strike) => strike.attackType === primaryType)
+  // Keep ranked attack/damage values available to custom abilities even when the creature has no Strike.
+  if (roadmap['Melee Attack'] !== '-') {
+    variables.meleeAttack = benchmark('table-2-9-strike-attack-bonus.csv', roadmap['Melee Attack'])
+    variables.meleeDamage = benchmark('table-2-10-strike-damage.csv', roadmap['Melee Damage'])
+  }
+  if (roadmap['Ranged Attack'] !== '-') {
+    variables.rangedAttack = benchmark('table-2-9-strike-attack-bonus.csv', roadmap['Ranged Attack'])
+    variables.rangedDamage = benchmark('table-2-10-strike-damage.csv', roadmap['Ranged Damage'])
+    if (roadmap.Range !== '-') variables.rangedRange = `${benchmark('range-per-level.csv', roadmap.Range, ' (feet)')} feet`
+  }
+  const primaryType = roadmap['Ranged Or Melee'] === 'R' ? 'Ranged' : roadmap['Ranged Or Melee'] === 'M' ? 'Melee' : undefined
+  const primary = primaryType ? strikes.find((strike) => strike.attackType === primaryType) : undefined
   const abilities = roadmap['Special Abilities'].split(';').map((entry) => entry.trim()).filter(Boolean).map((entry): AbilityCard => {
     // The legacy Support roadmap embeds a Heal note; frequency now comes from the ability row.
     const abilityName = entry.startsWith('Heal (') ? 'Heal' : entry
     const row = formatFields(find('all-abilites.csv', 'name', abilityName), variables)
-    const types: Record<string, AbilityCard['type']> = { Attack: 'attack', Spell: 'spell', Passive: 'passive', Reaction: 'reaction' }
+    const types: Record<string, AbilityCard['type']> = { Attack: 'attack', Spell: 'spell', Passive: 'passive', Reaction: 'reaction', Status: 'status', Action: 'action' }
     const costs: Record<string, AbilityCard['actionCost']> = {
       'one action': 1, 'two actions': 2, 'three actions': 3, 'one to three actions': '1–3',
       'free action': 'free', reaction: 'reaction', passive: 'passive',
@@ -111,14 +122,16 @@ export function buildArchetype(
     const type = types[row.entry_type]
     const actionCost = costs[row.activation || (type === 'passive' ? 'passive' : '')]
     if (!type || !actionCost) throw new Error(`Unsupported ability mapping: ${row.name}`)
-    const card: AbilityCard = { name: row.name, type, actionCost }
+    const allowedSymbols = ['sword', 'bow', 'circle', 'starburst', 'reaction', 'heart', 'status'] as const
+    if (!allowedSymbols.includes(row.symbol as typeof allowedSymbols[number])) throw new Error(`Unsupported symbol mapping: ${row.name} (${row.symbol})`)
+    const card: AbilityCard = { name: row.name, type, actionCost, symbol: row.symbol as AbilityCard['symbol'] }
     const fields = { requirements: 'requirements', trigger: 'trigger', targets: 'target', area: 'area',
       range: 'range', attack: 'attack', damage: 'damage', frequency: 'frequency', duration: 'duration', text: 'effect' } as const
     for (const [field, column] of Object.entries(fields)) {
       if (row[column]) card[field as keyof typeof fields] = row[column]
     }
     if (row.damage_type) card.damageType = row.damage_type
-    else if (card.damage) card.damageType = damageType
+    else if (card.damage) card.damageType = physicalDamageType
     if (row.traits) card.traits = row.traits.split(',').map((trait) => trait.trim())
     if (row.defense) {
       if (row.defense.endsWith(' DC')) card.targetDC = row.defense
@@ -160,8 +173,8 @@ export function buildArchetype(
 }
 
 /** Compatibility helper for the original Ace comparison. */
-export function buildAce(sources: CsvSources, level = 1, damageType = 'piercing'): Archetype {
-  return buildArchetype(sources, 'Ace', level, damageType)
+export function buildAce(sources: CsvSources, level = 1, physicalDamageType = 'piercing', nonphysicalDamageType = 'fire'): Archetype {
+  return buildArchetype(sources, 'Ace', level, physicalDamageType, nonphysicalDamageType)
 }
 
 /** Compare named stat values and all other fields; arrays of traits count as one field.

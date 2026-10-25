@@ -1,6 +1,7 @@
 export type AbilityCard = {
   name: string
-  type: 'attack' | 'spell' | 'passive' | 'reaction'
+  type: 'attack' | 'spell' | 'passive' | 'reaction' | 'status' | 'action'
+  symbol?: 'sword' | 'bow' | 'circle' | 'starburst' | 'reaction' | 'heart' | 'status'
   actionCost: 1 | 2 | 3 | '1–3' | 'free' | 'reaction' | 'passive'
   requirements?: string
   trigger?: string

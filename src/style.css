@@ -75,10 +75,13 @@ h1 { margin: 0; font-size: clamp(48px, 7vw, 66px); font-weight: 900; letter-spac
 .ability--spell { --ability-color: var(--tone-blue); --ability-tint: #202438; }
 .ability--passive { --ability-color: var(--tone-green); --ability-tint: #222b22; }
 .ability--reaction { --ability-color: var(--tone-purple); --ability-tint: #292332; }
+.ability--action { --ability-color: var(--tone-blue); --ability-tint: #202438; }
+.ability--status { --ability-color: #a33a2b; --ability-tint: #2b1a19; }
 .ability-head { position: relative; padding: 9px 14px 8px; background: var(--ability-color); clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); color: #f2eee4; }
 .ability-name-row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
 .ability-title { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .ability-icon { display: block; flex: none; width: 21px; height: 21px; }
+.ability-icon--status-symbol { color: #f2e8c3; font-size: 24px; font-weight: 700; line-height: 19px; text-align: center; }
 .ability-head h3 { margin: 0; color: #f2e8c3; font-size: 17px; font-weight: 800; line-height: 1.1; }
 .action-mark { font-size: 18px; font-weight: 800; letter-spacing: -.2em; padding-right: 4px; white-space: nowrap; }
 .ability-meta { margin: 3px 0 0; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 11px; letter-spacing: .015em; line-height: 1.3; }
