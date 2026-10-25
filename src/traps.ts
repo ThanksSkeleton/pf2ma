@@ -6,6 +6,12 @@ import { parseCsv } from './data-builder.ts'
 export function buildTraps(sources: CsvSources, archetype: 'Trapper' | 'Saboteur', level: number, physicalDamageType = 'piercing', nonphysicalDamageType = 'fire'): Archetype[] {
   if (!Number.isInteger(level) || level < -1 || level > 24) throw new Error('Level must be an integer from -1 through 24')
   const table = (file: string) => parseCsv(sources[file] ?? '')
+  const narratives = table('TacticsAndDescription.csv')
+  const narrative = (name: string) => {
+    const row = narratives.find((candidate) => candidate.archetype === name)
+    if (!row?.description || !row.tactics) throw new Error(`Missing description or tactics for ${name} in TacticsAndDescription.csv`)
+    return row
+  }
   const roadmap = table('RoadMaps_Prod.csv').find((row) => row['Road Map'] === archetype)
   if (!roadmap) throw new Error(`Missing roadmap for ${archetype}`)
   const benchmark = (file: string, column: string) => {
@@ -26,6 +32,7 @@ export function buildTraps(sources: CsvSources, archetype: 'Trapper' | 'Saboteur
   return trapConfigs.map((config): Archetype => {
     const damage = benchmark('table-2-10-strike-damage.csv', config.damageRank)
     const hardness = benchmark('table-2-15-trap-defenses.csv', 'Hardness')
+    const text = narrative(config.name)
     const trigger: AbilityCard = {
       name: 'Trap Trigger', type: 'action', actionCost: 'passive', symbol: 'starburst', targets: config.target,
       ...(config.area ? { area: config.area } : {}), ...(config.duration ? { duration: config.duration } : {}),
@@ -35,7 +42,7 @@ export function buildTraps(sources: CsvSources, archetype: 'Trapper' | 'Saboteur
     }
     return {
       name: config.name, level, role: 'Trap', size: 'Small',
-      description: `A level ${level} trap with statistics from the creature-building trap defenses table.`,
+      description: text.description,
       statGroups: [
         [{ label: 'AC', value: benchmark('table-2-15-trap-defenses.csv', 'Low AC') },
           { label: 'HP', value: benchmark('table-2-15-trap-defenses.csv', 'HP') }],
@@ -44,7 +51,7 @@ export function buildTraps(sources: CsvSources, archetype: 'Trapper' | 'Saboteur
           { label: 'Will', value: benchmark('table-2-15-trap-defenses.csv', 'Low Save') }],
         [{ label: 'Speed', value: '0 feet' }],
       ],
-      tactics: 'The trap does not move. It triggers as described in its ability.',
+      tactics: text.tactics,
       abilities: [{ name: 'Hardness', type: 'passive', actionCost: 'passive', text: `The trap has Hardness ${hardness}.` }, trigger], minions: [],
     }
   })

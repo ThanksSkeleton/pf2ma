@@ -56,7 +56,7 @@ export function buildArchetype(
     return row
   }
   const roadmap = find('RoadMaps_Prod.csv', 'Road Map', name)
-  const narrativeName = ['Trapper', 'Saboteur'].includes(name) ? 'Seeder' : name
+  const narrativeName = name
   const narrative = find('TacticsAndDescription.csv', 'archetype', narrativeName)
   const benchmark = (file: string, rank = '', suffix = '') => {
     const column = `${rank || 'Moderate'}${suffix}`

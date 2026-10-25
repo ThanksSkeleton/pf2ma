@@ -1,13 +1,30 @@
 import './style.css'
 
 import type { AbilityCard, Archetype } from './archetype.ts'
-import { buildArchetype, listArchetypes } from './data-builder.ts'
+import { buildArchetype, listArchetypes, parseCsv } from './data-builder.ts'
 import { buildEngineerMinions } from './engineer-minions.ts'
 import { buildTraps } from './traps.ts'
 
 const rawCsv = import.meta.glob<string>('../csv/*.csv', { query: '?raw', import: 'default', eager: true })
 const sources = Object.fromEntries(Object.entries(rawCsv).map(([path, contents]) => [path.split('/').pop()!, contents]))
-const names = listArchetypes(sources)
+const archetypeRows = parseCsv(sources['RoadMaps_Prod.csv'])
+const archetypeNames = listArchetypes(sources)
+const roleByName = new Map(archetypeRows.map((row) => [row['Road Map'], row.Role]))
+const alphaSort = (items: string[]) => [...items].sort((a, b) => a.localeCompare(b))
+const sortRoleFor = (name: string) => roleByName.get(name) === 'Artillery' ? 'Bombard' : roleByName.get(name) ?? ''
+const preferredRoleOrder = ['Striker', 'Defender', 'Support', 'Controller', 'Bombard']
+const roleOrder = [...preferredRoleOrder, ...new Set(archetypeNames.map(sortRoleFor))]
+  .filter((role, index, roles) => roles.indexOf(role) === index)
+const roleRank = new Map(roleOrder.map((role, index) => [role, index]))
+const roleSort = (items: string[]) => [...items].sort((a, b) =>
+  (roleRank.get(sortRoleFor(a)) ?? 0) - (roleRank.get(sortRoleFor(b)) ?? 0) || a.localeCompare(b))
+let sortMode: 'alpha' | 'role' = 'alpha'
+let names = alphaSort(archetypeNames)
+const physicalDamageTypes = ['piercing', 'slashing', 'bludgeoning']
+const nonphysicalDamageTypes = ['acid', 'cold', 'electricity', 'fire', 'sonic', 'force', 'mental', 'poison', 'bleed', 'spirit', 'vitality', 'void']
+let selectedLevel = 1
+let selectedPhysicalDamageType = 'piercing'
+let selectedNonphysicalDamageType = 'fire'
 const escapeHtml = (value: string | number) => String(value).replace(/[&<>"']/g, (char) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[char]!)
@@ -83,7 +100,7 @@ const statStyleByLabel: Record<string, string> = {
   Size: 'black',
 }
 
-const renderCard = (card: AbilityCard) => {
+const renderCard = (card: AbilityCard, spellRank: number) => {
   const action = actionPresentation[card.actionCost]
   const targetingLine = [
     card.range ? `Range: ${card.range}` : undefined,
@@ -123,7 +140,7 @@ const renderCard = (card: AbilityCard) => {
     .join('')
   return `
   <section class="ability ${presentation.style}" aria-label="${escapeHtml(card.name)}">
-    <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${escapeHtml(card.name)}</h3></div>${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${actionMark}</span>` : ''}</div>${metaLines.map((line) => `<p class="ability-meta">${escapeHtml(line ?? '')}</p>`).join('')}</div>
+    <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${escapeHtml(card.name)}</h3></div><div class="ability-cost"><span class="ability-rank">Rank ${spellRank}</span>${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${actionMark}</span>` : ''}</div></div>${metaLines.map((line) => `<p class="ability-meta">${escapeHtml(line ?? '')}</p>`).join('')}</div>
     <p class="ability-text">${detailLines}${escapeHtml(card.text ?? '')}</p>
   </section>`
 }
@@ -132,6 +149,15 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): str
   const slug = creature.name.toLowerCase().replaceAll(' ', '-')
   const id = parentId ? `${parentId}-${slug}` : slug
   const roleIcon = roleIconByName[creature.role]
+  const speed = creature.statGroups.flat().find((stat) => stat.label === 'Speed')
+  const baseStatGroups = creature.statGroups.map((group) => group.filter((stat) => stat.label !== 'Speed')).filter((group) => group.length)
+  const spellRank = creature.spellRank ?? Math.max(1, Math.ceil(creature.level / 2))
+  const builderControls = depth === 0 ? `
+      <div class="builder-controls builder-controls--sheet" aria-label="Creature options">
+        <label for="physical-damage-type">Physical damage<select id="physical-damage-type">${physicalDamageTypes.map((type) => `<option value="${type}"${type === selectedPhysicalDamageType ? ' selected' : ''}>${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
+        <label for="nonphysical-damage-type">Nonphysical damage<select id="nonphysical-damage-type">${nonphysicalDamageTypes.map((type) => `<option value="${type}"${type === selectedNonphysicalDamageType ? ' selected' : ''}>${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
+        <label for="creature-level">Level<select id="creature-level">${Array.from({ length: 26 }, (_, index) => index - 1).map((level) => `<option value="${level}"${level === selectedLevel ? ' selected' : ''}>${level}</option>`).join('')}</select></label>
+      </div>` : ''
   return `
   <article class="creature-sheet${depth > 0 ? ' creature-sheet--minion' : ''}" aria-labelledby="${id}-name">
     <div class="top-grid">
@@ -140,13 +166,15 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): str
           ${roleIcon ? `<img class="crest" src="${roleIcon}" alt="" aria-hidden="true">` : ''}
           <p class="role">${escapeHtml(creature.role)}</p>
         </div>
-        <p class="creature-level">Level ${creature.level}${creature.spellRank ? ` · Spell rank ${creature.spellRank}` : ''}</p>
         <h1 id="${id}-name">${escapeHtml(creature.name)}</h1>
-        <dl class="size-row"><div class="stat-row stat-row--${statStyleByLabel.Size}"><dt>Size</dt><dd>${escapeHtml(creature.size)}</dd></div></dl>
+        <dl class="size-row">
+          <div class="stat-row stat-row--${statStyleByLabel.Size}"><dt>Size</dt><dd>${escapeHtml(creature.size)}</dd></div>
+          ${speed ? `<div class="stat-row stat-row--${statStyleByLabel.Speed}"><dt>Speed</dt><dd>${escapeHtml(speed.value)}</dd></div>` : ''}
+        </dl>
       </header>
 
       <section class="base-block" aria-label="Base stats">
-        <div class="stat-list">${creature.statGroups.map((group) => `
+        <div class="stat-list">${baseStatGroups.map((group) => `
           <dl class="stat-group">${group.map((stat) => `
             <div class="stat-row stat-row--${statStyleByLabel[stat.label] ?? 'black'}"><dt>${escapeHtml(stat.label)}</dt><dd>${escapeHtml(stat.value)}</dd></div>
           `).join('')}</dl>
@@ -156,13 +184,14 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): str
 
     <div class="sheet-body">
       ${creature.skills ? `<dl class="skills" aria-label="Skills">${Object.entries(creature.skills).map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>` : ''}
+      ${builderControls}
       <section class="description" aria-labelledby="${id}-description-heading"><div class="section-heading"><h2 id="${id}-description-heading">Description</h2></div><p>${escapeHtml(creature.description)}</p></section>
 
       <section class="tactics" aria-labelledby="${id}-tactics-heading"><div class="section-heading"><h2 id="${id}-tactics-heading">Tactics</h2></div><p>${escapeHtml(creature.tactics)}</p></section>
 
       <section class="abilities" aria-labelledby="${id}-abilities-heading">
         <div class="section-heading"><h2 id="${id}-abilities-heading">Abilities</h2></div>
-        <div class="ability-list">${[...(creature.attack ? [creature.attack] : []), ...(creature.secondaryAttacks ?? []), ...creature.abilities].map(renderCard).join('')}</div>
+        <div class="ability-list">${[...(creature.attack ? [creature.attack] : []), ...(creature.secondaryAttacks ?? []), ...creature.abilities].map((card) => renderCard(card, spellRank)).join('')}</div>
       </section>
     </div>
     ${creature.minions.length ? `
@@ -177,21 +206,20 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): str
 const app = document.querySelector<HTMLDivElement>('#app')
 if (!app) throw new Error('App root is missing')
 
-const physicalDamageTypes = ['piercing', 'slashing', 'bludgeoning']
-const nonphysicalDamageTypes = ['acid', 'cold', 'electricity', 'fire', 'sonic', 'force', 'mental', 'poison', 'bleed', 'spirit', 'vitality', 'void']
 let selectedIndex = 0
 
 app.innerHTML = `
-  <div class="builder-controls" aria-label="Creature options">
-    <label for="physical-damage-type">Physical damage<select id="physical-damage-type">${physicalDamageTypes.map((type) => `<option value="${type}">${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
-    <label for="nonphysical-damage-type">Nonphysical damage<select id="nonphysical-damage-type">${nonphysicalDamageTypes.map((type) => `<option value="${type}"${type === 'fire' ? ' selected' : ''}>${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
-    <label for="creature-level">Level<select id="creature-level">${Array.from({ length: 26 }, (_, index) => index - 1).map((level) => `<option value="${level}"${level === 1 ? ' selected' : ''}>${level}</option>`).join('')}</select></label>
+  <div class="builder-controls builder-controls--top" aria-label="Archetype options">
+    <div class="carousel-sort" role="radiogroup" aria-label="Sort archetypes">
+      <span>Sort</span>
+      <label><input type="radio" name="archetype-sort" value="alpha" checked>ABC</label>
+      <label><input type="radio" name="archetype-sort" value="role">Role</label>
+    </div>
   </div>
   <section class="archetype-carousel" aria-roledescription="carousel" aria-label="Archetypes" tabindex="0">
-    <div class="carousel-heading"><h2>Choose archetype</h2><p id="carousel-position" role="status" aria-live="polite" aria-atomic="true"></p></div>
     <div class="carousel-navigation">
       <button type="button" id="previous-archetype" class="carousel-arrow" aria-label="Previous archetype" aria-controls="archetype-panel">‹</button>
-      <div class="carousel-track">${names.map((name, index) => `<button type="button" class="archetype-choice" data-index="${index}" aria-controls="archetype-panel" aria-pressed="${index === 0}">${escapeHtml(name)}</button>`).join('')}</div>
+      <div class="carousel-track"></div>
       <button type="button" id="next-archetype" class="carousel-arrow" aria-label="Next archetype" aria-controls="archetype-panel">›</button>
     </div>
   </section>
@@ -199,22 +227,33 @@ app.innerHTML = `
 `
 
 const panel = app.querySelector<HTMLDivElement>('#archetype-panel')!
-const levelInput = app.querySelector<HTMLSelectElement>('#creature-level')!
-const physicalDamageInput = app.querySelector<HTMLSelectElement>('#physical-damage-type')!
-const nonphysicalDamageInput = app.querySelector<HTMLSelectElement>('#nonphysical-damage-type')!
-const choices = Array.from(app.querySelectorAll<HTMLButtonElement>('.archetype-choice'))
+const carouselTrack = app.querySelector<HTMLDivElement>('.carousel-track')!
 const carousel = app.querySelector<HTMLElement>('.archetype-carousel')!
-const position = app.querySelector<HTMLElement>('#carousel-position')!
+const carouselNavigation = app.querySelector<HTMLElement>('.carousel-navigation')!
+let choices: HTMLButtonElement[] = []
+
+const renderChoices = () => {
+  carouselTrack.innerHTML = names.map((name, index) => {
+    const role = roleByName.get(name) ?? ''
+    const roleIcon = sortMode === 'role' && roleIconByName[role]
+      ? `<img class="archetype-role-icon" src="${roleIconByName[role]}" alt="" aria-hidden="true">`
+      : ''
+    return `<button type="button" class="archetype-choice${sortMode === 'role' ? ' archetype-choice--role' : ''}" data-index="${index}" aria-controls="archetype-panel" aria-pressed="${index === selectedIndex}">${roleIcon}${escapeHtml(name)}</button>`
+  }).join('')
+  choices = Array.from(carouselTrack.querySelectorAll<HTMLButtonElement>('.archetype-choice'))
+  choices.forEach((choice, index) => choice.addEventListener('click', () => selectArchetype(index)))
+}
 
 const renderSelected = () => {
-  const level = Number(levelInput.value)
-  const creature = buildArchetype(sources, names[selectedIndex], level, physicalDamageInput.value, nonphysicalDamageInput.value)
-  if (creature.name === 'Engineer') creature.minions = buildEngineerMinions(sources, level, physicalDamageInput.value)
-  if (creature.name === 'Trapper' || creature.name === 'Saboteur') creature.minions = buildTraps(sources, creature.name, level, physicalDamageInput.value, nonphysicalDamageInput.value)
+  const level = selectedLevel
+  const creature = buildArchetype(sources, names[selectedIndex], level, selectedPhysicalDamageType, selectedNonphysicalDamageType)
+  if (creature.name === 'Engineer') creature.minions = buildEngineerMinions(sources, level, selectedPhysicalDamageType)
+  if (creature.name === 'Trapper' || creature.name === 'Saboteur') creature.minions = buildTraps(sources, creature.name, level, selectedPhysicalDamageType, selectedNonphysicalDamageType)
   panel.innerHTML = `<div class="monster-box">${renderCreatureSheet(creature)}</div>`
   panel.setAttribute('aria-label', `${creature.name}, level ${level}`)
   document.title = `${creature.name} · Level ${level} | PF2E Monster Archetype Bank`
-  position.textContent = `${creature.name} · ${selectedIndex + 1} of ${names.length}`
+  carouselNavigation.classList.toggle('fade-left', selectedIndex > 0)
+  carouselNavigation.classList.toggle('fade-right', selectedIndex < names.length - 1)
   choices.forEach((choice, index) => choice.setAttribute('aria-pressed', String(index === selectedIndex)))
 }
 const selectArchetype = (index: number, focus = false) => {
@@ -223,7 +262,6 @@ const selectArchetype = (index: number, focus = false) => {
   choices[selectedIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
   if (focus) choices[selectedIndex].focus({ preventScroll: true })
 }
-choices.forEach((choice, index) => choice.addEventListener('click', () => selectArchetype(index)))
 app.querySelector('#previous-archetype')!.addEventListener('click', () => selectArchetype(selectedIndex - 1))
 app.querySelector('#next-archetype')!.addEventListener('click', () => selectArchetype(selectedIndex + 1))
 carousel.addEventListener('keydown', (event) => {
@@ -234,7 +272,26 @@ carousel.addEventListener('keydown', (event) => {
   event.preventDefault()
   selectArchetype(index, true)
 })
-levelInput.addEventListener('change', renderSelected)
-physicalDamageInput.addEventListener('change', renderSelected)
-nonphysicalDamageInput.addEventListener('change', renderSelected)
+panel.addEventListener('change', (event) => {
+  const target = event.target
+  if (!(target instanceof HTMLSelectElement)) return
+  if (target.id === 'creature-level') selectedLevel = Number(target.value)
+  else if (target.id === 'physical-damage-type') selectedPhysicalDamageType = target.value
+  else if (target.id === 'nonphysical-damage-type') selectedNonphysicalDamageType = target.value
+  else return
+  renderSelected()
+})
+app.querySelectorAll<HTMLInputElement>('input[name="archetype-sort"]').forEach((input) => {
+  input.addEventListener('change', () => {
+    if (!input.checked) return
+    const selectedName = names[selectedIndex]
+    sortMode = input.value as 'alpha' | 'role'
+    names = sortMode === 'alpha' ? alphaSort(archetypeNames) : roleSort(archetypeNames)
+    selectedIndex = names.indexOf(selectedName)
+    renderChoices()
+    renderSelected()
+    choices[selectedIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+  })
+})
+renderChoices()
 renderSelected()

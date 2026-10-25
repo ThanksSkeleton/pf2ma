@@ -10,12 +10,19 @@ export function buildEngineerMinions(sources: CsvSources, level: number, damageT
     if (!value) throw new Error(`Missing minion benchmark ${file}: ${level} ${rank}`)
     return value
   }
+  const narratives = parseCsv(sources['TacticsAndDescription.csv'] ?? '')
+  const narrative = (name: string) => {
+    const row = narratives.find((candidate) => candidate.archetype === name)
+    if (!row?.description || !row.tactics) throw new Error(`Missing description or tactics for ${name} in TacticsAndDescription.csv`)
+    return row
+  }
   return ['Ranged', 'Melee'].map((subtype): Archetype => {
     const ranged = subtype === 'Ranged'
+    const text = narrative(`${subtype} Minion`)
     const save = lookup('table-2-6-saving-throws.csv', 'Terrible')
     return {
       name: `${subtype} Minion`, level, role: 'Minion', size: 'Small',
-      description: ranged ? 'A stationary, fragile minion that attacks from a short distance.' : 'A fragile minion that closes on nearby enemies to attack.',
+      description: text.description,
       statGroups: [
         [{ label: 'Perception', value: lookup('table-2-2-perception.csv', 'Terrible') }],
         [{ label: 'AC', value: lookup('table-2-5-armor-class.csv', 'Low') },
@@ -29,7 +36,7 @@ export function buildEngineerMinions(sources: CsvSources, level: number, damageT
         attack: lookup('table-2-9-strike-attack-bonus.csv', 'Moderate'),
         damage: lookup('table-2-10-strike-damage.csv', 'Terrible'), damageType,
       },
-      tactics: ranged ? 'The Ranged Minion cannot move. It attacks a creature within 30 feet.' : 'The Melee Minion moves toward an enemy and attacks when it can reach one.',
+      tactics: text.tactics,
       abilities: [], minions: [],
     }
   })
