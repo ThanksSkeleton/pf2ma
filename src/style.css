@@ -37,7 +37,9 @@ body { margin: 0; }
 .carousel-arrow:hover, .archetype-choice:hover { border-color: #d5c489; }
 button:focus-visible, select:focus-visible, .archetype-carousel:focus-visible { outline: 2px solid #d5c489; outline-offset: 3px; }
 .creature-level { margin: 0 0 9px; color: #d0c5b9; font-size: 12px; }
-.skills { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 20px; margin: 0 0 24px; font-size: 13px; text-align: right; }
+.skills-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 20px; margin: 0 0 24px; }
+.archetype-tags { flex: 0 0 auto; color: #d0c5b9; font-size: 13px; text-align: left; }
+.skills { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 20px; margin: 0 0 0 auto; font-size: 13px; text-align: right; }
 .skills div { display: flex; justify-content: flex-end; gap: 8px; }
 .skills dt { color: #d0c5b9; }
 .skills dd { margin: 0; font-weight: bold; }
@@ -77,6 +79,8 @@ h1 { margin: 0; font-size: clamp(45px, 7vw, 63px); font-weight: 900; letter-spac
 .tactics { margin: 0 0 30px; }
 .tactics p { margin: 0; font-size: 15px; line-height: 1.52; }
 .abilities .section-heading { margin-bottom: 14px; }
+.references { margin-top: 30px; }
+.references .section-heading { margin-bottom: 14px; }
 .ability-list { display: grid; gap: 13px; }
 .ability { --ability-color: var(--tone-burgundy); --ability-tint: #292321; }
 .ability--strike { --ability-color: var(--tone-yellow); --ability-tint: #2e281f; }
@@ -113,7 +117,7 @@ h1 { margin: 0; font-size: clamp(45px, 7vw, 63px); font-weight: 900; letter-spac
 @media print {
   :root { background: white; }
   .builder-controls, .archetype-carousel { display: none; }
-  .monster-box { width: 100%; border: 0; box-shadow: none; }
+  .monster-box { width: 100%; margin: 0; border: 0; box-shadow: none; }
   .creature-sheet { width: 100%; box-shadow: none; }
   .sheet-body { padding-bottom: 0; }
   .ability { break-inside: avoid; }

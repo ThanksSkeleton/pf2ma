@@ -140,7 +140,7 @@ const renderCard = (card: AbilityCard, spellRank: number) => {
     .join('')
   return `
   <section class="ability ${presentation.style}" aria-label="${escapeHtml(card.name)}">
-    <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${escapeHtml(card.name)}</h3></div><div class="ability-cost"><span class="ability-rank">Rank ${spellRank}</span>${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${actionMark}</span>` : ''}</div></div>${metaLines.map((line) => `<p class="ability-meta">${escapeHtml(line ?? '')}</p>`).join('')}</div>
+    <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${escapeHtml(card.name)}</h3></div><div class="ability-cost">${card.type === 'spell' ? `<span class="ability-rank">Rank ${spellRank}</span>` : ''}${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${actionMark}</span>` : ''}</div></div>${metaLines.map((line) => `<p class="ability-meta">${escapeHtml(line ?? '')}</p>`).join('')}</div>
     <p class="ability-text">${detailLines}${escapeHtml(card.text ?? '')}</p>
   </section>`
 }
@@ -183,7 +183,7 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): str
     </div>
 
     <div class="sheet-body">
-      ${creature.skills ? `<dl class="skills" aria-label="Skills">${Object.entries(creature.skills).map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl>` : ''}
+      ${creature.skills ? `<div class="skills-row">${creature.archetypeTags?.length ? `<div class="archetype-tags" aria-label="Archetype tags">${creature.archetypeTags.map(escapeHtml).join(', ')}</div>` : ''}<dl class="skills" aria-label="Skills">${Object.entries(creature.skills).map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl></div>` : ''}
       ${builderControls}
       <section class="description" aria-labelledby="${id}-description-heading"><div class="section-heading"><h2 id="${id}-description-heading">Description</h2></div><p>${escapeHtml(creature.description)}</p></section>
 
@@ -193,6 +193,10 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): str
         <div class="section-heading"><h2 id="${id}-abilities-heading">Abilities</h2></div>
         <div class="ability-list">${[...(creature.attack ? [creature.attack] : []), ...(creature.secondaryAttacks ?? []), ...creature.abilities].map((card) => renderCard(card, spellRank)).join('')}</div>
       </section>
+      ${creature.references?.length ? `<section class="references" aria-labelledby="${id}-references-heading">
+        <div class="section-heading"><h2 id="${id}-references-heading">Conditions &amp; PC Responses</h2></div>
+        <div class="ability-list">${creature.references.map((card) => renderCard(card, spellRank)).join('')}</div>
+      </section>` : ''}
     </div>
     ${creature.minions.length ? `
     <section class="minions-section" aria-labelledby="${id}-minions-heading">

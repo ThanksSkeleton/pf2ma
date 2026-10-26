@@ -26,31 +26,36 @@ This Strike neither takes nor increases your multiple attack penalty.",sword
 24,Downed Prey,homebrew,Assassin,Passive,passive,,,,,,,,,,,,,,Your melee Strikes against prone creatures deal additional precision damage equal to $lowDamage on a hit.,heart
 26,Guardian Field,homebrew,Bastion,Spell,two actions,Concentration,,,Sustained,,Your allies within the aura,,10-foot aura centered on you,,,,,,"At the start of each ally's turn, if that ally is in the aura, it gains temporary Hit Points equal to $lowDamage. A creature can gain them from this ability only once per round.",starburst
 27,Committed Blow,homebrew,Demolisher,Attack,two actions,Attack,,,,,One creature,melee reach,,,$meleeAttack,,$extremeDamage,$meleeDamageType,You stun yourself: stunned 1.,sword
-30,Shared Veil,homebrew,Mirage,Spell,two actions,"Concentration, Magical",,,Until the start of your next turn or until after the target takes a hostile action.,,One willing creature you can see.,30 feet,,,,,,,The target becomes hidden.,starburst
+30,Shared Veil,homebrew,Mirage,Spell,two actions,"Concentration, Magical",,,Until the start of your next turn or until after the target takes a hostile action.,,One willing creature you can see.,30 feet,,,,,,,The target can make a Hide check as a reaction.,starburst
 31,Chosen Rival,homebrew,Ronin,Spell,one action,Concentration,,,1 minute,,One creature you can see.,30 feet,,,,,,,"The first time each turn you hit the chosen creature with a melee Strike, you deal additional $lowDamage. You have resistance to damage from every other creature equal to $minimumResistance. Choosing a new rival ends this effect.",starburst
-32,Shadow Prowl,homebrew,Specter,Spell,one action,Move,,,"The Hidden condition lasts until the start of your next turn or until after you make a Strike, whichever comes first.",,You.,,,,,,,,"Stride up to $speed. At the end of this movement, you become hidden.",circle
+32,Shadow Prowl,homebrew,Specter,Spell,one action,Move,,,"The Hidden condition lasts until the start of your next turn or until after you make a Strike, whichever comes first.",,You.,,,,,,,,"Stride up to $speed. You can make a Hide check as a free action at the end of this movement.",circle
 33,Isolated Prey,homebrew,Specter,Passive,passive,,,,,,,,,,,,,,Melee Strikes against enemies that are off-guard and have no adjacent allies deal additional precision damage equal to $lowDamage.,heart
 34,Aegis Ward,homebrew,Aegis,Spell,two actions,"Aura, Concentrate, Manipulate",,,Sustained,,You and your allies,,10-foot aura centered on you,,,,,,"Choose acid, cold, electricity, fire, or sonic when you cast the spell. You and your allies within the aura gain a +1 status bonus to AC, saving throws, and attack rolls, and resistance 5 to the chosen damage type.
 
 You must Sustain the spell.",starburst
 35,Breaching Strikes,homebrew,Breacher,Passive,passive,,,,,,,,,,,,,,Creatures you hit with a Strike take a –3 penalty to AC. This penalty does not stack.,heart
-38,Abduct,homebrew,Cataphract,Spell,one action,Move,,,,The creature has at least one creature grabbed.,,,,,,,,,"Stride up to $halfSpeed, pulling any grabbed creatures along with you.",circle
+38,Abduct,homebrew,Cataphract,Spell,one action,Move,,,,You have at least one creature grabbed.,,,,,,,,,"Stride up to $halfSpeed, pulling any creatures you have grabbed along with you.",circle
 39,Minion Master,homebrew,Engineer,Spell,one action,"Concentrate, Manipulate",,Once per turn,,Fewer than 6 minions.,One adjacent square.,,,,,,,,Create one minion in the target square. Your minions take their turns immediately after you.,starburst
 40,Fiery Rebuke,homebrew,Pyro,Reaction,reaction,Fire,A creature within 30 feet damages you.,,,,The triggering creature.,30 feet,,Basic Reflex,,$abilityDC,$lowDamage,fire,"The triggering creature takes the listed damage, subject to the saving throw.",reaction
-41,Delayed Magic Missile,homebrew,Rainmaker,Spell,two actions,"Concentrate, Force, Manipulate",,At Will,,,One or more creatures you can see.,120 feet,,,,,,,"Choose targets for $dartCount darts when you use this ability. At the start of your next turn, each dart automatically hits its assigned target and deals 1d4+1 force damage.",starburst
-42,Leaping Knockdown,homebrew,Assassin,Attack,two actions,"Attack, Move",,At Will,,,One creature within range,80 feet,,Reflex DC,$athletics,,,,"Leap, ignoring difficult terrain. This movement does not trigger reactions. Make a Trip attack against the target using Athletics ($athletics) versus its Reflex DC. This Trip cannot critically succeed.",sword
+41,Delayed Magic Missile,homebrew,Rainmaker,Spell,two actions,"Concentrate, Force, Manipulate",,At Will,,,Each opponent you can see.,120 feet,,,,,$terribleDamage,force,"Fire a dart for each opponent you can see. At the start of the next turn, each dart automatically hits its assigned target and deals $terribleDamage force damage.",starburst
+119,Leaping Knockdown,homebrew,Assassin,Attack,two actions,"Attack, Move",,,,,One creature within range,80 feet,,Reflex DC,$athletics,,,,"Leap, ignoring difficult terrain; this movement does not trigger reactions. Attempt Athletics ($athletics) against the target’s Reflex DC. This attack uses your current multiple attack penalty and increases it. Critical Success: Target falls prone; no extra damage.
+Success: Target falls prone.
+Failure: No effect.
+Critical Failure: You fall prone.",sword
 43,Breach Ram,homebrew,Breacher,Attack,two actions,"Attack, Move",,At Will,,,One creature in a straight path,,,Fortitude,$meleeAttack,$abilityDC,$meleeDamage,$meleeDamageType,"Stride at least $halfSpeed and up to $speed in a straight line. If you end adjacent to a creature, make a melee Strike against it. On a hit, the target attempts the saving throw; failure pushes it 5 feet.",sword
 44,Mirror Image,core,Ace,Spell,two actions,"Concentrate, Illusion, Manipulate, Visual",,Once per day,1 minute,,You.,,,,,,,,"Create three illusory doubles in your space. When an attack would hit you, randomly determine whether it hits you or a remaining double, with each equally likely. A double struck by an attack disappears. A failed attack that is not a critical failure removes one double and has no other effect. If a critical hit is assigned to a double, remove that double and resolve a normal hit against you instead. The spell ends when the last double disappears.",circle
-45,Disarm,core,Ronin,Attack,one action,,,At Will,,Your last action was a successful Strike.,The creature hit by that Strike.,,,Reflex DC,$athletics,,,,"Attempt to Disarm the target using Athletics ($athletics) against its Reflex DC. On a success, the target drops one item it is holding. On a critical success, the target also takes a –2 circumstance penalty to attack rolls with that item until the end of its next turn.",sword
-45,Push,core,Sentinel,Attack,one action,,,At Will,,Your last action was a successful Strike with Push listed in its damage entry.,The creature hit by that Strike.,,,Fortitude DC,$athletics,,,,"Attempt to Shove the target using Athletics. Apply the normal Shove results, but do not apply or increase your multiple attack penalty. If the Strike specifies a Push distance, use it instead of the normal success distance.",sword
-46,Grab,core,Bastion; Cataphract; Sentinel,Attack,one action,,,At Will,,"Your last action was a successful Strike with Grab listed in its damage entry, or you have a creature grabbed or restrained.","The creature hit by that Strike, or one creature held with an appendage that has Grab.",,,Fortitude DC,$athletics,,,,"After a qualifying Strike, attempt to Grapple its target using the attacking body part. Apply the normal Grapple results, but do not apply or increase your multiple attack penalty. Alternatively, choose one creature grabbed or restrained by an appendage with Grab and extend that condition automatically until the end of your next turn.",sword
-47,Knockdown,core,Breacher; Ronin,Attack,one action,,,At Will,,Your last action was a successful Strike with Knockdown listed in its damage entry.,The creature hit by that Strike.,,,Reflex DC,$athletics,,,,"Attempt to Trip the target using Athletics. Apply the normal Trip results, but do not apply or increase your multiple attack penalty.",sword
+109,Disarm,homebrew,,Attack,one action,Attack,,,,,One item held by a creature,,,Reflex DC,$athletics,,,,"Attempt Athletics ($athletics) against the holder’s Reflex DC. This attack uses your current multiple attack penalty and increases it.
+Critical Success: The item falls into the holder’s space.
+Success: The holder’s grip weakens. Further Disarm attempts against this item gain a +2 circumstance bonus; the holder takes a −2 circumstance penalty to attacks with it and checks needing a firm grip. The holder can Interact to readjust its grip; otherwise this lasts while it holds the item.
+Failure: No effect.
+Critical Failure: You are off-guard until the start of your next turn.",sword
 48,Translocate,Mod,Operator,Spell,two actions,"Concentrate, Manipulate, Teleportation",,Once per day,,,You and your worn and held items.,120 feet,,,,,,,"Teleport to an unoccupied space you can see within range, bringing your worn and held items. The spell fails if another creature would travel with you, including one inside an extradimensional container.",circle
-49,Breathe Fire,core,Pyro,Spell,two actions,"Concentrate, Manipulate",,At Will,,,Creatures in the area.,,15-foot cone,Basic Reflex,,$abilityDC,$breatheFireDamage,$nonphysicalDamageType,,starburst
+49,Breathe Fire,core,Pyro,Spell,two actions,"Concentrate, Manipulate",,At Will,,,Creatures in the area.,,15-foot cone,Basic Reflex,,$abilityDC,$breatheFireDamage,$nonphysicalDamageType,"A gout of flame sprays from your mouth. You deal 2d6 fire damage to creatures in the area with a basic Reflex save.
+Heightened (+1) The damage increases by 2d6.",starburst
 50,Revealing Light,core,Scout,Spell,two actions,"Concentrate, Light, Manipulate",,At Will,Varies by saving throw.,,Creatures in the area.,120 feet,10-foot burst,Reflex,,$abilityDC,,,"Each creature attempts a Reflex save. Critical success: unaffected. Success: affected for 2 rounds. Failure: affected for 1 minute. Critical failure: affected for 10 minutes. An affected creature is dazzled. If invisible, it becomes concealed instead; concealment from other causes is removed.",starburst
 51,Dispel Magic,core,Scout,Spell,two actions,"Concentrate, Manipulate",,Once per day,,,One spell effect or unattended magic item.,120 feet,,,,,,,"Attempt a counteract check against the target using your spellcasting modifier ($spellAttack) and effective spell rank. Success counteracts the spell effect or suppresses a magic item's magic for 10 minutes, leaving its mundane properties intact. Attempts against artifacts and similar items automatically fail. Use the normal counteract rules to determine which ranks your check can affect.",starburst
-52,Reactive Strike,core,Sentinel,Reaction,reaction,,"A creature within your reach uses a manipulate or move action, makes a ranged attack, or leaves a square during its move action.",At Will,,,The triggering creature.,melee reach,,,$meleeAttack,,$meleeDamage,$meleeDamageType,Make a melee Strike against the triggering creature. This Strike neither takes nor increases your multiple attack penalty. A critical hit disrupts the triggering action if it has the manipulate trait.,reaction
-53,Tactical Reflexes,core,Sentinel,Passive,passive,,,At Will,,,,,,,,,,,"When you regain your actions at the start of your turn, gain one additional reaction usable only for Reactive Strike.",heart
+52,Reactive Strike,core,Sentinel,Reaction,reaction,,"A creature within the monster's reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using",At Will,,,The triggering creature.,melee reach,,,$meleeAttack,,$meleeDamage,$meleeDamageType,"The monster attempts a melee Strike against the triggering creature. If the attack is a critical hit and the trigger was a manipulate action, the monster disrupts that action. This Strike doesn't count toward the monster's multiple attack penalty, and its multiple attack penalty doesn't apply to this Strike.",reaction
+53,Tactical Reflexes,homebrew,Sentinel,Passive,passive,,,At Will,,,,,,,,,,,"When you regain your actions at the start of your turn, gain one additional reaction usable only for Reactive Strike.",heart
 54,Heal,core,Support,Spell,one to three actions,"Healing, Manipulate, Vitality; Concentrate with two or three actions",,At Will,,,One willing living creature or one undead; all living and undead creatures in the area with three actions.,Touch with one action; 30 feet with two actions,30-foot emanation with three actions,Basic Fortitude (undead only),,$abilityDC,$healDice,vitality (damage to undead; healing to willing living creatures),"Use spell rank equal to half your level rounded up, minimum 1 and maximum 10. One action: touch one target, restoring the listed HP to a willing living creature or dealing the listed vitality damage to an undead creature with a basic Fortitude save. Two actions: target one creature within 30 feet; add $healBonus HP when healing a living creature. Three actions: affect all living and undead creatures in a 30-foot emanation, healing living creatures and damaging undead with the listed dice; undead attempt a basic Fortitude save. The dice are 1d8 per rank; the two-action healing bonus is 8 per rank.",starburst
 55,Dazzling Flash,Mod,Witch,Spell,two actions,"Cleric, Concentrate, Focus, Light, Manipulate, Visual",,Once per day,,,Creatures in the area.,,15-foot cone,Fortitude,,$abilityDC,,,"Raise your religious symbol to emit a flash. Each creature attempts a Fortitude save.
 Critical Success: Unaffected.
@@ -60,17 +65,16 @@ Critical Failure: Blinded for 1 round and dazzled for 1 hour.",starburst
 70,Glancing Blow,homebrew,Assault,Attack,two actions,"Attack, Concentrate, Manipulate",,,,,Creatures in the area.,melee reach,,Basic Reflex,,$abilityDC,$lowDamage,$meleeDamageType,Creatures in the area take the listed damage with a basic Reflex save.,sword
 71,Glancing Shot,homebrew,Assault,Attack,two actions,"Attack, Concentrate, Manipulate",,,,,One creature you can see.,$rangedRange,,Basic Reflex,,$abilityDC,$rangedDamage,$rangedDamageType,The target takes the listed damage with a basic Reflex save.,bow
 72,Sustain,homebrew,Aegis; Bastion,Spell,one action,Concentrate,,,,,,,,,,,,,"Choose one of your effects with a sustained duration or one that lists a special benefit when you Sustain it. An effect with a sustained duration continues until the end of your next turn; using Sustain more than once in the same turn does not extend it further. If an effect can be Sustained but gives no duration, it lasts for up to 10 minutes. Sustain also grants any special benefit listed by the effect. If the Sustain action is disrupted, the effect ends.",circle
-73,Grapple,homebrew,Bastion; Cataphract,Attack,one action,Attack,,,,You have at least one free hand and your target is no more than one size larger than you.,One creature or object,,,Fortitude DC,$athletics,,,,"Attempt to grab a creature or object with your free hand. Attempt an Athletics check against the target’s Fortitude DC. You can Grapple a target you already have grabbed or restrained without a free hand.
-
-Critical Success: The target is restrained until the end of your next turn unless you move or the target Escapes.
-Success: The target is grabbed until the end of your next turn unless you move or the target Escapes.
-Failure: You fail to grab the target. If you already had it grabbed or restrained using Grapple, those conditions end.
-Critical Failure: If you already had the target grabbed or restrained, it breaks free. The target can either grab you as if it succeeded at Grapple, or force you to fall prone.",sword
+103,Grapple,homebrew,,Attack,one action,Attack,,,,,One creature or object,,,Fortitude DC,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Fortitude DC. This attack uses your current multiple attack penalty and increases it. To keep a hold, spend another action before it expires and repeat this check; use the new result. A hold ends if you move or the target Escapes.
+Critical Success: Target is restrained until the end of your next turn.
+Success: Target is grabbed until the end of your next turn.
+Failure: No new hold; if you already held the target with Grapple, that hold ends.
+Critical Failure: Any Grapple hold you had on the target ends. The target chooses: you become grabbed by it until the end of its next turn (or until it moves or you Escape), or you fall prone.",sword
 78,Friendly Teleport,homebrew,Mirage,Spell,two actions,"Concentrate, Teleport",,,,,Another willing creature you can see in range.,30 feet,,,,,,,Teleport the target to an unoccupied square within range.,starburst
-79,Prone,homebrew,Assassin,Status,passive,,,,,,,,,,,,,,You are lying on the ground. You are off-guard and take a –2 circumstance penalty to attack rolls. You can Crawl or Stand.,status
+114,Prone,homebrew,Assassin; Bastion; Cataphract; Ronin; Sentinel,Status,passive,,,,,,,,,,,,,,"The creature takes a −2 circumstance penalty to attack rolls and is off-guard. It can use only Crawl or Stand as move actions. Crawl moves it 5 feet if its Speed is at least 10 feet; Stand ends prone. It can Take Cover while prone for a +4 circumstance bonus to AC against ranged attacks, even without cover, but remains off-guard. A creature knocked prone while climbing or flying falls; a swimming creature cannot be knocked prone.",status
 79,Swap,homebrew,Mirage,Spell,two actions,"Concentrate, Teleport",,,,,"Two willing creatures you can see in range, including yourself.",30 feet,,,,,,,"Teleport the two targets, swapping their positions.",starburst
 80,Lifelink Donor,homebrew,Priest,Status,passive,,,,,,,,,,,,,,"Whenever a linked recipient would take damage, you take half that damage instead. Transferred damage cannot be transferred again. Whenever you would regain HP, divide that healing equally among you and all linked recipients, rounding fractions down and giving any remainder to you. A link ends immediately when a recipient moves more than 60 feet from you.",status
-81,Grabbed,homebrew,Bastion; Cataphract,Status,passive,,,,,,,,,,,,,,A grabbed creature is immobilized and off-guard.,status
+115,Grabbed,homebrew,Bastion; Cataphract; Sentinel,Status,passive,,,,,,,,,,,,,,"The creature is off-guard and immobilized. A manipulate action requires a DC 5 flat check after the action is spent and before it takes effect; on a failure, the action is lost.",status
 81,Lifelink Recipient,homebrew,Priest,Status,passive,,,,,,,,,,,,,,"You are linked to a donor. Whenever you would take damage, the donor takes half that damage instead. Whenever the donor would regain HP, that healing is divided equally among the donor and all linked recipients.",status
 84,In the Crosshairs,homebrew,Sniper,Status,passive,,,,,,,,,,,,,,"Sniper Strike is empowered.
 When you Take Cover, you can attempt a Reflex save against the Sniper’s ability DC; on a success, this status ends. If the Sniper designates a new target, this status ends.",status
@@ -78,3 +82,85 @@ When you Take Cover, you can attempt a Reflex save against the Sniper’s abilit
 86,Hidden,core,Mirage; Specter,Status,passive,,,,,,,,,,,,,,"While you're hidden from a creature, that creature knows the space you're in but can't tell precisely where you are. You typically become hidden by using Stealth to Hide. When Seeking a creature using only imprecise senses, it remains hidden, rather than Observed. A creature you're hidden from is Off-Guard to you, and it must succeed at a DC 11 flat check when targeting you with an attack, spell, or other effect or it fails to affect you. Area effects aren't subject to this flat check.
 
 A creature might be able to use the Seek action to try to observe you.",status
+100,Trip,homebrew,,Attack,one action,Attack,,,,,One creature,,,Reflex DC,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Reflex DC. This attack uses your current multiple attack penalty and increases it.
+Critical Success: Target falls prone and takes 1d6 bludgeoning damage.
+Success: Target falls prone.
+Failure: No effect.
+Critical Failure: You fall prone.",sword
+101,Advanced Trip,homebrew,Ronin,Attack,one action,Attack,,,,Your last action was a successful Strike against the target.,One creature,,,Reflex DC,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Reflex DC. This check ignores your multiple attack penalty and does not increase it.
+Critical Success: Target falls prone and takes 1d6 bludgeoning damage.
+Success: Target falls prone.
+Failure: No effect.
+Critical Failure: You fall prone.",sword
+102,Supreme Trip,homebrew,,Attack,free action,Attack,Your first Strike on this turn hits the target.,,,,One creature,,,Reflex DC,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Reflex DC. This check ignores your multiple attack penalty and does not increase it.
+Critical Success: Target falls prone and takes 1d6 bludgeoning damage.
+Success: Target falls prone.
+Failure: No effect.
+Critical Failure: You fall prone.",sword
+104,Advanced Grapple,homebrew,Bastion; Cataphract; Sentinel,Attack,one action,Attack,,,,Your last action was a successful Strike against the target.,One creature or object,,,Fortitude DC,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Fortitude DC. This check ignores your multiple attack penalty and does not increase it. A hold ends if you move or the target Escapes.
+Critical Success: Target is restrained until the end of your next turn.
+Success: Target is grabbed until the end of your next turn.
+Failure: No new hold; if you already held the target with Grapple, that hold ends.
+Critical Failure: Any Grapple hold you had on the target ends. The target chooses: you become grabbed by it until the end of its next turn (or until it moves or you Escape), or you fall prone.",sword
+105,Supreme Grapple,homebrew,,Attack,free action,Attack,Your first Strike on this turn hits the target.,,,,One creature or object,,,Fortitude DC,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Fortitude DC. This check ignores your multiple attack penalty and does not increase it. A hold ends if you move or the target Escapes.
+Critical Success: Target is restrained until the end of your next turn.
+Success: Target is grabbed until the end of your next turn.
+Failure: No new hold; if you already held the target with Grapple, that hold ends.
+Critical Failure: Any Grapple hold you had on the target ends. The target chooses: you become grabbed by it until the end of its next turn (or until it moves or you Escape), or you fall prone.",sword
+106,Shove,homebrew,,Attack,one action,Attack,,,,,One creature,,,Fortitude DC,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Fortitude DC. This attack uses your current multiple attack penalty and increases it.
+Critical Success: Push the target up to 10 feet away. You may Stride after it the same distance and direction.
+Success: Push the target 5 feet away. You may Stride after it the same distance and direction.
+Failure: No effect.
+Critical Failure: You fall prone.",sword
+107,Advanced Shove,homebrew,Sentinel,Attack,one action,Attack,,,,Your last action was a successful Strike against the target.,One creature,,,Fortitude DC,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Fortitude DC. This check ignores your multiple attack penalty and does not increase it.
+Critical Success: Push the target up to 10 feet away. You may Stride after it the same distance and direction.
+Success: Push the target 5 feet away. You may Stride after it the same distance and direction.
+Failure: No effect.
+Critical Failure: You fall prone.",sword
+108,Supreme Shove,homebrew,,Attack,free action,Attack,Your first Strike on this turn hits the target.,,,,One creature,,,Fortitude DC,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Fortitude DC. This check ignores your multiple attack penalty and does not increase it.
+Critical Success: Push the target up to 10 feet away. You may Stride after it the same distance and direction.
+Success: Push the target 5 feet away. You may Stride after it the same distance and direction.
+Failure: No effect.
+Critical Failure: You fall prone.",sword
+110,Advanced Disarm,homebrew,Ronin,Attack,one action,Attack,,,,Your last action was a successful Strike against the creature holding the target item.,One item held by a creature,,,Reflex DC,$athletics,,,,"Attempt Athletics ($athletics) against the holder’s Reflex DC. This check ignores your multiple attack penalty and does not increase it.
+Critical Success: The item falls into the holder’s space.
+Success: The holder’s grip weakens. Further Disarm attempts against this item gain a +2 circumstance bonus; the holder takes a −2 circumstance penalty to attacks with it and checks needing a firm grip. The holder can Interact to readjust its grip; otherwise this lasts while it holds the item.
+Failure: No effect.
+Critical Failure: You are off-guard until the start of your next turn.",sword
+111,Supreme Disarm,homebrew,,Attack,free action,Attack,Your first Strike on this turn hits the creature holding the target item.,,,,One item held by a creature,,,Reflex DC,$athletics,,,,"Attempt Athletics ($athletics) against the holder’s Reflex DC. This check ignores your multiple attack penalty and does not increase it.
+Critical Success: The item falls into the holder’s space.
+Success: The holder’s grip weakens. Further Disarm attempts against this item gain a +2 circumstance bonus; the holder takes a −2 circumstance penalty to attacks with it and checks needing a firm grip. The holder can Interact to readjust its grip; otherwise this lasts while it holds the item.
+Failure: No effect.
+Critical Failure: You are off-guard until the start of your next turn.",sword
+112,Advanced Maintain Grapple,homebrew,Bastion; Cataphract; Sentinel,Action,one action,,,,,You have the target grabbed or restrained with Advanced Grapple.,One creature you hold,,,,,,,,Extend the target’s existing grabbed or restrained condition until the end of your next turn.,circle
+113,Supreme Maintain Grapple,homebrew,,Action,one action,,,,,You have the target grabbed or restrained with Supreme Grapple.,One creature you hold,,,,,,,,Extend the target’s existing grabbed or restrained condition until the end of your next turn.,circle
+116,Restrained,homebrew,Bastion; Cataphract; Sentinel,Status,passive,,,,,,,,,,,,,,The creature is off-guard and immobilized. It cannot use attack or manipulate actions except Escape or Force Open its bonds. Restrained overrides grabbed.,status
+117,Off-Guard,homebrew,Assassin; Bastion; Cataphract; Ronin; Sentinel,Status,passive,,,,,,,,,,,,,,"The creature takes a −2 circumstance penalty to AC. Unless the causing effect limits who benefits, this applies against everyone.",status
+118,Escape (PC Response),homebrew,Bastion; Cataphract; Sentinel,Status,passive,,,,,,,,,,,,,,"A grabbed, immobilized, or restrained PC can spend one action to attempt Escape from one effect holding them. This has the attack trait: their multiple attack penalty applies and increases. They choose their unarmed attack modifier, Athletics, or Acrobatics against this monster’s Athletics DC ($athleticsDC).
+Critical Success: End grabbed, immobilized, and restrained from the chosen effect, then Stride up to 5 feet.
+Success: End those conditions from the chosen effect.
+Failure: Remain held.
+Critical Failure: Remain held and cannot attempt Escape again until their next turn.",status
+120,Immobilized,homebrew,Bastion; Cataphract; Sentinel,Status,passive,,,,,,,,,,,,,,"The creature cannot use actions with the move trait. If an outside force would move it from its space, that force must pass a check against the holding effect’s DC or the holder’s relevant defense, usually Fortitude DC.",status
+121,Dazzled,homebrew,Scout; Witch,Status,passive,,,,,,,,,,,,,,"If vision is the creature’s only precise sense, every creature and object is concealed from it. A concealed target requires a DC 5 flat check to affect with an attack, spell, or other targeted effect; area effects bypass this check.",status
+122,Blinded,homebrew,Witch,Status,passive,,,,,,,,,,,,,,"The creature cannot see or detect anything by sight. Normal terrain is difficult terrain for it. It critically fails Perception checks that require sight and, if sight is its only precise sense, takes a −4 status penalty to Perception checks. It is immune to visual effects. Blinded overrides dazzled.",status
+123,Concealed,homebrew,Scout; Witch,Status,passive,,,,,,,,,,,,,,"A creature targeting the concealed creature with an attack, spell, or other effect must first pass a DC 5 flat check or the effect misses it. Area effects do not require this check. Concealment can apply against some observers but not others.",status
+124,Invisible,homebrew,Scout,Status,passive,,,,,,,,,,,,,,The creature cannot be seen. An observer usually does not know its space (undetected); an observer who saw it become invisible knows its space but cannot see it (hidden). A successful Seek can make it hidden to that observer. It cannot become observed while invisible except through a special ability or magic.,status
+125,Undetected,homebrew,Scout,Status,passive,,,,,,,,,,,,,,"An observer does not know the creature’s space and cannot target it directly without guessing a square. A guessed attack requires a secret DC 11 flat check as for a hidden target; the GM does not reveal whether the square or roll was wrong. Area effects can still affect it, and an observer can Seek. The observer is off-guard to the undetected creature.",status
+126,Stunned,homebrew,Demolisher; Priest,Status,passive,,,,,,,,,,,,,,"The creature cannot act while stunned. When it regains actions, reduce the actions regained by its stunned value, then reduce that value by the actions lost. A duration-based stunned effect denies actions for its duration.",status
+127,Hide,homebrew,Assassin; Mirage; Specter,Action,one action,Secret,,,,You are behind standard cover OR otherwise concealed.,,,,,,,,,"Roll a Secret stealth check against every visible enemy's perception.
+Add a +2 or +4 circumstance bonus if you have standard or greater cover.
+You have the Hidden status against every enemy you beat.",circle
+128,Sneak,homebrew,Assassin; Mirage; Specter,Action,one action,"Move, Secret",,,,,,,,,,,,,"Stride up to half your Speed.
+
+At the end of your move, make a Stealth check against every enemy's Perception that you have standard cover OR concealment against, and that you were previously Hidden or Undetected from.
+
+Success: You become Undetected to those enemies.
+Failure: You become Hidden to those enemies.
+Critical Failure: You become Observed to those enemies, unless you are Invisible, in which case you become Hidden.",circle
+129,Unnoticed,core,Assassin; Mirage; Specter,Status,passive,,,,,,,,,,,,,,A creature you are unnoticed by has no idea you are present. You are also undetected by it.,status
+130,Observed,core,Assassin; Mirage; Specter,Status,passive,,,,,,,,,,,,,,An observer knows where you are and can perceive you with a precise sense. Hide can make you hidden; Sneak can make you undetected.,status
+131,Lying in Wait,homebrew,Assassin,Passive,passive,,,,,,,,,,,,,,The Assassin starts combat Unnoticed.,heart
+132,Breaking Stealth (PC Response),homebrew,Assassin; Mirage; Specter,Status,passive,,,,,,,,,,,,,,"If you Strike an enemy, you still get the Offguard bonus, but you become Observed.
+If you take any other action except Hide, Sneak, or Step, you become Observed.
+Seek can detect hidden creatures.",status

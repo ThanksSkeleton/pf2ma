@@ -66,13 +66,17 @@ test('attack modes, abilities, defaults, and scaling follow the CSV data', async
   assert.equal(build('Archer').abilities[0].actionCost, 'reaction')
   assert.equal(build('Pyro', 7).abilities[0].damage, '8d6')
   assert.equal(build('Pyro', 7, 'cold').abilities[0].damageType, 'fire')
-  assert.equal(build('Barricade').abilities[2].basicSave, true)
-  assert.equal(build('Barricade').abilities[2].dc, 17)
+  assert.equal(build('Pyro').abilities[0].basicSave, true)
+  assert.equal(build('Pyro').abilities[0].dc, 14)
   assert.equal(build('Support', 24).abilities[0].damage, '10d8')
   assert.equal(build('Support').abilities[0].actionCost, '1–3')
   assert.equal(build('Support').abilities[0].frequency, 'At Will')
-  assert.match(build('Rainmaker', 9).abilities[0].text, /6 darts/)
-  assert.match(build('Cataphract').abilities[1].text, /10 feet/)
+  const missile = build('Rainmaker', 9).abilities[0]
+  assert.equal(missile.damage, '2d6')
+  assert.equal(missile.damageType, 'force')
+  assert.equal(missile.targets, 'Each opponent you can see.')
+  assert.equal(missile.text, 'Fire a dart for each opponent you can see. At the start of the next turn, each dart automatically hits its assigned target and deals 2d6 force damage.')
+  assert.match(build('Cataphract').abilities.find((ability) => ability.name === 'Abduct').text, /10 feet/)
   assert.equal(build('Trapper').size, 'Medium')
   assert.equal(build('Scout').abilities[1].frequency, 'Once per day')
   assert.equal(build('Cataphract').abilities[0].targetDC, 'Fortitude DC')
@@ -86,6 +90,44 @@ test('attack modes, abilities, defaults, and scaling follow the CSV data', async
   for (const name of ['Translocate', 'Dazzling Flash']) {
     assert.equal(parseCsv(sources['all-abilites.csv']).find((row) => row.name === name).Source, 'Mod')
   }
+})
+
+test('archetype tags and stealth actions come from the CSV', async () => {
+  const { buildArchetype } = await import('../src/data-builder.ts')
+  const tagged = {
+    Mirage: ['Pacifist', 'Stealth'], Priest: ['Pacifist'], Support: ['Pacifist'],
+    Bastion: ['Manuevers'], Cataphract: ['Manuevers'], Ronin: ['Manuevers'], Sentinel: ['Manuevers'],
+    Assassin: ['Stealth'], Specter: ['Stealth'],
+  }
+  for (const row of parseCsv(sources['RoadMaps_Prod.csv']).filter((row) => !row['Road Map'].startsWith('Special:'))) {
+    const creature = buildArchetype(sources, row['Road Map'])
+    assert.deepEqual(creature.archetypeTags, tagged[row['Road Map']], row['Road Map'])
+    if (!creature.archetypeTags?.includes('Stealth')) continue
+    for (const name of ['Hide', 'Sneak']) {
+      const card = creature.abilities.find((ability) => ability.name === name)
+      assert.equal(card?.type, 'action', `${creature.name}: ${name}`)
+      assert.equal(card.actionCost, 1)
+    }
+    assert.equal(creature.abilities.find((card) => card.name === 'Hide')?.requirements,
+      'You are behind standard cover OR otherwise concealed.')
+    assert.equal(creature.abilities.find((card) => card.name === 'Hide')?.text,
+      "Roll a Secret stealth check against every visible enemy's perception.\nAdd a +2 or +4 circumstance bonus if you have standard or greater cover.\nYou have the Hidden status against every enemy you beat.")
+    assert.equal(creature.abilities.find((card) => card.name === 'Sneak')?.text,
+      "Stride up to half your Speed.\n\nAt the end of your move, make a Stealth check against every enemy's Perception that you have standard cover OR concealment against, and that you were previously Hidden or Undetected from.\n\nSuccess: You become Undetected to those enemies.\nFailure: You become Hidden to those enemies.\nCritical Failure: You become Observed to those enemies, unless you are Invisible, in which case you become Hidden.")
+    assert.equal(creature.references.find((card) => card.name === 'Breaking Stealth (PC Response)')?.text,
+      'If you Strike an enemy, you still get the Offguard bonus, but you become Observed.\nIf you take any other action except Hide, Sneak, or Step, you become Observed.\nSeek can detect hidden creatures.')
+    for (const name of ['Hidden', 'Undetected', 'Concealed', 'Observed', 'Off-Guard', 'Invisible']) {
+      assert.ok(creature.references.some((card) => card.name === name), `${creature.name}: ${name}`)
+    }
+  }
+  const assassin = buildArchetype(sources, 'Assassin')
+  assert.equal(assassin.abilities.find((card) => card.name === 'Lying in Wait')?.text,
+    'The Assassin starts combat Unnoticed.')
+  assert.ok(assassin.references.some((card) => card.name === 'Unnoticed'))
+  assert.match(buildArchetype(sources, 'Mirage').abilities.find((card) => card.name === 'Shared Veil')?.text,
+    /The target can make a Hide check as a reaction\./)
+  assert.match(buildArchetype(sources, 'Specter').abilities.find((card) => card.name === 'Shadow Prowl')?.text,
+    /You can make a Hide check as a free action/)
 })
 
 test('Engineer minions scale separately and keep their special movement', async () => {

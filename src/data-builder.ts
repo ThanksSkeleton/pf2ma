@@ -56,6 +56,7 @@ export function buildArchetype(
     return row
   }
   const roadmap = find('RoadMaps_Prod.csv', 'Road Map', name)
+  const archetypeTags = roadmap.ArchetypeTag?.split(',').map((tag) => tag.trim()).filter(Boolean) ?? []
   const narrativeName = name
   const narrative = find('TacticsAndDescription.csv', 'archetype', narrativeName)
   const benchmark = (file: string, rank = '', suffix = '') => {
@@ -78,8 +79,8 @@ export function buildArchetype(
     nonphysicalDamageType,
     physicalDamageType, meleeDamageType: physicalDamageType, rangedDamageType: physicalDamageType,
     breatheFireDamage: `${2 * spellRank}d6`, healDice: `${healRank}d8`, healBonus: 8 * healRank,
-    dartCount: 2 + 2 * Math.floor((spellRank - 1) / 2),
   }
+  variables.athleticsDC = Number(variables.athletics) + 10
   for (const rank of ['Terrible', 'Low', 'Moderate', 'High', 'Extreme']) {
     variables[`${rank.toLowerCase()}Damage`] = benchmark('table-2-10-strike-damage.csv', rank)
   }
@@ -110,7 +111,7 @@ export function buildArchetype(
   }
   const primaryType = roadmap['Ranged Or Melee'] === 'R' ? 'Ranged' : roadmap['Ranged Or Melee'] === 'M' ? 'Melee' : undefined
   const primary = primaryType ? strikes.find((strike) => strike.attackType === primaryType) : undefined
-  const abilities = roadmap['Special Abilities'].split(';').map((entry) => entry.trim()).filter(Boolean).map((entry): AbilityCard => {
+  const buildCard = (entry: string): AbilityCard => {
     // The legacy Support roadmap embeds a Heal note; frequency now comes from the ability row.
     const abilityName = entry.startsWith('Heal (') ? 'Heal' : entry
     const row = formatFields(find('all-abilites.csv', 'name', abilityName), variables)
@@ -145,7 +146,39 @@ export function buildArchetype(
       if (!Number.isFinite(card.dc)) throw new Error(`Invalid DC for ${row.name}`)
     }
     return card
-  })
+  }
+  const selectedCards = roadmap['Special Abilities'].split(';').map((entry) => entry.trim()).filter(Boolean).map(buildCard)
+  const abilities = selectedCards.filter((card) => card.type !== 'status')
+  const selectedStatuses = new Map(selectedCards.filter((card) => card.type === 'status').map((card) => [card.name, card]))
+  const conditionNames = ['Prone', 'Grabbed', 'Restrained', 'Immobilized', 'Off-Guard',
+    'Hidden', 'Dazzled', 'Blinded', 'Concealed', 'Invisible', 'Undetected', 'Unnoticed', 'Observed', 'Stunned']
+  const referenceNames = new Set(selectedStatuses.keys())
+  if (archetypeTags.includes('Stealth')) referenceNames.add('Breaking Stealth (PC Response)')
+  for (const card of abilities) {
+    const content = [card.name, card.requirements, card.trigger, card.duration, card.text].filter(Boolean).join(' ')
+    for (const condition of conditionNames) {
+      if (new RegExp(`\\b${condition}\\b`, 'i').test(content)) referenceNames.add(condition)
+    }
+    if (/^(?:(?:Advanced|Supreme) )?(?:Maintain )?Grapple$/.test(card.name)) {
+      referenceNames.add('Escape (PC Response)')
+    }
+  }
+  const dependencies: Record<string, string[]> = {
+    Prone: ['Off-Guard'], Grabbed: ['Immobilized', 'Off-Guard'],
+    Restrained: ['Immobilized', 'Off-Guard'], Hidden: ['Off-Guard'],
+    Dazzled: ['Concealed'], Invisible: ['Undetected', 'Hidden'],
+    Undetected: ['Hidden', 'Off-Guard'], Unnoticed: ['Undetected'],
+  }
+  const pending = [...referenceNames]
+  for (let i = 0; i < pending.length; i++) {
+    for (const dependency of dependencies[pending[i]] ?? []) {
+      if (!referenceNames.has(dependency)) {
+        referenceNames.add(dependency)
+        pending.push(dependency)
+      }
+    }
+  }
+  const references = [...referenceNames].map((reference) => selectedStatuses.get(reference) ?? buildCard(reference))
   const creature: Archetype = {
     name, level, role: roadmap.Role,
     size: find('Size.csv', 'archetype', narrativeName).size,
@@ -164,8 +197,10 @@ export function buildArchetype(
       'Stealth/Acrobatics': benchmark('table-2-3-skills.csv', roadmap['Stealth/Acrobatics']),
       Escape: benchmark('table-2-3-skills.csv', roadmap.Escape),
     },
+    archetypeTags: archetypeTags.length ? archetypeTags : undefined,
     spellRank,
   }
+  if (references.length) creature.references = references
   if (primary) creature.attack = primary
   const secondary = strikes.filter((strike) => strike !== primary)
   if (secondary.length) creature.secondaryAttacks = secondary
