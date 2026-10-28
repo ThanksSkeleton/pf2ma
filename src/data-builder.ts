@@ -150,7 +150,7 @@ export function buildArchetype(
   const selectedCards = roadmap['Special Abilities'].split(';').map((entry) => entry.trim()).filter(Boolean).map(buildCard)
   const abilities = selectedCards.filter((card) => card.type !== 'status')
   const selectedStatuses = new Map(selectedCards.filter((card) => card.type === 'status').map((card) => [card.name, card]))
-  const conditionNames = ['Prone', 'Grabbed', 'Restrained', 'Immobilized', 'Off-Guard',
+  const conditionNames = ['Prone', 'Slowed', 'Grabbed', 'Restrained', 'Immobilized', 'Off-Guard',
     'Hidden', 'Dazzled', 'Blinded', 'Concealed', 'Invisible', 'Undetected', 'Unnoticed', 'Observed', 'Stunned']
   const referenceNames = new Set(selectedStatuses.keys())
   if (archetypeTags.includes('Stealth')) referenceNames.add('Breaking Stealth (PC Response)')

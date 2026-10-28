@@ -55,7 +55,7 @@ test('all twelve maneuver tiers and both maintenance actions are unique homebrew
   for (const name of ['Prone', 'Grabbed', 'Restrained']) {
     assert.doesNotMatch(byName.get(name).effect, /−2 circumstance penalty to AC/)
   }
-  assert.equal(byName.has('Slowed'), false)
+  assert.equal(byName.has('Slowed'), true)
   assert.equal(byName.get('Abduct').requirements, 'You have at least one creature grabbed.')
   assert.doesNotMatch(byName.get('Abduct').effect, /movement does not release/)
   for (const name of ['Advanced Grapple', 'Supreme Grapple']) {
@@ -102,7 +102,7 @@ test('non-maneuver status users get separate reminder cards', () => {
   const build = (name) => buildArchetype(sources, name)
   const names = (cards) => cards?.map((card) => card.name) ?? []
   for (const [name, expected] of [
-    ['Demolisher', ['Stunned']],
+    ['Demolisher', ['Prone', 'Off-Guard', 'Slowed', 'Stunned']],
     ['Mirage', ['Hidden', 'Off-Guard', 'Concealed', 'Undetected', 'Observed', 'Invisible', 'Breaking Stealth (PC Response)']],
     ['Specter', ['Hidden', 'Off-Guard', 'Concealed', 'Undetected', 'Observed', 'Invisible', 'Breaking Stealth (PC Response)']],
     ['Scout', ['Dazzled', 'Concealed', 'Invisible', 'Undetected', 'Hidden', 'Off-Guard']],
