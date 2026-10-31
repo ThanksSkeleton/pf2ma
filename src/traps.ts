@@ -24,7 +24,6 @@ export function buildTraps(sources: CsvSources, archetype: 'Trapper' | 'Saboteur
   const trapConfigs = archetype === 'Trapper'
     ? [
       { name: 'Instant Trap', target: 'The first creature to move adjacent to the trap', area: '', damageRank: 'Low', duration: 'The Speed penalty lasts 1 minute.', effect: 'When a creature moves adjacent to the trap, it takes the listed damage with a basic Reflex save. On a failed save, its Speed is reduced by 5 feet for 1 minute. The trap is then destroyed.' },
-      { name: 'Prepared Trap', target: 'Creatures in the area', area: '10-foot burst centered on the opened object', damageRank: 'High', duration: '', effect: 'When the object is opened without first disabling the trap, creatures in the area take the listed damage with a basic Reflex save. A Perception check can reveal the trap; two successful Thievery checks disable it.' },
     ]
     : [
       { name: 'Mine', target: 'The creature that enters the trapped square', area: '', damageRank: 'High', duration: '', effect: 'When a creature enters the trapped square, it takes the listed damage with a basic Reflex save. The mine is then destroyed.' },

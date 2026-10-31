@@ -30,6 +30,11 @@ export function buildEngineerMinions(sources: CsvSources, level: number, damageT
         [{ label: 'Fort', value: save }, { label: 'Reflex', value: save }, { label: 'Will', value: save }],
         [{ label: 'Speed', value: ranged ? '0 feet' : '15 feet' }],
       ],
+      skills: {
+        Athletics: lookup('table-2-3-skills.csv', 'Low'),
+        'Stealth/Acrobatics': lookup('table-2-3-skills.csv', 'Low'),
+        Escape: lookup('table-2-3-skills.csv', 'Low'),
+      },
       attack: {
         name: `${subtype} Strike`, type: 'attack', actionCost: 1, symbol: ranged ? 'bow' : 'sword', attackType: ranged ? 'Ranged' : 'Melee',
         ...(ranged ? { range: '30 feet' } : {}),

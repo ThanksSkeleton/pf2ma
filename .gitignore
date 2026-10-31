@@ -1,5 +1,6 @@
 input
 node_modules
 dist
+output/
 *.tsbuildinfo
 .playwright-mcp/

@@ -76,7 +76,12 @@ export function buildArchetype(
     minimumResistance: benchmark('table-2-8-resistances-weaknesses.csv', 'Minimum'),
     athletics: benchmark('table-2-3-skills.csv', roadmap.Athletics),
     speed: `${speed} feet`, halfSpeed: `${Math.floor(speed / 10) * 5} feet`, doubleSpeed: `${speed * 2} feet`,
+    speedMinusTen: `${Math.max(0, speed - 10)} feet`,
     nonphysicalDamageType,
+    energyType: nonphysicalDamageType[0].toUpperCase() + nonphysicalDamageType.slice(1),
+    maximumResistance: benchmark('table-2-8-resistances-weaknesses.csv', 'Maximum'),
+    moderateSpellDC: benchmark('table-2-11-spell-dc-attack-bonus.csv', 'Moderate', ' DC'),
+    terribleHP: benchmark('table-2-7-hit-points.csv', 'Terrible'),
     physicalDamageType, meleeDamageType: physicalDamageType, rangedDamageType: physicalDamageType,
     breatheFireDamage: `${2 * spellRank}d6`, healDice: `${healRank}d8`, healBonus: 8 * healRank,
   }
@@ -95,6 +100,7 @@ export function buildArchetype(
     const strike: AbilityCard = { name: `${subtype} Strike`, type: 'attack', actionCost: 1, symbol: subtype === 'Melee' ? 'sword' : 'bow', attackType: subtype, attack, damage, damageType: physicalDamageType }
     if (subtype === 'Ranged') {
       strike.range = `${benchmark('range-per-level.csv', roadmap.Range, ' (feet)')} feet`
+      if (name === 'Sniper') strike.properties = ['Reload 1']
       variables.rangedRange = strike.range
     }
     strikes.push(strike)
@@ -113,7 +119,7 @@ export function buildArchetype(
   const primary = primaryType ? strikes.find((strike) => strike.attackType === primaryType) : undefined
   const buildCard = (entry: string): AbilityCard => {
     // The legacy Support roadmap embeds a Heal note; frequency now comes from the ability row.
-    const abilityName = entry.startsWith('Heal (') ? 'Heal' : entry
+    const abilityName = entry.startsWith('Heal (') && entry !== 'Heal (Priest)' ? 'Heal' : entry
     const row = formatFields(find('all-abilites.csv', 'name', abilityName), variables)
     const types: Record<string, AbilityCard['type']> = { Attack: 'attack', Spell: 'spell', Passive: 'passive', Reaction: 'reaction', Status: 'status', Action: 'action' }
     const costs: Record<string, AbilityCard['actionCost']> = {
@@ -126,6 +132,7 @@ export function buildArchetype(
     const allowedSymbols = ['sword', 'bow', 'circle', 'starburst', 'reaction', 'heart', 'status'] as const
     if (!allowedSymbols.includes(row.symbol as typeof allowedSymbols[number])) throw new Error(`Unsupported symbol mapping: ${row.name} (${row.symbol})`)
     const card: AbilityCard = { name: row.name, type, actionCost, symbol: row.symbol as AbilityCard['symbol'] }
+    if (entry === 'Heal (Priest)') card.name = 'Heal'
     const fields = { requirements: 'requirements', trigger: 'trigger', targets: 'target', area: 'area',
       range: 'range', attack: 'attack', damage: 'damage', frequency: 'frequency', duration: 'duration', text: 'effect' } as const
     for (const [field, column] of Object.entries(fields)) {
@@ -134,6 +141,7 @@ export function buildArchetype(
     if (row.damage_type) card.damageType = row.damage_type
     else if (card.damage) card.damageType = physicalDamageType
     if (row.traits) card.traits = row.traits.split(',').map((trait) => trait.trim())
+    if (row.name === 'Sniper Strike') card.properties = ['Reload 1']
     if (row.defense) {
       if (row.defense.endsWith(' DC')) card.targetDC = row.defense
       else {
@@ -150,7 +158,7 @@ export function buildArchetype(
   const selectedCards = roadmap['Special Abilities'].split(';').map((entry) => entry.trim()).filter(Boolean).map(buildCard)
   const abilities = selectedCards.filter((card) => card.type !== 'status')
   const selectedStatuses = new Map(selectedCards.filter((card) => card.type === 'status').map((card) => [card.name, card]))
-  const conditionNames = ['Prone', 'Slowed', 'Grabbed', 'Restrained', 'Immobilized', 'Off-Guard',
+  const conditionNames = ['Prone', 'Slowed', 'Grabbed', 'Restrained', 'Immobilized', 'Off-Guard', 'Shattered Defenses', 'Branded',
     'Hidden', 'Dazzled', 'Blinded', 'Concealed', 'Invisible', 'Undetected', 'Unnoticed', 'Observed', 'Stunned']
   const referenceNames = new Set(selectedStatuses.keys())
   if (archetypeTags.includes('Stealth')) referenceNames.add('Breaking Stealth (PC Response)')
@@ -158,6 +166,10 @@ export function buildArchetype(
     const content = [card.name, card.requirements, card.trigger, card.duration, card.text].filter(Boolean).join(' ')
     for (const condition of conditionNames) {
       if (new RegExp(`\\b${condition}\\b`, 'i').test(content)) referenceNames.add(condition)
+    }
+    if (/Cover Screen/i.test(content)) {
+      referenceNames.add('Cover Screen')
+      referenceNames.add('Destroy Cover Screen')
     }
     if (/^(?:(?:Advanced|Supreme) )?(?:Maintain )?Grapple$/.test(card.name)) {
       referenceNames.add('Escape (PC Response)')
@@ -199,6 +211,22 @@ export function buildArchetype(
     },
     archetypeTags: archetypeTags.length ? archetypeTags : undefined,
     spellRank,
+  }
+  if (selectedCards.some((card) => card.name === 'Summon Obstacle')) {
+    const objectTemplate = formatFields(find('all-abilites.csv', 'name', 'Obstacle'), variables)
+    const objectAbilities = ['Wall', 'Rubble', 'Climbable'].map((abilityName): AbilityCard => {
+      const row = formatFields(find('all-abilites.csv', 'name', abilityName), variables)
+      return { name: row.name, type: 'passive', actionCost: 'passive', symbol: 'heart', text: row.effect }
+    })
+    creature.minions.push({
+      name: 'Obstacle', level, role: 'Object', statFormat: 'object', size: 'Large',
+      description: objectTemplate.effect, tactics: '',
+      statGroups: [
+        [{ label: 'AC', value: '10' }, { label: 'HP', value: String(variables.terribleHP) }],
+        [{ label: 'Hardness', value: String(variables.maximumResistance) }],
+      ],
+      abilities: objectAbilities, minions: [],
+    })
   }
   if (references.length) creature.references = references
   if (primary) creature.attack = primary

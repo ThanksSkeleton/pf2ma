@@ -13,6 +13,7 @@ export type AbilityCard = {
   basicSave?: boolean
   attackType?: 'Ranged' | 'Melee'
   range?: string
+  properties?: string[]
   attack?: string
   damage?: string
   damageType?: string
@@ -26,6 +27,7 @@ export type Archetype = {
   name: string
   level: number
   role: string
+  statFormat?: 'object'
   size: string
   description: string
   statGroups: { label: string; value: string }[][]

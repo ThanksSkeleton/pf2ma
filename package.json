@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "compare:ace": "node --experimental-strip-types scripts/compare-ace.mjs",
+    "realize:monster": "node --experimental-strip-types scripts/realize-monster.ts",
+    "realize:all-level-1": "node --experimental-strip-types scripts/realize-all-level-1.ts",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
