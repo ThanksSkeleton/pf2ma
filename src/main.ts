@@ -4,6 +4,7 @@ import type { AbilityCard, Archetype } from './archetype.ts'
 import { buildArchetype, listArchetypes, parseCsv } from './data-builder.ts'
 import { buildEngineerMinions } from './engineer-minions.ts'
 import { buildTraps } from './traps.ts'
+import { encounterTemplates, rollEncounter, validPartyLevels } from './encounter.ts'
 
 const rawCsv = import.meta.glob<string>('../csv/*.csv', { query: '?raw', import: 'default', eager: true })
 const sources = Object.fromEntries(Object.entries(rawCsv).map(([path, contents]) => [path.split('/').pop()!, contents]))
@@ -145,14 +146,14 @@ const renderCard = (card: AbilityCard, spellRank: number) => {
   </section>`
 }
 
-const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): string => {
+const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = '', showReferences = true, showControls = true): string => {
   const slug = creature.name.toLowerCase().replaceAll(' ', '-')
   const id = parentId ? `${parentId}-${slug}` : slug
   const roleIcon = roleIconByName[creature.role]
   const speed = creature.statGroups.flat().find((stat) => stat.label === 'Speed')
   const baseStatGroups = creature.statGroups.map((group) => group.filter((stat) => stat.label !== 'Speed')).filter((group) => group.length)
   const spellRank = creature.spellRank ?? Math.max(1, Math.ceil(creature.level / 2))
-  const builderControls = depth === 0 ? `
+  const builderControls = depth === 0 && showControls ? `
       <div class="builder-controls builder-controls--sheet" aria-label="Creature options">
         <label for="physical-damage-type">Physical damage<select id="physical-damage-type">${physicalDamageTypes.map((type) => `<option value="${type}"${type === selectedPhysicalDamageType ? ' selected' : ''}>${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
         <label for="nonphysical-damage-type">Nonphysical damage<select id="nonphysical-damage-type">${nonphysicalDamageTypes.map((type) => `<option value="${type}"${type === selectedNonphysicalDamageType ? ' selected' : ''}>${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
@@ -193,7 +194,7 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): str
         <div class="section-heading"><h2 id="${id}-abilities-heading">Abilities</h2></div>
         <div class="ability-list">${[...(creature.attack ? [creature.attack] : []), ...(creature.secondaryAttacks ?? []), ...creature.abilities].map((card) => renderCard(card, spellRank)).join('')}</div>
       </section>
-      ${creature.references?.length ? `<section class="references" aria-labelledby="${id}-references-heading">
+      ${showReferences && creature.references?.length ? `<section class="references" aria-labelledby="${id}-references-heading">
         <div class="section-heading"><h2 id="${id}-references-heading">Conditions &amp; PC Responses</h2></div>
         <div class="ability-list">${creature.references.map((card) => renderCard(card, spellRank)).join('')}</div>
       </section>` : ''}
@@ -201,7 +202,7 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = ''): str
     ${creature.minions.length ? `
     <section class="minions-section" aria-labelledby="${id}-minions-heading">
       <div class="section-heading"><h2 id="${id}-minions-heading">Minions</h2></div>
-      <div class="minion-list">${creature.minions.map((minion) => renderCreatureSheet(minion, depth + 1, id)).join('')}</div>
+      <div class="minion-list">${creature.minions.map((minion) => renderCreatureSheet(minion, depth + 1, id, showReferences, false)).join('')}</div>
     </section>` : ''}
   </article>
   `
@@ -211,8 +212,35 @@ const app = document.querySelector<HTMLDivElement>('#app')
 if (!app) throw new Error('App root is missing')
 
 let selectedIndex = 0
+let selectedTemplateIndex = 0
+let encounterLevel = 5
+let activeTab: 'encounter' | 'monster' = 'encounter'
+
+const buildCreature = (name: string, level: number) => {
+  const creature = buildArchetype(sources, name, level, selectedPhysicalDamageType, selectedNonphysicalDamageType)
+  if (name === 'Engineer') creature.minions = buildEngineerMinions(sources, level, selectedPhysicalDamageType)
+  if (name === 'Trapper' || name === 'Saboteur') creature.minions = buildTraps(sources, name, level, selectedPhysicalDamageType, selectedNonphysicalDamageType)
+  return creature
+}
+
+const collectReferences = (creature: Archetype): AbilityCard[] => [
+  ...(creature.references ?? []), ...creature.minions.flatMap(collectReferences),
+]
 
 app.innerHTML = `
+  <nav class="main-tabs" role="tablist" aria-label="Main views">
+    <button type="button" id="encounter-tab" role="tab" aria-selected="true" aria-controls="encounter-view">Encounter</button>
+    <button type="button" id="monster-tab" role="tab" aria-selected="false" aria-controls="monster-view" tabindex="-1">Monster</button>
+  </nav>
+  <section id="encounter-view" role="tabpanel" aria-labelledby="encounter-tab">
+    <div class="builder-controls encounter-controls">
+      <label for="encounter-template">Quick adventure group<select id="encounter-template">${encounterTemplates.map((template, index) => `<option value="${index}">${escapeHtml(template.name)} (${template.xp} XP)</option>`).join('')}</select></label>
+      <label for="encounter-level">Party level<select id="encounter-level"></select></label>
+      <button type="button" id="roll-encounter">Roll encounter</button>
+    </div>
+    <div id="encounter-result" role="region" aria-live="polite" aria-label="Encounter result"><p class="encounter-prompt">Choose a group and party level, then roll an encounter.</p></div>
+  </section>
+  <section id="monster-view" role="tabpanel" aria-labelledby="monster-tab" hidden>
   <div class="builder-controls builder-controls--top" aria-label="Archetype options">
     <div class="carousel-sort" role="radiogroup" aria-label="Sort archetypes">
       <span>Sort</span>
@@ -228,13 +256,82 @@ app.innerHTML = `
     </div>
   </section>
   <div id="archetype-panel" role="region" aria-label="Selected creature"></div>
+  </section>
 `
 
 const panel = app.querySelector<HTMLDivElement>('#archetype-panel')!
 const carouselTrack = app.querySelector<HTMLDivElement>('.carousel-track')!
 const carousel = app.querySelector<HTMLElement>('.archetype-carousel')!
 const carouselNavigation = app.querySelector<HTMLElement>('.carousel-navigation')!
+const encounterTemplateSelect = app.querySelector<HTMLSelectElement>('#encounter-template')!
+const encounterLevelSelect = app.querySelector<HTMLSelectElement>('#encounter-level')!
+const encounterResult = app.querySelector<HTMLDivElement>('#encounter-result')!
 let choices: HTMLButtonElement[] = []
+
+const renderEncounterLevels = () => {
+  const levels = validPartyLevels(encounterTemplates[selectedTemplateIndex])
+  if (!levels.includes(encounterLevel)) encounterLevel = levels.reduce((closest, level) =>
+    Math.abs(level - encounterLevel) < Math.abs(closest - encounterLevel) ? level : closest)
+  encounterLevelSelect.innerHTML = levels.map((level) => `<option value="${level}"${level === encounterLevel ? ' selected' : ''}>${level}</option>`).join('')
+}
+
+const clearEncounter = () => {
+  encounterResult.innerHTML = '<p class="encounter-prompt">Choose a group and party level, then roll an encounter.</p>'
+  if (activeTab === 'encounter') document.title = 'Encounter | PF2E Monster Archetype Bank'
+}
+
+const renderEncounter = () => {
+  const template = encounterTemplates[selectedTemplateIndex]
+  const groups = rollEncounter(template, encounterLevel, archetypeNames)
+  const creatures = groups.map((group) => buildCreature(group.name, group.level))
+  const references = [...new Map(creatures.flatMap(collectReferences).map((card) => [card.name, card])).values()]
+  encounterResult.innerHTML = `
+    <div class="encounter-summary">
+      <h1>${escapeHtml(template.name)}</h1>
+      <p>Party level ${encounterLevel} · ${template.xp} XP</p>
+      <table><thead><tr><th scope="col">Monster name</th><th scope="col">Count</th><th scope="col">Level</th></tr></thead>
+        <tbody>${groups.map((group) => `<tr><th scope="row">${escapeHtml(group.name)}</th><td>${group.count}</td><td>${group.level}</td></tr>`).join('')}</tbody></table>
+    </div>
+    <div class="encounter-monsters">${creatures.map((creature, index) => `<section class="encounter-monster" aria-label="${escapeHtml(creature.name)} level ${creature.level}"><h2>${escapeHtml(creature.name)} · ${groups[index].count} × level ${creature.level}</h2><div class="monster-box">${renderCreatureSheet(creature, 0, '', false, false)}</div></section>`).join('')}</div>
+    <section class="encounter-references" aria-label="Statuses and reminders"><div class="section-heading"><h2>Statuses &amp; reminders</h2></div>
+      ${references.length ? `<div class="ability-list">${references.map((card) => renderCard(card, Math.max(1, Math.ceil(encounterLevel / 2)))).join('')}</div>` : '<p>None for this encounter.</p>'}
+    </section>
+  `
+  document.title = `${template.name} · Level ${encounterLevel} | PF2E Monster Archetype Bank`
+}
+
+const setTab = (tab: 'encounter' | 'monster', focus = false) => {
+  activeTab = tab
+  for (const name of ['encounter', 'monster'] as const) {
+    const button = app.querySelector<HTMLButtonElement>(`#${name}-tab`)!
+    button.setAttribute('aria-selected', String(name === tab))
+    button.tabIndex = name === tab ? 0 : -1
+    app.querySelector<HTMLElement>(`#${name}-view`)!.hidden = name !== tab
+  }
+  if (focus) app.querySelector<HTMLButtonElement>(`#${tab}-tab`)!.focus()
+  if (tab === 'monster') renderSelected()
+  else if (encounterResult.querySelector('.encounter-summary')) document.title = `${encounterTemplates[selectedTemplateIndex].name} · Level ${encounterLevel} | PF2E Monster Archetype Bank`
+  else document.title = 'Encounter | PF2E Monster Archetype Bank'
+}
+
+app.querySelectorAll<HTMLButtonElement>('.main-tabs [role="tab"]').forEach((button) => {
+  button.addEventListener('click', () => setTab(button.id === 'encounter-tab' ? 'encounter' : 'monster'))
+  button.addEventListener('keydown', (event) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
+    event.preventDefault()
+    setTab(activeTab === 'encounter' ? 'monster' : 'encounter', true)
+  })
+})
+encounterTemplateSelect.addEventListener('change', () => {
+  selectedTemplateIndex = Number(encounterTemplateSelect.value)
+  renderEncounterLevels()
+  clearEncounter()
+})
+encounterLevelSelect.addEventListener('change', () => {
+  encounterLevel = Number(encounterLevelSelect.value)
+  clearEncounter()
+})
+app.querySelector('#roll-encounter')!.addEventListener('click', renderEncounter)
 
 const renderChoices = () => {
   carouselTrack.innerHTML = names.map((name, index) => {
@@ -250,9 +347,7 @@ const renderChoices = () => {
 
 const renderSelected = () => {
   const level = selectedLevel
-  const creature = buildArchetype(sources, names[selectedIndex], level, selectedPhysicalDamageType, selectedNonphysicalDamageType)
-  if (creature.name === 'Engineer') creature.minions = buildEngineerMinions(sources, level, selectedPhysicalDamageType)
-  if (creature.name === 'Trapper' || creature.name === 'Saboteur') creature.minions = buildTraps(sources, creature.name, level, selectedPhysicalDamageType, selectedNonphysicalDamageType)
+  const creature = buildCreature(names[selectedIndex], level)
   panel.innerHTML = `<div class="monster-box">${renderCreatureSheet(creature)}</div>`
   panel.setAttribute('aria-label', `${creature.name}, level ${level}`)
   document.title = `${creature.name} · Level ${level} | PF2E Monster Archetype Bank`
@@ -299,3 +394,5 @@ app.querySelectorAll<HTMLInputElement>('input[name="archetype-sort"]').forEach((
 })
 renderChoices()
 renderSelected()
+renderEncounterLevels()
+setTab('encounter')
