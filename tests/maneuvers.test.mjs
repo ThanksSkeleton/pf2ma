@@ -108,7 +108,7 @@ test('non-maneuver status users get separate reminder cards', () => {
     ['Scout', ['Dazzled', 'Concealed', 'Invisible', 'Undetected', 'Hidden', 'Off-Guard']],
     ['Witch', ['Dazzled', 'Blinded', 'Concealed']],
     ['Priest', ['Lifelink Donor', 'Lifelink Recipient', 'Stunned']],
-    ['Sniper', ['In the Crosshairs']],
+    ['Sniper', ['Red Dot', 'Exposed']],
   ]) {
     const creature = build(name)
     assert.deepEqual(names(creature.references).sort(), expected.sort(), name)

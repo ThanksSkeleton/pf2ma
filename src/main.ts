@@ -30,6 +30,10 @@ const escapeHtml = (value: string | number) => String(value).replace(/[&<>"']/g,
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[char]!)
 
+const renderAbilityText = (value: string) => escapeHtml(value)
+  .replace(/&lt;b&gt;([\s\S]*?)&lt;\/b&gt;/g, '<strong>$1</strong>')
+  .replace(/(^|\n)(Critical Success|Critical Failure|Success|Failure):/g, '$1<strong>$2:</strong>')
+
 // Generated transparent raster symbols replace the former inline SVG artwork.
 const symbolAssets = {
   roleDefender: new URL('../symbols/role-defender.png', import.meta.url).href,
@@ -143,7 +147,7 @@ const renderCard = (card: AbilityCard, spellRank: number) => {
   return `
   <section class="ability ${presentation.style}${card.name === 'Cover Screen' ? ' ability--terrain-feature' : ''}" aria-label="${escapeHtml(card.name)}">
     <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${escapeHtml(card.name)}</h3></div><div class="ability-cost">${card.type === 'spell' ? `<span class="ability-rank">Rank ${spellRank}</span>` : ''}${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${actionMark}</span>` : ''}</div></div>${metaLines.map((line) => `<p class="ability-meta">${escapeHtml(line ?? '')}</p>`).join('')}</div>
-    <p class="ability-text">${detailLines}${escapeHtml(card.text ?? '')}</p>
+    <p class="ability-text">${detailLines}${renderAbilityText(card.text ?? '')}</p>
   </section>`
 }
 

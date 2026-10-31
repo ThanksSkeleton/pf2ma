@@ -1,8 +1,8 @@
 order,name,Source,monster,entry_type,activation,traits,trigger,frequency,duration,requirements,target,range,area,defense,attack,dc,damage,damage_type,effect,symbol
-1,Red Buff: Force,homebrew,Support,Spell,two actions,"Manipulate, Concentration",,At Will,Up to 1 minute.,,One willing creature,30 feet,,,,,,,Add $lowDamage to the target's first Strike each turn if it hits. Your Buffs of other colors end.,starburst
-2,Green Buff: Guard,homebrew,Support,Spell,two actions,"Manipulate, Concentration",,At Will,Up to 1 minute.,,One willing creature,30 feet,,,,,,,The target gains temporary Hit Points equal to $moderateDamage. Your Buffs of other colors end.,starburst
+1,Red Buff: Force,homebrew,Support,Spell,two actions,"Manipulate, Concentration",,At Will,Up to 1 minute.,,One willing creature,30 feet,,,,,,,Add $averageLowStrikeDamage to the target's first Strike damage each turn. Your Buffs of other colors end.,starburst
+2,Green Buff: Guard,homebrew,Support,Spell,two actions,"Manipulate, Concentration",,At Will,Up to 1 minute.,,One willing creature,30 feet,,,,,,,The target gains $averageModerateStrikeDamage Temporary Hit Points at the start of each of its turns. Your Buffs of other colors end.,starburst
 3,Blue Buff: Motion,homebrew,Support,Spell,two actions,"Manipulate, Concentration",,At Will,Up to 1 minute.,,One willing creature,30 feet,,,,,,,The target gains a +15-foot status bonus to its Speeds. Your Buffs of other colors end.,starburst
-5,Escalating Strike,homebrew,Scourer,Attack,one action,Attack,,At Will,,The target has Branded.,One creature,melee reach,,,$meleeAttack,,$extremeDamage,$meleeDamageType,Make a melee Strike.,sword
+5,Escalating Strike,homebrew,Scourer,Attack,one action,Attack,,At Will,,The target has Branded.,One creature,melee reach,,,$meleeAttack,,$extremeDamage,$meleeDamageType,,sword
 8,Elemental Upheaval,homebrew,Hive,Spell,two actions,Concentration,,At Will,,,,,30-foot emanation centered on you,Basic Reflex,,$abilityDC,,$nonphysicalDamageType,"Creatures in the area take $lowDamage, subject to the saving throw. The ground becomes difficult, hazardous terrain; a creature moving through it takes $terribleDamage for each square it enters. You are immune to this ability's effects.",starburst
 9,Set Instant Trap,homebrew,Trapper,Spell,three actions,"Manipulate, Concentration",,At Will,,,One adjacent square,,,,,,,,Build an instant trap on the target square.,starburst
 11,Set Mine,homebrew,Saboteur,Spell,one action,"Manipulate, Concentration",,At Will,,,One adjacent square,,,,,,,,Build a mine on the target square.,starburst
@@ -12,17 +12,21 @@ order,name,Source,monster,entry_type,activation,traits,trigger,frequency,duratio
 
 At the start of your next turn, the attack resolves at the designated location. Creatures in the area take the listed damage, subject to the saving throw.",starburst
 15,Pariah Aura,homebrew,Priest,Passive,passive,,,,,,All creatures other than you,,10-foot aura centered on you,,,,,,"Any creature other than you that starts its turn in the aura becomes a Lifelink recipient, with you as its donor. Each new link increases your stunned value by 1.",heart
-17,Put In the Crosshairs,homebrew,Sniper,Spell,two actions,Concentration,,,,The visible target is neither prone nor in Standard or Greater Cover.,One targeted creature,30–120 feet,,Reflex,,$abilityDC,,,"Designate one creature as your quarry; it is aware of this. If it fails its save, it gains the In the Crosshairs status. All your previous quarry lose In the Crosshairs.",starburst
-18,Sniper Strike,homebrew,Sniper,Attack,two actions,Attack,,,,The target is affected by In the Crosshairs.,One targeted creature,30–120 feet,,,$rangedAttack,,$rangedDamage,$rangedDamageType,"Fire your weapon on your quarry. On a hit, deal additional precision damage equal to $lowDamage.",bow
+17,Paint Target,homebrew,Sniper,Spell,one action,Concentrate,,,,"The target is not prone, and does not have Standard or Greater Cover.",One visible target,30–120 feet,,Reflex,,$abilityDC,,,"Designate a quarry. The quarry is aware of being targeted. All previous quarries lose their Red Dot and Exposed conditions.
+
+Critical Success: No effect. The quarry is immune to Paint Target for 10 minutes.
+Success: No effect.
+Failure: The quarry gains Red Dot.
+Critical Failure: The quarry gains Red Dot and is frightened 1.",starburst
 19,Blood Curse,homebrew,Witch,Spell,two actions,"Curse, Magical",,At Will,,,One targeted creature,30 feet,,Basic Will,,$abilityDC,$lowDamage,persistent bleed,The target takes the listed persistent bleed damage with a basic Will save.,starburst
-21,Battle-Mad Swing,homebrew,Berserker,Attack,one action,Attack,,"Once per turn, required every turn",,,One randomly chosen adjacent creature,,,,$meleeAttack,,$meleeDamage,$meleeDamageType,"Randomly select an adjacent creature, ally or enemy, and make a melee Strike against it. If no creatures are adjacent, swing at empty air.
+21,Battle-Mad Strike,homebrew,Berserker,Attack,one action,Attack,,"Once per turn, required every turn",,,One randomly chosen adjacent creature,,,,$meleeAttack,,$meleeDamage,$meleeDamageType,"Randomly select an adjacent creature, ally or enemy, and make a melee Strike against it. If no creatures are adjacent, swing at empty air.
 
 This Strike neither takes nor increases your multiple attack penalty.",sword
 22,Mindless Rush,homebrew,Berserker,Spell,one action,Move,,"Once per turn, required every turn",,,One closest enemy creature,60 feet,,,,,,,"Stride up to $speed toward the nearest enemy to which you are not already adjacent, taking the shortest available route. If no such enemy exists, do not move.",starburst
 23,Overwatch,homebrew,Archer,Reaction,reaction,Attack,An enemy within 30 feet begins an action with the move trait.,Recharge 1d4,,You can make a ranged Strike against the triggering creature.,The triggering creature.,30 feet,,,$rangedAttack,,$rangedDamage,$rangedDamageType,Make a ranged Strike against the creature before it moves.,reaction
 24,Downed Prey,homebrew,Assassin,Passive,passive,,,,,,,,,,,,,,Your melee Strikes against prone creatures deal additional precision damage equal to $lowDamage on a hit.,heart
 26,Guardian Field,homebrew,Bastion,Spell,two actions,Concentration,,,Sustained,,Your allies within the aura,,10-foot aura centered on you,,,,,,"At the start of each ally's turn, if that ally is in the aura, it gains temporary Hit Points equal to $lowDamage.",starburst
-27,Overcommitted Slam,homebrew,Demolisher,Attack,two actions,Attack,,,,,One creature,melee reach,15-foot cone,,$meleeAttack,,$extremeDamage,$meleeDamageType,"You also deal $meleeDamage $meleeDamageType damage to creatures in the cone, including the target (basic Reflex save against DC $abilityDC).
+27,Overcommitted Slam,homebrew,Demolisher,Attack,two actions,Attack,,,,,One creature,melee reach,15-foot cone,,$meleeAttack,,$extremeDamage,$meleeDamageType,"You also deal $meleeDamage $meleeDamageType damage to creatures in the cone, including the target (Basic Reflex save against DC $abilityDC).
 
 After your attack, you fall prone and become slowed 1 and stunned 3.",sword
 30,Veil,homebrew,Mirage,Spell,two actions,"Concentration, Magical",,,,,One willing creature you can see.,30 feet,,,,,,,The target can make a Hide check as a reaction.,starburst
@@ -36,22 +40,60 @@ You must Sustain the spell.",starburst
 39,Minion Master,homebrew,Engineer,Spell,one action,"Concentrate, Manipulate",,Once per turn,,Fewer than 6 minions.,One adjacent square.,,,,,,,,Create one minion in the target square. Your minions take their turns immediately after you.,starburst
 40,Instinctive Rebuke,homebrew,Pyro,Reaction,reaction,$energyType,You take damage.,,,,The nearest enemy.,30 feet,,,,,,,"Cast Blast toward the nearest enemy, ignoring its recharge.",reaction
 41,Delayed Magic Missile,homebrew,Rainmaker,Spell,two actions,"Concentrate, Force, Manipulate",,Recharge 1d4,,,Each opponent you can see.,120 feet,,,,,,,"Summon a stationary floating dart for each opponent you can see. The darts disappear if you die. At the start of your next turn, each dart unerringly hits its assigned target and deals $terribleDamage force damage.",starburst
-43,Breach Ram,homebrew,Breacher,Attack,three actions,"Attack, Move",,Recharge 1d4,,,One creature in a straight path,,,Fortitude,$meleeAttack,$abilityDC,$meleeDamage,$meleeDamageType,"Stride at least 10 feet and up to your Speed ($speed) in a straight line. If you end adjacent to a creature, make a melee Strike against it. On a hit, the target attempts the saving throw; failure pushes it 5 feet and gives it the Shattered Defenses condition.",sword
-44,Mirror Image,core,Ace,Spell,two actions,"Concentrate, Illusion, Manipulate, Visual",,Once per day,1 minute,,You.,,,,,,,,"Create three illusory doubles in your space. When an attack would hit you, randomly determine whether it hits you or a remaining double, with each equally likely. A double struck by an attack disappears. A failed attack that is not a critical failure removes one double and has no other effect. If a critical hit is assigned to a double, remove that double and resolve a normal hit against you instead. The spell ends when the last double disappears.",circle
+43,Charge,homebrew,Breacher,Attack,two actions,"Attack, Move",,Recharge 1d4,,,Special,,,Fortitude DC,$meleeAttack,,$meleeDamage,$meleeDamageType,"Stride up to your Speed ($speed), during which you can attempt to move through enemy spaces. Attempt an Athletics check against each such enemy’s Fortitude DC.
+Critical Success: Move through the space. You may push that enemy one square of your choice.
+Success: Move through the space.
+Failure: Stop before moving through the space. You may make a free Melee Strike against that creature.
+Critical Failure: Stop before moving through the space.
+
+If you reach the end of your Stride without failing, you may make a free Melee Strike against an adjacent creature.",sword
+44,Mirror Image,core,Ace,Spell,two actions,"Concentrate, Illusion, Manipulate, Visual",,Once per day,1 minute,,You.,,,,,,,,"Create three illusory doubles in your space. While under the effects of the spell, attacks against you are modified as follows:
+Critical Success: Normal hit against you, and kill a double.
+Success: Randomly hits you or a double, which kills it.
+Failure: Kill a double.
+Critical Failure: No effect.
+
+The spell ends when all doubles are dead.",circle
 49,Blast,core,Pyro,Spell,two actions,"Concentrate, Manipulate",,Recharge 1d4,,,Creatures in the area.,,15-foot cone,Basic Reflex,,$abilityDC,$breatheFireDamage,$nonphysicalDamageType,You fire a blast of $nonphysicalDamageType in a cone.,starburst
-50,Revealing Light,core,Scout,Spell,two actions,"Concentrate, Light, Manipulate",,Shared Recharge 1d4,Varies by saving throw.,,Creatures in the area.,120 feet,10-foot burst,Reflex,,$abilityDC,,,"Each creature attempts a Reflex save. Critical success: unaffected. Success: affected for 2 rounds. Failure: affected for 1 minute. Critical failure: affected for 10 minutes. An affected creature is dazzled. If invisible, it becomes concealed instead; concealment from other causes is removed. Shares a Recharge with Dispel Magic.",starburst
-51,Dispel Magic,core,Scout,Spell,two actions,"Concentrate, Manipulate",,Shared Recharge 1d4,,,One spell effect or unattended magic item.,120 feet,,,,,,,"Attempt a counteract check against the target using your spellcasting modifier ($spellAttack) and effective spell rank. Success counteracts the spell effect or suppresses a magic item's magic for 10 minutes, leaving its mundane properties intact. Attempts against artifacts and similar items automatically fail. Use the normal counteract rules to determine which ranks your check can affect. Shares a Recharge with Revealing Light.",starburst
+50,Revealing Light,core,Scout,Spell,two actions,"Concentrate, Light, Manipulate",,Shared Recharge 1d4,Varies by saving throw.,,Creatures in the area.,120 feet,10-foot burst,Reflex,,$abilityDC,,,"Each creature attempts a Reflex save.
+Critical Success: Unaffected.
+Success: Affected for 2 rounds.
+Failure: Affected for 1 minute.
+Critical Failure: Affected for 10 minutes.
+
+An affected creature is dazzled. If invisible, it becomes concealed instead; concealment from other causes is removed. Shares a Recharge with Dispel Magic: Spell.",starburst
+51,Dispel Magic: Spell,core,Scout,Spell,two actions,"Concentrate, Manipulate",,Shared Recharge 1d4,,,One spell effect.,120 feet,,,,,,,"Attempt a counteract check using your Spell Attack Bonus ($spellAttack) against the spell effect's caster DC. The effect's rank equals its spell rank or half its caster's level, rounded up.
+Critical Success: The entire effect ends if its rank is $spellRankPlus3 or less; otherwise no effect.
+Success: The entire effect ends if its rank is $spellRankPlus1 or less; otherwise no effect.
+Failure: The entire effect ends if its rank is $spellRankMinus1 or less; otherwise no effect.
+Critical Failure: No effect.
+
+Shares a Recharge with Revealing Light.",starburst
 52,Reactive Strike,core,Sentinel,Reaction,reaction,,"A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using",,,,The triggering creature.,melee reach,,,,,,,"You attempt a Melee Strike against the triggering creature. If the attack is a critical hit and the trigger was a manipulate action, you disrupt that action.",reaction
 53,Tactical Reflexes,homebrew,Sentinel,Passive,passive,,,,,,,,,,,,,,"When you regain your actions at the start of your turn, gain one additional reaction usable only for Reactive Strike or Reactive Trip.",heart
 54,Heal,core,Support,Spell,one to three actions,"Healing, Manipulate, Vitality; Concentrate with two or three actions",,Recharge 1d4,,,One willing living creature or one undead; all living and undead creatures in the area with three actions.,Touch with one action; 30 feet with two actions,30-foot emanation with three actions,Basic Fortitude (undead only),,$abilityDC,$healDice,vitality (damage to undead; healing to willing living creatures),"Use spell rank equal to half your level rounded up, minimum 1 and maximum 10. One action: touch one target, restoring the listed HP to a willing living creature or dealing the listed vitality damage to an undead creature with a basic Fortitude save. Two actions: target one creature within 30 feet; add $healBonus HP when healing a living creature. Three actions: affect all living and undead creatures in a 30-foot emanation, healing living creatures and damaging undead with the listed dice; undead attempt a basic Fortitude save. The dice are 1d8 per rank; the two-action healing bonus is 8 per rank.",starburst
-70,Glancing Blow,homebrew,Assault,Attack,two actions,"Attack, Concentrate",,,,,One adjacent creature,melee reach,,Basic Reflex,,$abilityDC,$lowDamage,$meleeDamageType,,sword
-71,Glancing Shot,homebrew,Assault,Attack,two actions,"Attack, Concentrate",,,,,One creature you can see.,$rangedRange,,Basic Reflex,,$abilityDC,$rangedDamage,$rangedDamageType,,bow
+70,Glancing Blow,homebrew,Assault,Attack,one action,Attack,,,,,,melee reach,,,$meleeAttack,,$lowDamage,$meleeDamageType,<b>Special:</b> Half damage on a miss; no damage on a critical miss.,sword
+71,Glancing Shot,homebrew,Assault,Attack,one action,Attack,,,,,,$rangedRange,,,$rangedAttack,,$lowDamage,$rangedDamageType,<b>Special:</b> Half damage on a miss; no damage on a critical miss.,bow
 72,Sustain,homebrew,Aegis; Bastion; Barricade,Spell,one action,Concentrate,,,,,,,,,,,,,"Choose one of your effects with a sustained duration or one that lists a special benefit when you Sustain it. An effect with a sustained duration continues until the end of your next turn; using Sustain more than once in the same turn does not extend it further. If an effect can be Sustained but gives no duration, it lasts for up to 10 minutes. Sustain also grants any special benefit listed by the effect. If the Sustain action is disrupted, the effect ends.",circle
-79,Swap,homebrew,Mirage,Spell,two actions,"Concentrate, Teleport",,Recharge 1d4,,,"Two creatures you can see in range, including yourself.",30 feet,,,,,,,"Each unwilling target attempts a Will save. If either target succeeds, the spell has no effect. Otherwise, teleport the two targets, swapping their positions.",starburst
+79,Swap,homebrew,Mirage,Spell,two actions,"Concentrate, Teleport",,Recharge 1d4,,,"Two creatures you can see in range, including yourself.",30 feet,,Will,,$abilityDC,,,"Each target may attempt a DC $abilityDC Will save to resist. Treat any target that does not attempt a save as having failed.
+Critical Success: No effect, and Swap takes a 4 on recharge.
+Success: No effect.
+Failure: If both targets failed, swap their positions.
+Critical Failure: As failure, and you are also stunned 1.",starburst
 80,Lifelink Donor,homebrew,Priest,Status,passive,,,,,,,,,,,,,,"Whenever a linked recipient would take damage, you take half that damage instead. A link ends immediately when a recipient moves more than 60 feet from you.",status
 81,Lifelink Recipient,homebrew,Priest,Status,passive,,,,,,,,,,,,,,"You are linked to a donor. Whenever you would take damage, the donor takes half that damage instead.",status
-84,In the Crosshairs,homebrew,Sniper,Status,passive,,,,,,,,,,,,,,"Sniper Strikes against you are empowered. When you take the Take Cover action, this condition ends.",status
-85,Berserker Rage,homebrew,Berserker,Action,one action,,,,1 minute,,,,,,,,,,"You gain temporary Hit Points equal to $lowDamage. While raging, you must use Mindless Rush and Battle-Mad Swing once each every turn, in either order, whenever able.",circle
+84,Red Dot,homebrew,Sniper,Status,passive,,,,,,,,,,,,,,"You are aware that you are being targeted by a sniper.
+
+- When you Take Cover, Red Dot ends.
+- At the end of your turn, if you are hidden, undetected, or unnoticed by the sniper, or the sniper has no line of sight to you, Red Dot ends.
+- Otherwise, Red Dot becomes Exposed.",status
+325,Exposed,homebrew,Sniper,Status,passive,,,,,,,,,,,,,,"You are aware that the sniper has acquired a clear shot at you.
+
+You have weakness $averageModerateStrikeDamage to the sniper's Strikes.
+
+- When you Take Cover, Exposed ends.
+- At the end of your turn, if you are hidden, undetected, or unnoticed by the sniper, or the sniper has no line of sight to you, Exposed ends.",status
+85,Berserker Rage,homebrew,Berserker,Action,one action,,,,1 minute,,,,,,,,,,"You gain temporary Hit Points equal to $lowDamage. While raging, you must use Mindless Rush and Battle-Mad Strike once each every turn, in either order, whenever able.",circle
 86,Hidden,core,Mirage; Specter,Status,passive,,,,,,,,,,,,,,"While you're hidden from a creature, that creature knows the space you're in but can't tell precisely where you are. You typically become hidden by using Stealth to Hide. When Seeking a creature using only imprecise senses, it remains hidden, rather than Observed. A creature you're hidden from is Off-Guard to you, and it must succeed at a DC 11 flat check when targeting you with an attack, spell, or other effect or it fails to affect you. Area effects aren't subject to this flat check.
 
 A creature might be able to use the Seek action to try to observe you.",status
@@ -121,7 +163,8 @@ Critical Success: End grabbed, immobilized, and restrained from the chosen effec
 Success: End those conditions from the chosen effect.
 Failure: Remain held.
 Critical Failure: Remain held and cannot attempt Escape again until their next turn.",status
-119,Leaping Knockdown,homebrew,Assassin,Attack,two actions,"Attack, Move",,,,,One creature within range,80 feet,,Reflex DC,,,,,"Leap, ignoring difficult terrain; this movement does not trigger reactions. Attempt Athletics ($athletics) against the target’s Reflex DC.
+119,Leaping Knockdown,homebrew,Assassin,Attack,two actions,"Attack, Move",,Recharge 1d4,,,One creature within range,80 feet,,Reflex DC,,,,,"Leap, ignoring difficult terrain; this movement does not trigger reactions. Attempt Athletics ($athletics) against the target’s Reflex DC.
+Critical Success: Target falls prone and Leaping Knockdown takes a 4 on recharge.
 Success: Target falls prone.
 Failure: No effect.
 Critical Failure: You fall prone.",sword
@@ -132,16 +175,20 @@ Critical Failure: You fall prone.",sword
 124,Invisible,homebrew,Scout,Status,passive,,,,,,,,,,,,,,The creature cannot be seen. An observer usually does not know its space (undetected); an observer who saw it become invisible knows its space but cannot see it (hidden). A successful Seek can make it hidden to that observer. It cannot become observed while invisible except through a special ability or magic.,status
 125,Undetected,homebrew,Scout,Status,passive,,,,,,,,,,,,,,"An observer does not know the creature’s space and cannot target it directly without guessing a square. A guessed attack requires a secret DC 11 flat check as for a hidden target; the GM does not reveal whether the square or roll was wrong. Area effects can still affect it, and an observer can Seek. The observer is off-guard to the undetected creature.",status
 126,Stunned,homebrew,Demolisher; Priest,Status,passive,,,,,,,,,,,,,,"The creature cannot act while stunned. When it regains actions, reduce the actions regained by its stunned value, then reduce that value by the actions lost. A duration-based stunned effect denies actions for its duration.",status
-127,Hide,homebrew,"Assassin,Mirage,Specter,Scout,Operator",Action,one action,Secret,,,,You are behind standard cover OR otherwise concealed.,,,,,,,,,"Roll a Secret stealth check against every visible enemy's perception.
-Add a +2 or +4 circumstance bonus if you have standard or greater cover.
-You have the Hidden status against every enemy you beat.",circle
+127,Hide,homebrew,"Assassin,Mirage,Specter,Scout,Operator",Action,one action,Secret,,,,You are behind standard cover OR otherwise concealed.,,,,,,,,,"Roll a single Secret Stealth check versus Perception DC against every enemy.
+Add a +2 or +4 circumstance bonus if you have Standard or Greater Cover.
+Critical Success: You have the Hidden status from that enemy.
+Success: You have the Hidden status from that enemy.
+Failure: You are Observed by that enemy.
+Critical Failure: You are Observed by that enemy.",circle
 128,Sneak,homebrew,"Assassin,Mirage,Specter,Scout,Operator",Action,one action,"Move, Secret",,,,,,,,,,,,,"Stride up to half your Speed.
 
-At the end of your move, make a Stealth check against every enemy's Perception that you have standard cover OR concealment against, and that you were previously Hidden or Undetected from.
+At the end of your move, make a single Secret Stealth check versus Perception DC against all enemies that you were already Hidden or Undetected by and that you are currently concealed from or have Standard Cover against. You gain a +2 or +4 circumstance bonus if you were behind Standard or Greater Cover for your entire move. You are Observed by all other enemies that can see you.
 
-Success: You become Undetected to those enemies.
-Failure: You become Hidden to those enemies.
-Critical Failure: You become Observed to those enemies, unless you are Invisible, in which case you become Hidden.",circle
+Critical Success: You become Undetected to that enemy.
+Success: You become Undetected to that enemy.
+Failure: You become Hidden to that enemy.
+Critical Failure: If you are Invisible, you become Hidden. Otherwise, you become Observed.",circle
 129,Unnoticed,core,Assassin; Mirage; Specter,Status,passive,,,,,,,,,,,,,,A creature you are unnoticed by has no idea you are present. You are also undetected by it.,status
 130,Observed,core,Assassin; Mirage; Specter,Status,passive,,,,,,,,,,,,,,An observer knows where you are and can perceive you with a precise sense. Hide can make you hidden; Sneak can make you undetected.,status
 132,Breaking Stealth (PC Response),homebrew,Assassin; Mirage; Specter,Status,passive,,,,,,,,,,,,,,"If you Strike an enemy, you still get the Offguard bonus, but you become Observed.
@@ -151,15 +198,24 @@ Seek can detect hidden creatures.",status
 201,Reactive Trip,homebrew,Sentinel,Reaction,reaction,,"A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using",,,,The triggering creature,melee reach,,,,,,,"You may attempt an Advanced Trip. If successful, you disrupt that move action.",reaction
 202,Shattered Defenses,homebrew,Breacher,Status,passive,,,,,,,,,,,,,,"This creature takes a –2 status penalty to AC until a DC 15 First Aid or Repair check is made, as appropriate.",status
 203,Camp,homebrew,Operator; Assassin,Passive,passive,,,,,,,,,,,,,,"You start combat with a Cover Screen in your square. Before combat begins, resolve a Hide against your opponents.",heart
-204,Summon Obstacle,homebrew,Barricade,Spell,three actions,"Manipulate, Concentrate",,Recharge 1d4,Sustained,,A 10×10-foot area,20 feet,,Fortitude,,$abilityDC,,,"Each creature in the area must attempt a Fortitude save or be pushed to the nearest open space outside the area. If the area is then empty, create an Obstacle in that area. The Obstacle is destroyed when the spell ends or when you recast it. This spell must be sustained.",starburst
+204,Summon Obstacle,homebrew,Barricade,Spell,three actions,"Manipulate, Concentrate",,Recharge 1d4,Sustained,,A 10×10-foot area,20 feet,,Fortitude,,$abilityDC,,,"Each creature in the area attempts a Fortitude save.
+Critical Success: No effect, and Summon Obstacle takes a 4 on recharge.
+Success: No effect.
+Failure: The creature is pushed to the nearest open space.
+Critical Failure: The creature is pushed to the nearest open space and takes $lowDamage.
+
+If the area is empty after the save, create an Obstacle there. The Obstacle is destroyed when the spell ends or when you recast it. This spell must be sustained.",starburst
 205,Obstacle,homebrew,,Object,passive,,,,,,,,,,,,,,10 feet tall and 1 foot thick.,status
 206,Throw Cover Screens,homebrew,Trapper,Spell,two actions,"Manipulate, Concentrate",,Recharge 1d4,,,"Two squares you can see within range, including your own",30 feet,,,,,,,Create Cover Screens in those squares.,starburst
 207,Cover Screen,homebrew,,Status,passive,,,,,,,,,,,,,,Provides Standard Cover for creatures in or behind the square. Does not affect movement.,status
 208,Destroy Cover Screen,homebrew,,Action,one action,,,,,A Cover Screen is in your melee reach.,One Cover Screen,,,,,,,,The Cover Screen is removed.,circle
 209,Cover Jaunt,homebrew,Operator,Spell,three actions,"Concentrate, Teleportation",,Recharge 1d4,,,A Cover Screen within range that you remember,60 feet,,,,,,,"Teleport to the Cover Screen. Line of sight is not required. If it is occupied, the spell fails.",circle
 210,Deploy Cover Screen,homebrew,Operator,Spell,three actions,"Manipulate, Concentrate",,Once per day,,,Your square or an adjacent square,,,,,,,,Create a Cover Screen in that square.,starburst
-211,Bound by Blood,homebrew,Witch,Spell,two actions,"Curse, Magical",,At Will,,,Exactly two adjacent creatures in range,30 feet,,Basic Will,,$abilityDC,$lowDamage,persistent bleed,Targets that fail their saves take persistent bleed damage.,starburst
-212,Divided by Plague,homebrew,Witch,Spell,two actions,"Curse, Magical",,At Will,,,Exactly two creatures in range with no adjacent creatures,30 feet,,Fortitude,,$abilityDC,,,Targets that fail their saves are sickened 1; targets that critically fail are sickened 2.,starburst
+211,Bound by Blood,homebrew,Witch,Spell,two actions,"Curse, Magical",,At Will,,,Exactly two adjacent creatures in range,30 feet,,Basic Will,,$abilityDC,$lowDamage,persistent bleed,,starburst
+212,Divided by Plague,homebrew,Witch,Spell,two actions,"Curse, Magical",,At Will,,,Exactly two creatures in range with no adjacent creatures,30 feet,,Fortitude,,$abilityDC,,,"Critical Success: No effect, and you are immune to Witch spells for 10 minutes.
+Success: No effect.
+Failure: Sickened 1.
+Critical Failure: Sickened 2.",starburst
 213,Shove,homebrew,Barricade; Breacher,Status,passive,,,,,,,,,,,,,,This creature has the Shove maneuver.,status
 313,Wall,homebrew,Obstacle,Passive,passive,,,,,,,,,,,,,,Not a creature and is immune to critical hits and precision damage.,heart
 314,Rubble,homebrew,Obstacle,Passive,passive,,,,,,,,,,,,,,"When destroyed, the Obstacle leaves difficult terrain in its squares.",heart
@@ -168,3 +224,4 @@ Seek can detect hidden creatures.",status
 321,Branded,homebrew,Scourer,Status,passive,Curse,,,,,,,,,,,,,"You take additional damage from Strikes from creatures that inflict Branded. At the end of your turn, your Branded value decreases by 1.",status
 322,Communal Heal,homebrew,Priest,Spell,two actions,"Healing, Manipulate, Concentrate",,At Will,,,,,,,,,,,You and all Lifelink Recipients restore $terribleDamage HP.,starburst
 323,See Invisible,homebrew,Scout,Passive,passive,,,,,,,,,,,,,,"You can see invisible creatures as though they weren't invisible, although their features are blurred, making them Concealed and difficult to identify.",heart
+324,Shattering Charge,homebrew,Breacher,Passive,passive,,,,,,,,,,,,,,"If you traveled your Speed during your Charge and hit the free Melee Strike, apply Shattered Defenses to the creature you hit.",heart

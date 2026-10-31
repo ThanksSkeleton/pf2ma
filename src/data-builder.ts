@@ -71,7 +71,8 @@ export function buildArchetype(
   const spellRank = Math.max(1, Math.ceil(level / 2))
   const healRank = Math.min(10, spellRank)
   const variables: Record<string, string | number> = {
-    level, spellRank, abilityDC: benchmark('table-2-11-spell-dc-attack-bonus.csv', roadmap['Spell DC'], ' DC'),
+    level, spellRank, spellRankPlus3: spellRank + 3, spellRankPlus1: spellRank + 1, spellRankMinus1: spellRank - 1,
+    abilityDC: benchmark('table-2-11-spell-dc-attack-bonus.csv', roadmap['Spell DC'], ' DC'),
     spellAttack: benchmark('table-2-11-spell-dc-attack-bonus.csv', roadmap['Spell Attack'], ' Spell Attack Bonus'),
     minimumResistance: benchmark('table-2-8-resistances-weaknesses.csv', 'Minimum'),
     athletics: benchmark('table-2-3-skills.csv', roadmap.Athletics),
@@ -84,6 +85,8 @@ export function buildArchetype(
     terribleHP: benchmark('table-2-7-hit-points.csv', 'Terrible'),
     physicalDamageType, meleeDamageType: physicalDamageType, rangedDamageType: physicalDamageType,
     breatheFireDamage: `${2 * spellRank}d6`, healDice: `${healRank}d8`, healBonus: 8 * healRank,
+    averageLowStrikeDamage: benchmark('table-2-10-strike-damage.csv', 'Low', ' Average'),
+    averageModerateStrikeDamage: benchmark('table-2-10-strike-damage.csv', 'Moderate', ' Average'),
   }
   variables.athleticsDC = Number(variables.athletics) + 10
   for (const rank of ['Terrible', 'Low', 'Moderate', 'High', 'Extreme']) {
@@ -141,7 +144,6 @@ export function buildArchetype(
     if (row.damage_type) card.damageType = row.damage_type
     else if (card.damage) card.damageType = physicalDamageType
     if (row.traits) card.traits = row.traits.split(',').map((trait) => trait.trim())
-    if (row.name === 'Sniper Strike') card.properties = ['Reload 1']
     if (row.defense) {
       if (row.defense.endsWith(' DC')) card.targetDC = row.defense
       else {
@@ -165,6 +167,7 @@ export function buildArchetype(
   for (const card of abilities) {
     const content = [card.name, card.requirements, card.trigger, card.duration, card.text].filter(Boolean).join(' ')
     for (const condition of conditionNames) {
+      if (card.name === 'Paint Target' && condition === 'Prone') continue
       if (new RegExp(`\\b${condition}\\b`, 'i').test(content)) referenceNames.add(condition)
     }
     if (/Cover Screen/i.test(content)) {
