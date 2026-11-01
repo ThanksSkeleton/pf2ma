@@ -27,7 +27,7 @@ Trapper,Controller,Medium,Moderate,Low,High,High,High,Moderate,Low,High,Moderate
 Saboteur,Controller,Medium,Moderate,Low,High,High,Moderate,Moderate,Moderate,High,Terrible,,R,,,Moderate,-,-,,High,Set Mine; Thrown Burst; Final Burst,"Ranged,Hazards"
 Sentinel,Defender,Medium,Low,Extreme,Low,High,Moderate,High,,Terrible,,Low,M,Low,Low,Low,Moderate,Moderate,,,Reactive Strike; Reactive Trip; Tactical Reflexes; Advanced Trip,"Flexible,Maneuvers,Trip,Shove"
 Sniper,Artillery,Medium,Extreme,Low,High,Low,Low,Low,Low,Low,Low,Low,R,Extreme,Moderate,High,-,-,,High,Paint Target; Red Dot; Exposed,"Ranged,Cover"
-Specter,Striker,Medium,,Low,High,Low,Moderate,Low,Low,Moderate,Low,High,M,Low,Low,Low,High,Moderate,,,Shadow Prowl; Isolated Prey; Hidden; Hide; Sneak,"Stealth,Cover"
+Specter,Striker,Medium,,Low,High,Low,Moderate,Low,Low,Moderate,Low,High,M,Low,Low,Low,High,Moderate,,,Shadow Prowl; Isolated Prey; Hidden; Hide; Sneak,"Flexible,Stealth,Cover"
 Support,Support,Medium,Low,Low,Low,Low,Low,Moderate,Moderate,Moderate,Low,,Nil,-,-,-,-,-,,Moderate,"Heal (once per day, rank half the creature's level rounded up, minimum 1, maximum 10); Red Buff: Force; Green Buff: Guard; Blue Buff: Motion",Pacifist
 Witch,Controller,Medium,,Low,Low,Low,,Low,Low,Low,High,,R,Low,Low,Low,-,-,,,Bound by Blood; Divided by Plague,Ranged
 Special: Melee Minion,N/A,Small,Terrible,Low,Low,Low,Low,Terrible,Terrible,Terrible,Terrible,15 feet,M,Low,Low,Low,Moderate,Terrible,,,,

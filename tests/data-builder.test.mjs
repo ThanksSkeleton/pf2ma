@@ -117,7 +117,7 @@ test('requested attack-mode traits appear on the listed archetypes', async () =>
   const categoryMembers = {
     Ranged: ['Ace', 'Aegis', 'Archer', 'Barricade', 'Bombard', 'Summoner', 'Operator', 'Rainmaker', 'Saboteur', 'Scout', 'Sniper', 'Trapper', 'Witch'],
     Modal: ['Soldier', 'Hornet'],
-    Flexible: ['Assassin', 'Kidnapper', 'Goliath', 'Despoiler', 'Pyro', 'Ronin', 'Sentinel'],
+    Flexible: ['Assassin', 'Kidnapper', 'Goliath', 'Despoiler', 'Pyro', 'Ronin', 'Sentinel', 'Specter'],
     Melee: ['Bastion', 'Berserker', 'Breacher', 'Demolisher', 'Scourer'],
   }
   for (const row of parseCsv(sources['RoadMaps_Prod.csv']).filter((row) => !row['Road Map'].startsWith('Special:'))) {

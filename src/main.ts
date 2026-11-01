@@ -11,6 +11,9 @@ const rawCsv = import.meta.glob<string>('../csv/*.csv', { query: '?raw', import:
 const sources = Object.fromEntries(Object.entries(rawCsv).map(([path, contents]) => [path.split('/').pop()!, contents]))
 const archetypeRows = parseCsv(sources['RoadMaps_Prod.csv'])
 const archetypeNames = listArchetypes(sources)
+const encounterArchetypes = archetypeRows.filter((row) => archetypeNames.includes(row['Road Map'])).map((row) => ({
+  name: row['Road Map'], role: row.Role, traits: row.ArchetypeTraits?.split(',').map((trait) => trait.trim()).filter(Boolean) ?? [],
+}))
 const roleByName = new Map(archetypeRows.map((row) => [row['Road Map'], row.Role]))
 const alphaSort = (items: string[]) => [...items].sort((a, b) => a.localeCompare(b))
 const sortRoleFor = (name: string) => roleByName.get(name) === 'Artillery' ? 'Bombard' : roleByName.get(name) ?? ''
@@ -152,7 +155,7 @@ const renderCard = (card: AbilityCard, spellRank: number, disabled = false) => {
   </section>`
 }
 
-const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = '', showReferences = true, showControls = true): string => {
+const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = '', showReferences = true, showControls = true, mode: AttackMode = selectedMode): string => {
   const slug = creature.name.toLowerCase().replaceAll(' ', '-')
   const id = parentId ? `${parentId}-${slug}` : slug
   const roleIcon = roleIconByName[creature.role]
@@ -199,7 +202,7 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = '', show
 
       <section class="abilities" aria-labelledby="${id}-abilities-heading">
         <div class="section-heading"><h2 id="${id}-abilities-heading">Abilities</h2></div>
-        <div class="ability-list">${[...(creature.attack ? [creature.attack] : []), ...(creature.secondaryAttacks ?? []), ...creature.abilities].map((card) => renderCard(card, spellRank, isAttackDisabled(creature, card, selectedMode))).join('')}</div>
+        <div class="ability-list">${[...(creature.attack ? [creature.attack] : []), ...(creature.secondaryAttacks ?? []), ...creature.abilities].map((card) => renderCard(card, spellRank, isAttackDisabled(creature, card, mode))).join('')}</div>
       </section>
       ${showReferences && creature.references?.length ? `<section class="references" aria-labelledby="${id}-references-heading">
         <div class="section-heading"><h2 id="${id}-references-heading">Conditions &amp; PC Responses</h2></div>
@@ -209,7 +212,7 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = '', show
     ${creature.minions.length ? `
     <section class="minions-section" aria-labelledby="${id}-minions-heading">
       <div class="section-heading"><h2 id="${id}-minions-heading">${creature.minions.some((minion) => minion.statFormat === 'object') ? 'Minions &amp; Objects' : 'Minions'}</h2></div>
-      <div class="minion-list">${creature.minions.map((minion) => renderCreatureSheet(minion, depth + 1, id, showReferences, false)).join('')}</div>
+      <div class="minion-list">${creature.minions.map((minion) => renderCreatureSheet(minion, depth + 1, id, showReferences, false, mode)).join('')}</div>
     </section>` : ''}
   </article>
   `
@@ -289,7 +292,7 @@ const clearEncounter = () => {
 
 const renderEncounter = () => {
   const template = encounterTemplates[selectedTemplateIndex]
-  const groups = rollEncounter(template, encounterLevel, archetypeNames)
+  const groups = rollEncounter(template, encounterLevel, encounterArchetypes)
   const creatures = groups.map((group) => buildCreature(group.name, group.level))
   const references = [...new Map(creatures.flatMap(collectReferences).map((card) => [card.name, card])).values()]
   encounterResult.innerHTML = `
@@ -299,7 +302,7 @@ const renderEncounter = () => {
       <table><thead><tr><th scope="col">Monster name</th><th scope="col">Count</th><th scope="col">Level</th></tr></thead>
         <tbody>${groups.map((group) => `<tr><th scope="row">${escapeHtml(group.name)}</th><td>${group.count}</td><td>${group.level}</td></tr>`).join('')}</tbody></table>
     </div>
-    <div class="encounter-monsters">${creatures.map((creature, index) => `<section class="encounter-monster" aria-label="${escapeHtml(creature.name)} level ${creature.level}"><h2>${escapeHtml(creature.name)} · ${groups[index].count} × level ${creature.level}</h2><div class="monster-box">${renderCreatureSheet(creature, 0, '', false, false)}</div></section>`).join('')}</div>
+    <div class="encounter-monsters">${creatures.map((creature, index) => `<section class="encounter-monster" aria-label="${escapeHtml(creature.name)} level ${creature.level}"><h2>${escapeHtml(creature.name)} · ${groups[index].count} × level ${creature.level}${groups[index].mode ? ` · ${groups[index].mode} mode` : ''}</h2><div class="monster-box">${renderCreatureSheet(creature, 0, '', false, false, groups[index].mode ?? 'Melee')}</div></section>`).join('')}</div>
     <section class="encounter-references" aria-label="Statuses and reminders"><div class="section-heading"><h2>Statuses &amp; reminders</h2></div>
       ${references.length ? `<div class="ability-list">${references.map((card) => renderCard(card, Math.max(1, Math.ceil(encounterLevel / 2)))).join('')}</div>` : '<p>None for this encounter.</p>'}
     </section>
