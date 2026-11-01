@@ -56,7 +56,7 @@ export function buildArchetype(
     return row
   }
   const roadmap = find('RoadMaps_Prod.csv', 'Road Map', name)
-  const archetypeTags = roadmap.ArchetypeTag?.split(',').map((tag) => tag.trim()).filter(Boolean) ?? []
+  const archetypeTraits = roadmap.ArchetypeTraits?.split(',').map((trait) => trait.trim()).filter(Boolean) ?? []
   const narrativeName = name
   const narrative = find('TacticsAndDescription.csv', 'archetype', narrativeName)
   const benchmark = (file: string, rank = '', suffix = '') => {
@@ -100,7 +100,7 @@ export function buildArchetype(
     const prefix = subtype.toLowerCase()
     variables[`${prefix}Attack`] = attack
     variables[`${prefix}Damage`] = damage
-    const strike: AbilityCard = { name: `${subtype} Strike`, type: 'attack', actionCost: 1, symbol: subtype === 'Melee' ? 'sword' : 'bow', attackType: subtype, attack, damage, damageType: physicalDamageType }
+    const strike: AbilityCard = { name: `${subtype} Strike`, type: 'attack', actionCost: 1, symbol: subtype === 'Melee' ? 'sword' : 'bow', attackType: subtype, traits: ['Attack'], attack, damage, damageType: physicalDamageType }
     if (subtype === 'Ranged') {
       strike.range = `${benchmark('range-per-level.csv', roadmap.Range, ' (feet)')} feet`
       if (name === 'Sniper') strike.properties = ['Reload 1']
@@ -144,6 +144,9 @@ export function buildArchetype(
     if (row.damage_type) card.damageType = row.damage_type
     else if (card.damage) card.damageType = physicalDamageType
     if (row.traits) card.traits = row.traits.split(',').map((trait) => trait.trim())
+    if (type === 'attack' && !card.traits?.some((trait) => trait.toLowerCase() === 'attack')) {
+      card.traits = ['Attack', ...(card.traits ?? [])]
+    }
     if (row.defense) {
       if (row.defense.endsWith(' DC')) card.targetDC = row.defense
       else {
@@ -163,7 +166,7 @@ export function buildArchetype(
   const conditionNames = ['Prone', 'Slowed', 'Grabbed', 'Restrained', 'Immobilized', 'Off-Guard', 'Shattered Defenses', 'Branded',
     'Hidden', 'Dazzled', 'Blinded', 'Concealed', 'Invisible', 'Undetected', 'Unnoticed', 'Observed', 'Stunned']
   const referenceNames = new Set(selectedStatuses.keys())
-  if (archetypeTags.includes('Stealth')) referenceNames.add('Breaking Stealth (PC Response)')
+  if (archetypeTraits.includes('Stealth')) referenceNames.add('Breaking Stealth (PC Response)')
   for (const card of abilities) {
     const content = [card.name, card.requirements, card.trigger, card.duration, card.text].filter(Boolean).join(' ')
     for (const condition of conditionNames) {
@@ -212,7 +215,7 @@ export function buildArchetype(
       'Stealth/Acrobatics': benchmark('table-2-3-skills.csv', roadmap['Stealth/Acrobatics']),
       Escape: benchmark('table-2-3-skills.csv', roadmap.Escape),
     },
-    archetypeTags: archetypeTags.length ? archetypeTags : undefined,
+    archetypeTraits: archetypeTraits.length ? archetypeTraits : undefined,
     spellRank,
   }
   if (selectedCards.some((card) => card.name === 'Summon Obstacle')) {

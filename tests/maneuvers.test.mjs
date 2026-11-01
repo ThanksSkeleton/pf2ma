@@ -23,7 +23,8 @@ test('all twelve maneuver tiers and both maintenance actions are unique homebrew
       assert.equal(row.Source, 'homebrew', name)
       assert.equal(row.entry_type, 'Attack', name)
       assert.equal(row.traits, 'Attack', name)
-      assert.equal(row.defense, ['Trip', 'Disarm'].includes(family) ? 'Reflex DC' : 'Fortitude DC', name)
+      assert.equal(row.defense, prefix === 'Advanced ' && ['Trip', 'Grapple', 'Disarm'].includes(family)
+        ? '' : ['Trip', 'Disarm'].includes(family) ? 'Reflex DC' : 'Fortitude DC', name)
       assert.equal(row.attack, '$athletics', name)
       for (const outcome of ['Critical Success:', 'Success:', 'Failure:', 'Critical Failure:']) {
         assert.ok(row.effect.includes(outcome), `${name}: ${outcome}`)

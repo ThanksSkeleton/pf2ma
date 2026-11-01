@@ -34,7 +34,7 @@ export type Archetype = {
   attack?: AbilityCard
   secondaryAttacks?: AbilityCard[]
   skills?: Record<string, string>
-  archetypeTags?: string[]
+  archetypeTraits?: string[]
   spellRank?: number
   tactics: string
   abilities: AbilityCard[]

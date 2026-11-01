@@ -3,7 +3,7 @@ order,name,Source,monster,entry_type,activation,traits,trigger,frequency,duratio
 2,Green Buff: Guard,homebrew,Support,Spell,two actions,"Manipulate, Concentration",,At Will,Up to 1 minute.,,One willing creature,30 feet,,,,,,,The target gains $averageModerateStrikeDamage Temporary Hit Points at the start of each of its turns. Your Buffs of other colors end.,starburst
 3,Blue Buff: Motion,homebrew,Support,Spell,two actions,"Manipulate, Concentration",,At Will,Up to 1 minute.,,One willing creature,30 feet,,,,,,,The target gains a +15-foot status bonus to its Speeds. Your Buffs of other colors end.,starburst
 5,Escalating Strike,homebrew,Scourer,Attack,one action,Attack,,At Will,,The target has Branded.,One creature,melee reach,,,$meleeAttack,,$extremeDamage,$meleeDamageType,,sword
-8,Elemental Upheaval,homebrew,Hive,Spell,two actions,Concentration,,At Will,,,,,30-foot emanation centered on you,Basic Reflex,,$abilityDC,,$nonphysicalDamageType,"Creatures in the area take $lowDamage, subject to the saving throw. The ground becomes difficult, hazardous terrain; a creature moving through it takes $terribleDamage for each square it enters. You are immune to this ability's effects.",starburst
+8,Elemental Upheaval,homebrew,Hive,Spell,two actions,Concentration,,At Will,,,,,10-foot emanation centered on you,Basic Reflex,,$abilityDC,,$nonphysicalDamageType,"Creatures in the area take $lowDamage, subject to the saving throw. The ground becomes difficult, hazardous terrain; a creature moving through it takes $terribleDamage for each square it enters. You are immune to this ability's effects.",starburst
 9,Set Instant Trap,homebrew,Trapper,Spell,three actions,"Manipulate, Concentration",,At Will,,,One adjacent square,,,,,,,,Build an instant trap on the target square.,starburst
 11,Set Mine,homebrew,Saboteur,Spell,one action,"Manipulate, Concentration",,At Will,,,One adjacent square,,,,,,,,Build a mine on the target square.,starburst
 12,Thrown Burst,homebrew,Saboteur,Spell,two actions,Attack,,Recharge 1d4,,,,20 feet,5-foot burst,Basic Reflex,,$abilityDC,$lowDamage,$nonphysicalDamageType,"Lob an attack into the area; you don't need line of sight to the area. Creatures in it take the listed damage, subject to the saving throw.",starburst
@@ -26,12 +26,12 @@ This Strike neither takes nor increases your multiple attack penalty.",sword
 23,Overwatch,homebrew,Archer,Reaction,reaction,Attack,An enemy within 30 feet begins an action with the move trait.,Recharge 1d4,,You can make a ranged Strike against the triggering creature.,The triggering creature.,30 feet,,,$rangedAttack,,$rangedDamage,$rangedDamageType,Make a ranged Strike against the creature before it moves.,reaction
 24,Downed Prey,homebrew,Assassin,Passive,passive,,,,,,,,,,,,,,Your melee Strikes against prone creatures deal additional precision damage equal to $lowDamage on a hit.,heart
 26,Guardian Field,homebrew,Bastion,Spell,two actions,Concentration,,,Sustained,,Your allies within the aura,,10-foot aura centered on you,,,,,,"At the start of each ally's turn, if that ally is in the aura, it gains temporary Hit Points equal to $lowDamage.",starburst
-27,Overcommitted Slam,homebrew,Demolisher,Attack,two actions,Attack,,,,,One creature,melee reach,15-foot cone,,$meleeAttack,,$extremeDamage,$meleeDamageType,"You also deal $meleeDamage $meleeDamageType damage to creatures in the cone, including the target (Basic Reflex save against DC $abilityDC).
+27,Overcommitted Slam,homebrew,Demolisher,Attack,two actions,Attack,,Recharge 1d4,Until Recharge,,One creature,melee reach,15-foot cone,,$meleeAttack,,$extremeDamage,$meleeDamageType,"You also deal $meleeDamage $meleeDamageType damage to creatures in the cone, including the target (Basic Reflex save against DC $abilityDC).
 
-After your attack, you fall prone and become slowed 1 and stunned 3.",sword
+After your attack, you fall prone. You are slowed until Overcommitted Slam recharges.",sword
 30,Veil,homebrew,Mirage,Spell,two actions,"Concentration, Magical",,,,,One willing creature you can see.,30 feet,,,,,,,The target can make a Hide check as a reaction.,starburst
 31,Chosen Rival,homebrew,Ronin,Spell,one action,Concentration,,,1 minute,,One creature you can see.,30 feet,,,,,,,"The first time each turn you hit the chosen creature with a melee Strike, you deal additional $lowDamage. You have resistance to damage from every other creature equal to $minimumResistance. Choosing a new rival ends this effect.",starburst
-32,Shadow Prowl,homebrew,Specter,Spell,one action,Move,,,"The Hidden condition lasts until the start of your next turn or until after you make a Strike, whichever comes first.",,You.,,,,,,,,Stride up to $speed. You can make a Hide check as a free action at the end of this movement.,circle
+32,Shadow Prowl,homebrew,Specter,Spell,one action,Move,,,,,You.,,,,,,,,Stride up to $speed. You can make a Hide check as a free action at the end of this movement.,circle
 33,Isolated Prey,homebrew,Specter,Passive,passive,,,,,,,,,,,,,,Melee Strikes against enemies that are off-guard and have no adjacent allies deal additional precision damage equal to $lowDamage.,heart
 34,Aegis Ward,homebrew,Aegis,Spell,two actions,"Aura, Concentrate, Manipulate",,,Sustained,,You and your allies,,10-foot aura centered on you,,,,,,"Choose acid, cold, electricity, fire, or sonic when you cast the spell. You and your allies within the aura gain a +1 status bonus to AC, saving throws, and attack rolls, and resistance 5 to the chosen damage type.
 
@@ -40,7 +40,7 @@ You must Sustain the spell.",starburst
 39,Minion Master,homebrew,Engineer,Spell,one action,"Concentrate, Manipulate",,Once per turn,,Fewer than 6 minions.,One adjacent square.,,,,,,,,Create one minion in the target square. Your minions take their turns immediately after you.,starburst
 40,Instinctive Rebuke,homebrew,Pyro,Reaction,reaction,$energyType,You take damage.,,,,The nearest enemy.,30 feet,,,,,,,"Cast Blast toward the nearest enemy, ignoring its recharge.",reaction
 41,Delayed Magic Missile,homebrew,Rainmaker,Spell,two actions,"Concentrate, Force, Manipulate",,Recharge 1d4,,,Each opponent you can see.,120 feet,,,,,,,"Summon a stationary floating dart for each opponent you can see. The darts disappear if you die. At the start of your next turn, each dart unerringly hits its assigned target and deals $terribleDamage force damage.",starburst
-43,Charge,homebrew,Breacher,Attack,two actions,"Attack, Move",,Recharge 1d4,,,Special,,,Fortitude DC,$meleeAttack,,$meleeDamage,$meleeDamageType,"Stride up to your Speed ($speed), during which you can attempt to move through enemy spaces. Attempt an Athletics check against each such enemy’s Fortitude DC.
+43,Charge,homebrew,Breacher,Attack,two actions,"Attack, Move",,Recharge 1d4,,,Special,,,,$meleeAttack,,$meleeDamage,$meleeDamageType,"Stride up to your Speed ($speed), during which you can attempt to move through enemy spaces. Attempt an Athletics check against each such enemy’s Fortitude DC.
 Critical Success: Move through the space. You may push that enemy one square of your choice.
 Success: Move through the space.
 Failure: Stop before moving through the space. You may make a free Melee Strike against that creature.
@@ -102,7 +102,7 @@ Critical Success: Target falls prone and takes 1d6 bludgeoning damage.
 Success: Target falls prone.
 Failure: No effect.
 Critical Failure: You fall prone.",sword
-101,Advanced Trip,homebrew,Sentinel,Attack,one action,Attack,,,,Your last action was a successful Strike against the target.,One creature,,,Reflex DC,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Reflex DC. This check ignores your multiple attack penalty and does not increase it.
+101,Advanced Trip,homebrew,Sentinel,Attack,one action,Attack,,,,Your last action was a successful Strike against the target.,One creature,,,,$athletics,,,,"Attempt Athletics ($athletics) against the target’s Reflex DC. This check ignores your multiple attack penalty and does not increase it.
 Critical Success: Target falls prone and takes 1d6 bludgeoning damage.
 Success: Target falls prone.
 Failure: No effect.
@@ -117,7 +117,7 @@ Critical Success: Target is restrained until the end of your next turn.
 Success: Target is grabbed until the end of your next turn.
 Failure: No new hold; if you already held the target with Grapple, that hold ends.
 Critical Failure: Any Grapple hold you had on the target ends. The target chooses: you become grabbed by it until the end of its next turn (or until it moves or you Escape), or you fall prone.",sword
-104,Advanced Grapple,homebrew,Goliath; Cataphract,Attack,one action,Attack,,,,Your last action was a successful Strike against the target.,One creature or object,,,Fortitude DC,,,,,"Attempt Athletics ($athletics) against the target’s Fortitude DC. This check ignores your multiple attack penalty and does not increase it. A hold ends if you move or the target Escapes.
+104,Advanced Grapple,homebrew,Goliath; Cataphract,Attack,one action,Attack,,,,Your last action was a successful Strike against the target.,One creature or object,,,,,,,,"Attempt Athletics ($athletics) against the target’s Fortitude DC. This check ignores your multiple attack penalty and does not increase it. A hold ends if you move or the target Escapes.
 Critical Success: Target is restrained until the end of your next turn.
 Success: Target is grabbed until the end of your next turn.
 Failure: No new hold; if you already held the target with Grapple, that hold ends.
@@ -142,7 +142,7 @@ Critical Success: The item falls into the holder’s space.
 Success: The holder’s grip weakens. Further Disarm attempts against this item gain a +2 circumstance bonus; the holder takes a −2 circumstance penalty to attacks with it and checks needing a firm grip. The holder can Interact to readjust its grip; otherwise this lasts while it holds the item.
 Failure: No effect.
 Critical Failure: You are off-guard until the start of your next turn.",sword
-110,Advanced Disarm,homebrew,Ronin,Attack,one action,Attack,,,,Your last action was a successful Strike against the creature holding the target item.,One item held by a creature,,,Reflex DC,$athletics,,,,"Attempt Athletics ($athletics) against the holder’s Reflex DC. This check ignores your multiple attack penalty and does not increase it.
+110,Advanced Disarm,homebrew,Ronin,Attack,one action,Attack,,,,Your last action was a successful Strike against the creature holding the target item.,One item held by a creature,,,,$athletics,,,,"Attempt Athletics ($athletics) against the holder’s Reflex DC. This check ignores your multiple attack penalty and does not increase it.
 Critical Success: The item falls into the holder’s space.
 Success: The holder’s grip weakens. Further Disarm attempts against this item gain a +2 circumstance bonus; the holder takes a −2 circumstance penalty to attacks with it and checks needing a firm grip. The holder can Interact to readjust its grip; otherwise this lasts while it holds the item.
 Failure: No effect.
@@ -163,7 +163,7 @@ Critical Success: End grabbed, immobilized, and restrained from the chosen effec
 Success: End those conditions from the chosen effect.
 Failure: Remain held.
 Critical Failure: Remain held and cannot attempt Escape again until their next turn.",status
-119,Leaping Knockdown,homebrew,Assassin,Attack,two actions,"Attack, Move",,Recharge 1d4,,,One creature within range,80 feet,,Reflex DC,,,,,"Leap, ignoring difficult terrain; this movement does not trigger reactions. Attempt Athletics ($athletics) against the target’s Reflex DC.
+119,Leaping Knockdown,homebrew,Assassin,Attack,two actions,"Attack, Move",,Recharge 1d4,,,One creature within range,80 feet,,,,,,,"Leap, ignoring difficult terrain; this movement does not trigger reactions. Attempt Athletics ($athletics) against the target’s Reflex DC.
 Critical Success: Target falls prone and Leaping Knockdown takes a 4 on recharge.
 Success: Target falls prone.
 Failure: No effect.

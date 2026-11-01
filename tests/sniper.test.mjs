@@ -20,6 +20,7 @@ test('Sniper uses Paint Target and level-scaled High DC and Moderate Average wea
     assert.deepEqual(sniper.abilities.map((card) => card.name), ['Paint Target'])
     assert.deepEqual(sniper.references.map((card) => card.name), ['Red Dot', 'Exposed'])
     assert.equal(strike.actionCost, 1)
+    assert.deepEqual(strike.traits, ['Attack'])
     assert.equal(strike.range, '120 feet')
     assert.deepEqual(strike.properties, ['Reload 1'])
     assert.equal(strike.damage, damageRows.find((row) => Number(row.Level.replace('–', '-')) === level).Moderate)

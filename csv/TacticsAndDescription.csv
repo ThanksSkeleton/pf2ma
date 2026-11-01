@@ -1,37 +1,90 @@
 archetype,description,tactics
-Ace,"A fast, short-range striker with Mirror Image.","Placeholder"
-Aegis,A support with a multipurpose empowering aura.,"Placeholder"
-Archer,A long-range striker that can get close and punish movement.,"Placeholder"
-Assassin,A fragile striker that leaps to knock down opponents.,"Placeholder"
-Assault,A striker that deals reliable damage.,"Placeholder"
-Barricade,A controller that adds obstacles to the battlefield.,"Placeholder"
-Bastion,A shoving defender that grants temporary Hit Points in an aura.,"Placeholder"
-Berserker,A high-damage striker with forced random attacks and movement.,"Placeholder"
-Bombard,An artillery archetype that denies areas with delayed shots.,"Placeholder"
-Breacher,A striker that charges through enemies and can apply an armor debuff.,"Placeholder"
-Cataphract,A striker that grapples and kidnaps opponents.,"Placeholder"
-Demolisher,A slow defender with a powerful attack that stuns itself.,"Placeholder"
-Engineer,A summoner that creates a minion every turn.,"Placeholder"
-Goliath,A grappling defender that challenges a single opponent.,"Placeholder"
-Hive,A controller that creates hazardous terrain beneath itself.,"Placeholder"
-Hornet,"A fragile, fast, hard-to-hit controller.","Placeholder"
-Instant Trap,A slowing trap that covers 9 squares.,"Placeholder"
+Ace,"A fast, short-range striker with Mirror Image.","When Mirror Image is up - approach and do as much damage as possible.
+When Mirror Image is down - kite."
+Aegis,A support with a multipurpose empowering aura.,"Don't approach to enemies closer than 30 feet.
+Move towards allies otherwise, attempt to protect groups."
+Archer,A long-range striker that can get close and punish movement.,"When Overwatch is up or you have melee allies - approach and do as much damage as possible.
+When Overwatch is down - kite."
+Assassin,A fragile striker that leaps to knock down opponents.,"Attack the least armored opponent with Leaping Knockdown.
+Make an immediate attack on prone enemies no matter what.
+Flee if no enemies are prone and re-engage when Leaping Knockdown is back up."
+Assault,A striker that deals reliable damage.,"Fire on the most heavily armored opponent until they are dead."
+Barricade,A controller that adds obstacles to the battlefield.,"Attempt to divide enemy party with Obstacle if 0/1 blockers.
+Attempt to separate wounded allies and enemies with Obstacle if 1/2 blockers.
+Attempt to protect self desperately, ignore blockers.
+Try to set up for next Obstacle after casting."
+Bastion,A shoving defender that grants temporary Hit Points in an aura.,"Hold back and attempt to set up a defensive area where allies can come heal
+Shove enemies away and then move back"
+Berserker,A high-damage striker with forced random attacks and movement.,"At the start, attempt to split up as much as possible from allies and other berserkers.
+Use your only controlled action for attacks.
+Don't be tactical."
+Bombard,An artillery archetype that denies areas with delayed shots.,"Approach cautiously and attempt to get some free hits.
+Delay initiative.
+Once enemies seem to need an area, start denying it.
+Each turn, back up and continue firing on that area."
+Breacher,A striker that charges through enemies and can apply an armor debuff.,"Attempt to set up a proper charge without obstructions.
+If you can't, charge anyway.
+When charge is down attack and double move, trying to build distance again."
+Cataphract,A striker that grapples and kidnaps opponents.,"Target the furthest opponent for kidnapping.
+Focus on grabbing and kidnapping rather than restraining.
+Stick on them and attempt to bring them away from their group."
+Demolisher,A slow defender with a powerful attack that stuns itself.,"Dumb ogre monster.
+Attack the nearest opponent and overcommitted slam immediately.
+Rise and fight while slowed until overcommitted slam is back up."
+Engineer,A summoner that creates a minion every turn.,"Set up 3 ranged minions. Use other actions for cover. Go Prone if needed.
+Start sending melee minions after that."
+Goliath,A grappling defender that challenges a single opponent.,"Mark the most martial enemy as rival and attempt to neutralize them.
+Focus on restraining and not damaging."
+Hive,A controller that creates hazardous terrain beneath itself.,"Greedily deny as much terrain as possible.
+Only fight on your own terrain, counterattacking once and then proceeding to deny."
+Hornet,"A fragile, fast, hard-to-hit controller.","You recklessly consider yourself invincible until you take any hit or status.
+Then you switch to hit and run tactics."
+Instant Trap,A slowing trap in one square that covers the adjacent squares.,"Placeholder"
 Melee Minion,"A slow, fragile minion.","Placeholder"
 Mine,A visible trap that affects a single square.,"Placeholder"
-Mirage,A support that can teleport allies or hide them.,"Placeholder"
-Operator,A slow artillery sniper with a single teleport.,"Placeholder"
+Mirage,A support that can teleport allies or hide them.,"Highest Priority: Veiling allies that are in cover.
+Second Priority: Swapping wounded allies with fresh ones to protect them.
+Third Priority: Helping allies go where they want.
+Fourth Priority: Swapping away enemy vanguard"
+Operator,A slow artillery sniper with a single teleport.,"Wait for opponents to get close before opening strike. (delay)
+Once Cover is blown, start moving to make equidistant cover
+Jump to other cover if enemies get close."
 Prepared Trap,An area-of-effect trap already hidden on the battlefield.,"Placeholder"
-Priest,A support that shares its large health pool with allies.,"Placeholder"
-Pyro,A short-range defender with area-of-effect and retaliatory attacks.,"Placeholder"
-Rainmaker,A long-range artillery that fires delayed strikes that cannot miss.,"Placeholder"
+Priest,A support that shares its large health pool with allies.,"You want at least one ally by you at all times. If alone, approach ally.
+If you have an ally, avoid enemies as much as possible."
+Pyro,A short-range defender with area-of-effect and retaliatory attacks.,"Try to push up against walls and get in short ranged halways if possible.
+Prioritize moving closer for a good blast instead of weakly attacking.
+Refuse to damage allies with blast (except in rebuke)"
+Rainmaker,A long-range artillery that fires delayed strikes that cannot miss.,"Hold first DMM until you can get N-1 enemies.
+Settle for whatever on later DMMs."
 Ranged Minion,A fragile minion that cannot move.,"Placeholder"
-Ronin,A striker that challenges a single opponent and uses disarm and trip.,"Placeholder"
-Saboteur,A controller that plants mines on single squares.,"Placeholder"
-Scourer,A striker that gets a huge bonus for attacking the same opponent round after round.,"Placeholder"
-Scout,"A support that can see invisible creatures, reveal them, and dispel magic.","Placeholder"
-Sentinel,A defender with multiple reactive strikes that trips opponents.,"Placeholder"
-Sniper,A artillery that marks distant opponents.,"Placeholder"
-Specter,A striker that stalks and hides in cover.,"Placeholder"
-Support,A support that heals allies and chooses a type of buff to cast.,"Placeholder"
-Trapper,A controller that sets slowing traps and deploys Cover Screens.,"Placeholder"
-Witch,A controller that bleeds adjacent opponents and sickens opponents that are alone.,"Placeholder"
+Ronin,A striker that challenges a single opponent and uses disarm and trip.,"Target any opponent you see using manuevers or being martially clever.
+Always use manuevers before attacking.
+Always alternate manuevers."
+Saboteur,A controller that plants mines on single squares.,"Deny area near allies to complicate movement.
+Set 3 mines and then use thrown burst.
+Don't use final burst tactically."
+Scourer,A striker that gets a huge bonus for attacking the same opponent round after round.,"Dumb animal.
+Attacks nearest unless it has branded anyone, then only focus on them."
+Scout,"A support that can see invisible creatures, reveal them, and dispel magic.","Seek cover and fire from cover.
+Hold revealing light until an enemy hides or goes invisible.
+Hold Dispel Magic utnil the first debuff."
+Sentinel,A defender with multiple reactive strikes that trips opponents.,"Separate from allies in order to control ground more effectively.
+Trip each opponent first. Future Reactions against them go for damage.
+Use Advanced trip on your turn against all enemies."
+Sniper,A artillery that marks distant opponents.,"Target most dexterous opponent for paint target.
+If a paint attempt fails, do not attempt to paint the same person again until you have gone through aeveryone . Do not move until enemies are within 30 feet."
+Specter,A striker that stalks and hides in cover.,"Stay hidden until enemies approach in range.
+Flee and melt into cover after firing."
+Support,A support that heals allies and chooses a type of buff to cast.,"Never move from starting location - set up a hospital.
+Begin with applying blue buff to vanguard
+Apply red buff after vanguard starts fighting.
+Apply green buff if enemies are nearby.
+Heal after that.
+Buff Self and Heal Self as lowest priority."
+Trapper,A controller that sets slowing traps and deploys Cover Screens.,"Throw one cover screen close and one far.
+Immediately move towards trap location.
+Attack in response only. Otherwise just set up more traps."
+Witch,A controller that bleeds adjacent opponents and sickens opponents that are alone.,"Highest Priority: Bound by Blood on melee, healers, other
+Second Priority: Divided by Plague on anyone.
+Third Priorty: Bound by Blood on ally/enemy pairs."

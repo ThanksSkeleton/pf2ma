@@ -23,6 +23,7 @@ test('level 1 Ace matches the accepted reference', () => {
   assert.equal(built.statGroups.flat().find((stat) => stat.label === 'Reflex').value, '+7')
   assert.equal(built.attack.range, '30 feet')
   assert.equal(built.attack.damageType, 'piercing')
+  assert.deepEqual(built.attack.traits, ['Attack'])
   assert.equal(built.abilities[0].frequency, 'Once per day')
   assert.equal(built.abilities[0].targets, 'You.')
   assert.equal(buildAce(sources, 1, 'slashing').attack.damageType, 'slashing')
@@ -59,8 +60,15 @@ test('attack modes, abilities, defaults, and scaling follow the CSV data', async
   const build = (name, level = 1, damageType = 'piercing') => buildArchetype(sources, name, level, damageType)
   for (const name of ['Mirage', 'Priest', 'Support', 'Pyro']) assert.equal(build(name).attack, undefined)
   assert.equal(build('Hornet').abilities.length, 0)
-  assert.equal(build('Bastion').attack.attackType, 'Ranged')
-  assert.equal(build('Bastion').secondaryAttacks[0].attackType, 'Melee')
+  assert.equal(build('Hive').abilities.find((card) => card.name === 'Elemental Upheaval')?.area,
+    '10-foot emanation centered on you')
+  for (const name of ['Bastion', 'Berserker', 'Breacher', 'Demolisher', 'Scourer']) {
+    assert.equal(build(name).attack.attackType, 'Melee', name)
+    assert.equal(build(name).secondaryAttacks, undefined, name)
+  }
+  assert.equal(build('Saboteur').attack.attackType, 'Ranged')
+  assert.equal(build('Goliath').attack.damage,
+    parseCsv(sources['table-2-10-strike-damage.csv']).find((row) => row.Level === '1').Moderate)
   assert.equal(build('Assassin').attack.attackType, 'Melee')
   assert.equal(build('Assassin').secondaryAttacks[0].attackType, 'Ranged')
   assert.equal(build('Archer').abilities[0].actionCost, 'reaction')
@@ -82,8 +90,10 @@ test('attack modes, abilities, defaults, and scaling follow the CSV data', async
   assert.equal(slam.attack, demolisher.attack.attack)
   assert.equal(slam.damage, parseCsv(sources['table-2-10-strike-damage.csv']).find((row) => row.Level === '9').Extreme)
   assert.equal(slam.area, '15-foot cone')
+  assert.equal(slam.frequency, 'Recharge 1d4')
+  assert.equal(slam.duration, 'Until Recharge')
   assert.match(slam.text, /basic Reflex save against DC \d+/)
-  assert.match(slam.text, /fall prone and become slowed 1 and stunned 3/)
+  assert.match(slam.text, /After your attack, you fall prone\. You are slowed until Overcommitted Slam recharges\./)
   assert.ok(slam.text.includes(demolisher.attack.damage))
   assert.match(build('Cataphract').abilities.find((ability) => ability.name === 'Abduct').text, /10 feet/)
   assert.equal(build('Trapper').size, 'Medium')
@@ -91,6 +101,7 @@ test('attack modes, abilities, defaults, and scaling follow the CSV data', async
   assert.equal(build('Cataphract').abilities[0].targetDC, 'Fortitude DC')
   assert.equal(build('Cataphract').abilities[0].savingThrow, undefined)
   for (const level of [1, 5, 24]) {
+    assert.equal(build('Operator', level).attack.range, '60 feet')
     const translocate = build('Operator', level).abilities[0]
     assert.equal(translocate.range, '120 feet')
     assert.ok(!translocate.text.includes('At rank 5'))
@@ -101,17 +112,26 @@ test('attack modes, abilities, defaults, and scaling follow the CSV data', async
   }
 })
 
-test('archetype tags and stealth actions come from the CSV', async () => {
+test('requested attack-mode traits appear on the listed archetypes', async () => {
   const { buildArchetype } = await import('../src/data-builder.ts')
-  const tagged = {
-    Mirage: ['Pacifist', 'Stealth'], Priest: ['Pacifist'], Support: ['Pacifist'],
-    Bastion: ['Manuevers'], Cataphract: ['Manuevers'], Ronin: ['Manuevers'], Sentinel: ['Manuevers'],
-    Assassin: ['Stealth'], Specter: ['Stealth'],
+  const categoryMembers = {
+    Ranged: ['Ace', 'Aegis', 'Archer', 'Barricade', 'Bombard', 'Engineer', 'Operator', 'Rainmaker', 'Saboteur', 'Scout', 'Sniper', 'Trapper', 'Witch'],
+    Modal: ['Assault', 'Hornet'],
+    Flexible: ['Assassin', 'Cataphract', 'Goliath', 'Hive', 'Pyro', 'Ronin', 'Sentinel'],
+    Melee: ['Bastion', 'Berserker', 'Breacher', 'Demolisher', 'Scourer'],
   }
   for (const row of parseCsv(sources['RoadMaps_Prod.csv']).filter((row) => !row['Road Map'].startsWith('Special:'))) {
     const creature = buildArchetype(sources, row['Road Map'])
-    assert.deepEqual(creature.archetypeTags, tagged[row['Road Map']], row['Road Map'])
-    if (!creature.archetypeTags?.includes('Stealth')) continue
+    const categories = Object.entries(categoryMembers).filter(([, members]) => members.includes(row['Road Map'])).map(([category]) => category)
+    assert.deepEqual(creature.archetypeTraits?.filter((trait) => Object.keys(categoryMembers).includes(trait)) ?? [], categories, row['Road Map'])
+  }
+})
+
+test('stealth actions come from the CSV', async () => {
+  const { buildArchetype } = await import('../src/data-builder.ts')
+  for (const row of parseCsv(sources['RoadMaps_Prod.csv']).filter((row) => !row['Road Map'].startsWith('Special:'))) {
+    const creature = buildArchetype(sources, row['Road Map'])
+    if (!creature.archetypeTraits?.includes('Stealth')) continue
     for (const name of ['Hide', 'Sneak']) {
       const card = creature.abilities.find((ability) => ability.name === name)
       assert.equal(card?.type, 'action', `${creature.name}: ${name}`)

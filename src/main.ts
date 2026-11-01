@@ -107,18 +107,16 @@ const statStyleByLabel: Record<string, string> = {
 
 const renderCard = (card: AbilityCard, spellRank: number) => {
   const action = actionPresentation[card.actionCost]
-  const targetingLine = [
-    card.range ? `Range: ${card.range}` : undefined,
-    card.targets ? `Targets: ${card.targets}` : undefined,
-    card.area ? `Area: ${card.area}` : undefined,
-  ].filter(Boolean).join(' · ')
-  const metaLines = [
-    card.traits?.join(', '),
-    card.frequency,
-    targetingLine,
-    card.properties?.join(', '),
-    card.duration ? `Duration ${card.duration}` : undefined,
-  ].filter(Boolean)
+  const basicStrike = card.type === 'attack' && /^(Melee|Ranged) Strike$/.test(card.name)
+  const selfTargetedSpell = card.type === 'spell' && /^(you|self)\.?$/i.test(card.targets?.trim() ?? '')
+  const metaLines: [string, string][] = [
+    ...(card.traits?.length ? [['', card.traits.join(', ')] as [string, string]] : []),
+    ...(card.frequency ? [['Frequency', card.frequency === 'At Will' ? 'At will' : card.frequency === 'Once per turn, required every turn' ? 'Once per turn (required every turn)' : card.frequency] as [string, string]] : []),
+    ...(card.targets && !basicStrike && !selfTargetedSpell ? [['Targets', card.targets] as [string, string]] : []),
+    ...(card.range && !(basicStrike && card.attackType === 'Melee') && !selfTargetedSpell ? [['Range', card.range] as [string, string]] : []),
+    ...(card.area ? [['Area', card.area] as [string, string]] : []),
+    ...(card.duration && !/^instantaneous\.?$/i.test(card.duration.trim()) ? [['Duration', card.duration] as [string, string]] : []),
+  ]
   const presentation = cardPresentationByType[card.type]
   const symbol = card.type === 'reaction' ? 'reaction'
     : card.type === 'passive' ? 'heart'
@@ -139,6 +137,7 @@ const renderCard = (card: AbilityCard, spellRank: number) => {
     ['Attack', card.attack],
     ['Damage', card.damage ? `${card.damage}${card.damageType ? ` ${card.damageType}` : ''}` : undefined],
     ['Damage Type', card.damage ? undefined : card.damageType],
+    ['Properties', card.properties?.join(', ')],
   ]
   const detailLines = details
     .filter(([, value]) => value !== undefined && value !== '')
@@ -146,7 +145,7 @@ const renderCard = (card: AbilityCard, spellRank: number) => {
     .join('')
   return `
   <section class="ability ${presentation.style}${card.name === 'Cover Screen' ? ' ability--terrain-feature' : ''}" aria-label="${escapeHtml(card.name)}">
-    <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${escapeHtml(card.name)}</h3></div><div class="ability-cost">${card.type === 'spell' ? `<span class="ability-rank">Rank ${spellRank}</span>` : ''}${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${actionMark}</span>` : ''}</div></div>${metaLines.map((line) => `<p class="ability-meta">${escapeHtml(line ?? '')}</p>`).join('')}</div>
+    <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${escapeHtml(card.name)}</h3></div><div class="ability-cost">${card.type === 'spell' ? `<span class="ability-rank">Rank ${spellRank}</span>` : ''}${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${actionMark}</span>` : ''}</div></div>${metaLines.map(([label, value]) => `<p class="ability-meta">${label ? `<strong>${label}:</strong> ${escapeHtml(value)}` : `<strong>${escapeHtml(value)}</strong>`}</p>`).join('')}</div>
     <p class="ability-text">${detailLines}${renderAbilityText(card.text ?? '')}</p>
   </section>`
 }
@@ -189,7 +188,7 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = '', show
     </div>
 
     <div class="sheet-body">
-      ${creature.skills ? `<div class="skills-row">${creature.archetypeTags?.length ? `<div class="archetype-tags" aria-label="Archetype tags">${creature.archetypeTags.map(escapeHtml).join(', ')}</div>` : ''}<dl class="skills" aria-label="Skills">${Object.entries(creature.skills).map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl></div>` : ''}
+      ${creature.skills ? `<div class="skills-row">${creature.archetypeTraits?.length ? `<div class="archetype-traits" aria-label="Archetype traits">${creature.archetypeTraits.map(escapeHtml).join(', ')}</div>` : ''}<dl class="skills" aria-label="Skills">${Object.entries(creature.skills).map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('')}</dl></div>` : ''}
       ${builderControls}
       <section class="description" aria-labelledby="${id}-description-heading"><div class="section-heading"><h2 id="${id}-description-heading">Description</h2></div><p>${escapeHtml(creature.description)}</p></section>
 
