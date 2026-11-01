@@ -2,9 +2,10 @@ import './style.css'
 
 import type { AbilityCard, Archetype } from './archetype.ts'
 import { buildArchetype, listArchetypes, parseCsv } from './data-builder.ts'
-import { buildEngineerMinions } from './engineer-minions.ts'
+import { buildSummonerMinions } from './summoner-minions.ts'
 import { buildTraps } from './traps.ts'
 import { encounterTemplates, rollEncounter, validPartyLevels } from './encounter.ts'
+import { isAttackDisabled, type AttackMode } from './attack-mode.ts'
 
 const rawCsv = import.meta.glob<string>('../csv/*.csv', { query: '?raw', import: 'default', eager: true })
 const sources = Object.fromEntries(Object.entries(rawCsv).map(([path, contents]) => [path.split('/').pop()!, contents]))
@@ -26,6 +27,7 @@ const nonphysicalDamageTypes = ['acid', 'cold', 'electricity', 'fire', 'sonic', 
 let selectedLevel = 1
 let selectedPhysicalDamageType = 'piercing'
 let selectedNonphysicalDamageType = 'fire'
+let selectedMode: AttackMode = 'Melee'
 const escapeHtml = (value: string | number) => String(value).replace(/[&<>"']/g, (char) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[char]!)
@@ -105,7 +107,7 @@ const statStyleByLabel: Record<string, string> = {
   Size: 'black',
 }
 
-const renderCard = (card: AbilityCard, spellRank: number) => {
+const renderCard = (card: AbilityCard, spellRank: number, disabled = false) => {
   const action = actionPresentation[card.actionCost]
   const basicStrike = card.type === 'attack' && /^(Melee|Ranged) Strike$/.test(card.name)
   const selfTargetedSpell = card.type === 'spell' && /^(you|self)\.?$/i.test(card.targets?.trim() ?? '')
@@ -144,7 +146,7 @@ const renderCard = (card: AbilityCard, spellRank: number) => {
     .map(([label, value]) => `<span class="ability-line"><strong>${label}</strong> ${escapeHtml(value!)}</span>`)
     .join('')
   return `
-  <section class="ability ${presentation.style}${card.name === 'Cover Screen' ? ' ability--terrain-feature' : ''}" aria-label="${escapeHtml(card.name)}">
+  <section class="ability ${presentation.style}${card.name === 'Cover Screen' ? ' ability--terrain-feature' : ''}${disabled ? ' ability--disabled' : ''}" aria-label="${escapeHtml(card.name)}">
     <div class="ability-head"><div class="ability-name-row"><div class="ability-title">${icon}<h3>${escapeHtml(card.name)}</h3></div><div class="ability-cost">${card.type === 'spell' ? `<span class="ability-rank">Rank ${spellRank}</span>` : ''}${action ? `<span class="action-mark" role="img" aria-label="${action.label}">${actionMark}</span>` : ''}</div></div>${metaLines.map(([label, value]) => `<p class="ability-meta">${label ? `<strong>${label}:</strong> ${escapeHtml(value)}` : `<strong>${escapeHtml(value)}</strong>`}</p>`).join('')}</div>
     <p class="ability-text">${detailLines}${renderAbilityText(card.text ?? '')}</p>
   </section>`
@@ -162,6 +164,7 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = '', show
         <label for="physical-damage-type">Physical damage<select id="physical-damage-type">${physicalDamageTypes.map((type) => `<option value="${type}"${type === selectedPhysicalDamageType ? ' selected' : ''}>${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
         <label for="nonphysical-damage-type">Nonphysical damage<select id="nonphysical-damage-type">${nonphysicalDamageTypes.map((type) => `<option value="${type}"${type === selectedNonphysicalDamageType ? ' selected' : ''}>${type[0].toUpperCase() + type.slice(1)}</option>`).join('')}</select></label>
         <label for="creature-level">Level<select id="creature-level">${Array.from({ length: 26 }, (_, index) => index - 1).map((level) => `<option value="${level}"${level === selectedLevel ? ' selected' : ''}>${level}</option>`).join('')}</select></label>
+        <label for="creature-mode">Mode<select id="creature-mode"><option value="Melee"${selectedMode === 'Melee' ? ' selected' : ''}>Melee</option><option value="Ranged"${selectedMode === 'Ranged' ? ' selected' : ''}>Ranged</option></select></label>
       </div>` : ''
   return `
   <article class="creature-sheet${depth > 0 ? ' creature-sheet--minion' : ''}${creature.statFormat === 'object' ? ' creature-sheet--object' : ''}" aria-labelledby="${id}-name">
@@ -196,7 +199,7 @@ const renderCreatureSheet = (creature: Archetype, depth = 0, parentId = '', show
 
       <section class="abilities" aria-labelledby="${id}-abilities-heading">
         <div class="section-heading"><h2 id="${id}-abilities-heading">Abilities</h2></div>
-        <div class="ability-list">${[...(creature.attack ? [creature.attack] : []), ...(creature.secondaryAttacks ?? []), ...creature.abilities].map((card) => renderCard(card, spellRank)).join('')}</div>
+        <div class="ability-list">${[...(creature.attack ? [creature.attack] : []), ...(creature.secondaryAttacks ?? []), ...creature.abilities].map((card) => renderCard(card, spellRank, isAttackDisabled(creature, card, selectedMode))).join('')}</div>
       </section>
       ${showReferences && creature.references?.length ? `<section class="references" aria-labelledby="${id}-references-heading">
         <div class="section-heading"><h2 id="${id}-references-heading">Conditions &amp; PC Responses</h2></div>
@@ -222,7 +225,7 @@ let activeTab: 'encounter' | 'monster' = 'encounter'
 
 const buildCreature = (name: string, level: number) => {
   const creature = buildArchetype(sources, name, level, selectedPhysicalDamageType, selectedNonphysicalDamageType)
-  if (name === 'Engineer') creature.minions = buildEngineerMinions(sources, level, selectedPhysicalDamageType)
+  if (name === 'Summoner') creature.minions = buildSummonerMinions(sources, level, selectedPhysicalDamageType)
   if (name === 'Trapper' || name === 'Saboteur') creature.minions = buildTraps(sources, name, level, selectedPhysicalDamageType, selectedNonphysicalDamageType)
   return creature
 }
@@ -381,6 +384,7 @@ panel.addEventListener('change', (event) => {
   if (target.id === 'creature-level') selectedLevel = Number(target.value)
   else if (target.id === 'physical-damage-type') selectedPhysicalDamageType = target.value
   else if (target.id === 'nonphysical-damage-type') selectedNonphysicalDamageType = target.value
+  else if (target.id === 'creature-mode') selectedMode = target.value as AttackMode
   else return
   renderSelected()
 })

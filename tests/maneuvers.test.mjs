@@ -67,7 +67,7 @@ test('all twelve maneuver tiers and both maintenance actions are unique homebrew
 test('migrated sheets get matching actions and complete relevant references', () => {
   const build = (name) => buildArchetype(sources, name)
   const names = (cards) => cards?.map((card) => card.name) ?? []
-  for (const name of ['Bastion', 'Cataphract', 'Sentinel']) {
+  for (const name of ['Bastion', 'Kidnapper', 'Sentinel']) {
     const creature = build(name)
     assert.ok(names(creature.abilities).includes('Advanced Grapple'))
     assert.ok(names(creature.abilities).includes('Advanced Maintain Grapple'))
@@ -84,7 +84,7 @@ test('migrated sheets get matching actions and complete relevant references', ()
   assert.ok(names(build('Sentinel').abilities).includes('Advanced Shove'))
   assert.deepEqual(names(build('Assassin').references).sort(),
     ['Prone', 'Unnoticed', 'Off-Guard', 'Hidden', 'Concealed', 'Undetected', 'Observed', 'Invisible', 'Breaking Stealth (PC Response)'].sort())
-  assert.match(build('Cataphract').abilities.find((card) => card.name === 'Abduct').text,
+  assert.match(build('Kidnapper').abilities.find((card) => card.name === 'Abduct').text,
     /pulling any creatures you have grabbed/)
   assert.equal(build('Ace').references, undefined)
 })

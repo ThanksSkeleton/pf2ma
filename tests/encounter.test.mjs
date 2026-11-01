@@ -16,12 +16,12 @@ test('quick adventure groups match their XP budgets and stay within supported cr
 })
 
 test('rolling assigns a distinct monster to each template slot and preserves counts', () => {
-  const names = ['Ace', 'Bastion', 'Cataphract']
+  const names = ['Ace', 'Bastion', 'Kidnapper']
   const result = rollEncounter(encounterTemplates[2], 5, names, () => 0)
   assert.deepEqual(result, [
     { name: 'Ace', count: 1, level: 5 },
     { name: 'Bastion', count: 1, level: 5 },
-    { name: 'Cataphract', count: 1, level: 5 },
+    { name: 'Kidnapper', count: 1, level: 5 },
   ])
   assert.throws(() => rollEncounter(encounterTemplates[0], 2, names), /Unsupported party level/)
 })

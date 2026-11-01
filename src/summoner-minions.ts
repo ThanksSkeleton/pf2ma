@@ -2,8 +2,8 @@ import type { Archetype } from './archetype.ts'
 import type { CsvSources } from './data-builder.ts'
 import { parseCsv } from './data-builder.ts'
 
-/** Engineer's attached minions remain separate from selectable archetypes. */
-export function buildEngineerMinions(sources: CsvSources, level: number, damageType = 'piercing'): Archetype[] {
+/** Summoner's attached minions remain separate from selectable archetypes. */
+export function buildSummonerMinions(sources: CsvSources, level: number, damageType = 'piercing'): Archetype[] {
   if (!Number.isInteger(level) || level < -1 || level > 24) throw new Error('Level must be an integer from -1 through 24')
   const lookup = (file: string, rank: string) => {
     const value = parseCsv(sources[file] ?? '').find((row) => Number(row.Level.replace('–', '-')) === level)?.[rank]

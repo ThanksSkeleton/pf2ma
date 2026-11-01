@@ -60,7 +60,7 @@ test('attack modes, abilities, defaults, and scaling follow the CSV data', async
   const build = (name, level = 1, damageType = 'piercing') => buildArchetype(sources, name, level, damageType)
   for (const name of ['Mirage', 'Priest', 'Support', 'Pyro']) assert.equal(build(name).attack, undefined)
   assert.equal(build('Hornet').abilities.length, 0)
-  assert.equal(build('Hive').abilities.find((card) => card.name === 'Elemental Upheaval')?.area,
+  assert.equal(build('Despoiler').abilities.find((card) => card.name === 'Elemental Upheaval')?.area,
     '10-foot emanation centered on you')
   for (const name of ['Bastion', 'Berserker', 'Breacher', 'Demolisher', 'Scourer']) {
     assert.equal(build(name).attack.attackType, 'Melee', name)
@@ -95,11 +95,11 @@ test('attack modes, abilities, defaults, and scaling follow the CSV data', async
   assert.match(slam.text, /basic Reflex save against DC \d+/)
   assert.match(slam.text, /After your attack, you fall prone\. You are slowed until Overcommitted Slam recharges\./)
   assert.ok(slam.text.includes(demolisher.attack.damage))
-  assert.match(build('Cataphract').abilities.find((ability) => ability.name === 'Abduct').text, /10 feet/)
+  assert.match(build('Kidnapper').abilities.find((ability) => ability.name === 'Abduct').text, /10 feet/)
   assert.equal(build('Trapper').size, 'Medium')
   assert.equal(build('Scout').abilities[1].frequency, 'Once per day')
-  assert.equal(build('Cataphract').abilities[0].targetDC, 'Fortitude DC')
-  assert.equal(build('Cataphract').abilities[0].savingThrow, undefined)
+  assert.equal(build('Kidnapper').abilities[0].targetDC, 'Fortitude DC')
+  assert.equal(build('Kidnapper').abilities[0].savingThrow, undefined)
   for (const level of [1, 5, 24]) {
     assert.equal(build('Operator', level).attack.range, '60 feet')
     const translocate = build('Operator', level).abilities[0]
@@ -115,9 +115,9 @@ test('attack modes, abilities, defaults, and scaling follow the CSV data', async
 test('requested attack-mode traits appear on the listed archetypes', async () => {
   const { buildArchetype } = await import('../src/data-builder.ts')
   const categoryMembers = {
-    Ranged: ['Ace', 'Aegis', 'Archer', 'Barricade', 'Bombard', 'Engineer', 'Operator', 'Rainmaker', 'Saboteur', 'Scout', 'Sniper', 'Trapper', 'Witch'],
-    Modal: ['Assault', 'Hornet'],
-    Flexible: ['Assassin', 'Cataphract', 'Goliath', 'Hive', 'Pyro', 'Ronin', 'Sentinel'],
+    Ranged: ['Ace', 'Aegis', 'Archer', 'Barricade', 'Bombard', 'Summoner', 'Operator', 'Rainmaker', 'Saboteur', 'Scout', 'Sniper', 'Trapper', 'Witch'],
+    Modal: ['Soldier', 'Hornet'],
+    Flexible: ['Assassin', 'Kidnapper', 'Goliath', 'Despoiler', 'Pyro', 'Ronin', 'Sentinel'],
     Melee: ['Bastion', 'Berserker', 'Breacher', 'Demolisher', 'Scourer'],
   }
   for (const row of parseCsv(sources['RoadMaps_Prod.csv']).filter((row) => !row['Road Map'].startsWith('Special:'))) {
@@ -159,10 +159,10 @@ test('stealth actions come from the CSV', async () => {
     /You can make a Hide check as a free action/)
 })
 
-test('Engineer minions scale separately and keep their special movement', async () => {
-  const { buildEngineerMinions } = await import('../src/engineer-minions.ts')
+test('Summoner minions scale separately and keep their special movement', async () => {
+  const { buildSummonerMinions } = await import('../src/summoner-minions.ts')
   for (let level = -1; level <= 24; level++) {
-    const [ranged, melee] = buildEngineerMinions(sources, level, 'cold')
+    const [ranged, melee] = buildSummonerMinions(sources, level, 'cold')
     assert.equal(ranged.level, level)
     assert.equal(melee.level, level)
     assert.equal(ranged.statGroups[3][0].value, '0 feet')
@@ -170,10 +170,10 @@ test('Engineer minions scale separately and keep their special movement', async 
     assert.equal(ranged.attack.damageType, 'cold')
     assert.equal(melee.attack.damageType, 'cold')
   }
-  const [ranged, melee] = buildEngineerMinions(sources, 1)
+  const [ranged, melee] = buildSummonerMinions(sources, 1)
   assert.equal(ranged.statGroups[1][1].value, '3')
   assert.equal(melee.statGroups[1][1].value, '7')
   assert.equal(ranged.attack.attack, '+7')
   assert.equal(melee.attack.damage, '2')
-  assert.equal(buildEngineerMinions(sources, 5)[0].statGroups[1][1].value, '14')
+  assert.equal(buildSummonerMinions(sources, 5)[0].statGroups[1][1].value, '14')
 })

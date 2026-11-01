@@ -4,7 +4,7 @@ import { loadSources, realizeMonster } from './realized-monster-data.ts'
 function usage(): never {
   throw new Error([
     'Usage: npm run realize:monster -- --archetype <name> --physical <type> --nonphysical <type> --level <number>',
-    'Example: npm run realize:monster -- --archetype Engineer --physical slashing --nonphysical fire --level 5',
+    'Example: npm run realize:monster -- --archetype Summoner --physical slashing --nonphysical fire --level 5',
   ].join('\n'))
 }
 

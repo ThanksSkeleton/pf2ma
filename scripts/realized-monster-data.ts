@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
 import { buildArchetype, type CsvSources } from '../src/data-builder.ts'
-import { buildEngineerMinions } from '../src/engineer-minions.ts'
+import { buildSummonerMinions } from '../src/summoner-minions.ts'
 import { buildTraps } from '../src/traps.ts'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
@@ -22,7 +22,7 @@ export async function loadSources(): Promise<CsvSources> {
 
 export function realizeMonster(sources: CsvSources, name: string, level: number, physical = 'piercing', nonphysical = 'fire') {
   const creature = buildArchetype(sources, name, level, physical, nonphysical)
-  if (name === 'Engineer') creature.minions = buildEngineerMinions(sources, level, physical)
+  if (name === 'Summoner') creature.minions = buildSummonerMinions(sources, level, physical)
   if (name === 'Trapper' || name === 'Saboteur') {
     creature.minions = buildTraps(sources, name, level, physical, nonphysical)
   }

@@ -32,7 +32,7 @@ export function parseCsv(source: string): Row[] {
   })
 }
 
-/** Roadmap entries available to the general builder; Engineer owns its special minions. */
+/** Roadmap entries available to the general builder; Summoner owns its special minions. */
 export function listArchetypes(sources: CsvSources): string[] {
   return parseCsv(sources['RoadMaps_Prod.csv'] ?? '').map((row) => row['Road Map'])
     .filter((name) => !name.startsWith('Special:'))
@@ -43,7 +43,7 @@ export function buildArchetype(
   sources: CsvSources, name: string, level = 1, physicalDamageType = 'piercing', nonphysicalDamageType = 'fire',
 ): Archetype {
   if (!Number.isInteger(level) || level < -1 || level > 24) throw new Error('Level must be an integer from -1 through 24')
-  if (name.startsWith('Special:')) throw new Error('Minions are handled separately by Engineer')
+  if (name.startsWith('Special:')) throw new Error('Minions are handled separately by Summoner')
   const cache = new Map<string, Row[]>()
   const table = (file: string) => {
     if (sources[file] === undefined) throw new Error(`Missing CSV: ${file}`)

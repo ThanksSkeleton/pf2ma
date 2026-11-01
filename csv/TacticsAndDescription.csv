@@ -8,7 +8,7 @@ When Overwatch is down - kite."
 Assassin,A fragile striker that leaps to knock down opponents.,"Attack the least armored opponent with Leaping Knockdown.
 Make an immediate attack on prone enemies no matter what.
 Flee if no enemies are prone and re-engage when Leaping Knockdown is back up."
-Assault,A striker that deals reliable damage.,"Fire on the most heavily armored opponent until they are dead."
+Soldier,A striker that deals reliable damage.,"Fire on the most heavily armored opponent until they are dead."
 Barricade,A controller that adds obstacles to the battlefield.,"Attempt to divide enemy party with Obstacle if 0/1 blockers.
 Attempt to separate wounded allies and enemies with Obstacle if 1/2 blockers.
 Attempt to protect self desperately, ignore blockers.
@@ -25,17 +25,17 @@ Each turn, back up and continue firing on that area."
 Breacher,A striker that charges through enemies and can apply an armor debuff.,"Attempt to set up a proper charge without obstructions.
 If you can't, charge anyway.
 When charge is down attack and double move, trying to build distance again."
-Cataphract,A striker that grapples and kidnaps opponents.,"Target the furthest opponent for kidnapping.
+Kidnapper,A striker that grapples and kidnaps opponents.,"Target the furthest opponent for kidnapping.
 Focus on grabbing and kidnapping rather than restraining.
 Stick on them and attempt to bring them away from their group."
 Demolisher,A slow defender with a powerful attack that stuns itself.,"Dumb ogre monster.
 Attack the nearest opponent and overcommitted slam immediately.
 Rise and fight while slowed until overcommitted slam is back up."
-Engineer,A summoner that creates a minion every turn.,"Set up 3 ranged minions. Use other actions for cover. Go Prone if needed.
+Summoner,A summoner that creates a minion every turn.,"Set up 3 ranged minions. Use other actions for cover. Go Prone if needed.
 Start sending melee minions after that."
 Goliath,A grappling defender that challenges a single opponent.,"Mark the most martial enemy as rival and attempt to neutralize them.
 Focus on restraining and not damaging."
-Hive,A controller that creates hazardous terrain beneath itself.,"Greedily deny as much terrain as possible.
+Despoiler,A controller that creates hazardous terrain beneath itself.,"Greedily deny as much terrain as possible.
 Only fight on your own terrain, counterattacking once and then proceeding to deny."
 Hornet,"A fragile, fast, hard-to-hit controller.","You recklessly consider yourself invincible until you take any hit or status.
 Then you switch to hit and run tactics."

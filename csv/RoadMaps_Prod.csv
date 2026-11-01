@@ -3,17 +3,17 @@ Ace,Striker,Medium,High,Low,Low,Low,Low,Low,Low,,,High,R,High,Moderate,Low,-,-,,
 Aegis,Support,Medium,,Low,Low,Low,,Moderate,Low,Low,High,,R,Low,Low,Low,-,-,,,Aegis Ward; Sustain,Ranged
 Archer,Controller,Medium,High,Low,High,High,Low,Low,Low,,,,R,High,Moderate,Moderate,-,-,,,Overwatch,Ranged
 Assassin,Striker,Medium,,Low,High,High,Moderate,Low,Low,Moderate,Low,High,M,Low,Low,Low,High,Moderate,,,Leaping Knockdown; Downed Prey; Camp; Hide; Sneak,"Flexible,Stealth,Cover"
-Assault,Striker,Medium,,High,High,High,,Moderate,,,Low,,Spell,Moderate,Low,Low,Moderate,Low,,,Glancing Blow; Glancing Shot,Modal
+Soldier,Striker,Medium,,High,High,High,,Moderate,,,Low,,Spell,Moderate,Low,Low,Moderate,Low,,,Glancing Blow; Glancing Shot,Modal
 Barricade,Controller,Medium,Moderate,Low,Low,Low,Moderate,Moderate,Low,Moderate,Moderate,,R,High,Low,Low,-,-,,High,Summon Obstacle; Sustain,"Ranged,Cover,Hazards,Shove"
 Bastion,Defender,Medium,Low,High,Low,High,Moderate,High,,Terrible,,Low,M,-,-,-,Moderate,Moderate,,,Guardian Field; Advanced Shove; Sustain,"Melee,Maneuvers,Shove"
 Berserker,Striker,Medium,Low,Low,Low,Low,Low,Moderate,Low,Low,Low,Moderate,M,-,-,-,High,High,,,Berserker Rage; Mindless Rush; Battle-Mad Strike,Melee
 Bombard,Artillery,Medium,Low,Low,Low,Low,Low,Moderate,Moderate,High,Low,,R,Moderate,Low,Low,-,-,,High,Aim and Fire Artillery,"Ranged,Hazards"
 Breacher,Striker,Medium,,High,High,High,,Moderate,,,Low,,M,-,-,-,Moderate,Moderate,,,Charge; Shattering Charge,Melee
-Cataphract,Striker,Medium,,High,High,High,,Moderate,,,Low,,M,Low,Low,Low,Moderate,Moderate,,,Advanced Grapple; Advanced Maintain Grapple; Kidnap,"Flexible,Maneuvers,Grapple"
+Kidnapper,Striker,Medium,,High,High,High,,Moderate,,,Low,,M,Low,Low,Low,Moderate,Moderate,,,Advanced Grapple; Advanced Maintain Grapple; Kidnap,"Flexible,Maneuvers,Grapple"
 Demolisher,Defender,Medium,Low,High,Low,High,Low,High,,Low,Low,Low,M,-,-,-,Moderate,High,,,Overcommitted Slam,Melee
-Engineer,Striker,Medium,,Low,Low,Low,Low,Low,Low,,High,,R,Low,Low,Low,-,-,,,Minion Master,Ranged
+Summoner,Striker,Medium,,Low,Low,Low,Low,Low,Low,,High,,R,Low,Low,Low,-,-,,,Minion Master,Ranged
 Goliath,Defender,Medium,Low,High,Low,High,Moderate,High,,Terrible,,Low,M,Low,Low,Low,Moderate,Moderate,,,Chosen Rival; Advanced Grapple; Advanced Maintain Grapple,"Flexible,Grapple"
-Hive,Controller,Medium,Moderate,Low,Low,High,High,Low,Moderate,Moderate,Moderate,,M,Low,Low,Low,High,Moderate,,High,Elemental Upheaval,"Flexible,Hazards"
+Despoiler,Controller,Medium,Moderate,Low,Low,High,High,Low,Moderate,Moderate,Moderate,,M,Low,Low,Low,High,Moderate,,High,Elemental Upheaval,"Flexible,Hazards"
 Hornet,Controller,Medium,,Low,Low,Low,Extreme,Low,Low,Low,Low,High,M,Low,Low,Low,High,Low,,,,Modal
 Mirage,Support,Medium,High,Low,Low,Low,,,High,,High,,Nil,-,-,-,-,-,,,Swap; Veil; Hidden; Hide; Sneak,"Pacifist,Stealth,Cover"
 Operator,Artillery,Medium,Extreme,Low,High,Low,Low,Low,Low,Low,Low,Low,R,Low,Moderate,Moderate,-,-,,,Cover Jaunt; Deploy Cover Screen; Camp; Hide; Sneak,"Ranged,Cover,Stealth"
