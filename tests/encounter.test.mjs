@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import test from 'node:test'
 import { parseCsv } from '../src/data-builder.ts'
-import { encounterTemplates, matchesEncounterCategory, rollEncounter, validPartyLevels } from '../src/encounter.ts'
+import { encounterCategoryDefinitions, encounterTemplates, matchesEncounterCategory, rollEncounter, validPartyLevels } from '../src/encounter.ts'
 
 const rows = parseCsv(readFileSync(new URL('../csv/RoadMaps_Prod.csv', import.meta.url), 'utf8'))
 const archetypes = rows.filter((row) => !row['Road Map'].startsWith('Special:')).map((row) => ({
@@ -14,6 +14,8 @@ const xpByOffset = new Map([[2, 80], [0, 40], [-2, 20], [-4, 10]])
 test('all variations have valid budgets, levels, and matching archetype pools', () => {
   assert.equal(encounterTemplates.length, 24)
   assert.equal(new Set(encounterTemplates.map((template) => template.name)).size, 24)
+  assert.deepEqual(new Set(encounterCategoryDefinitions.map((entry) => entry.category)),
+    new Set(encounterTemplates.flatMap((template) => template.slots.map((entry) => entry.category))))
   for (const template of encounterTemplates) {
     assert.equal(template.slots.reduce((sum, entry) => sum + entry.count * xpByOffset.get(entry.levelOffset), 0), template.xp)
     assert.ok(validPartyLevels(template).length)
@@ -37,11 +39,24 @@ test('all variations have valid budgets, levels, and matching archetype pools', 
   }
 })
 
-test('pacifists are exclusive and Elite Enemies uses at most one', () => {
-  assert.ok(matchesEncounterCategory(byName.get('Priest'), 'Pacifist'))
+test('Ability slots use the Ability tag, attack slots exclude it, and role slots exclude Pacifist', () => {
+  assert.ok(matchesEncounterCategory(byName.get('Priest'), 'Ability'))
   assert.ok(!matchesEncounterCategory(byName.get('Priest'), 'Ranged+'))
+  assert.ok(matchesEncounterCategory(byName.get('Bastion'), 'Ability'))
+  assert.ok(!matchesEncounterCategory(byName.get('Bastion'), 'Melee+'))
+  assert.ok(matchesEncounterCategory(byName.get('Bastion'), 'Defender'))
+  assert.ok(matchesEncounterCategory(byName.get('Witch'), 'Controller'))
+  assert.ok(!matchesEncounterCategory(byName.get('Witch'), 'Ranged+'))
+  assert.ok(matchesEncounterCategory(byName.get('Pyro'), 'Melee+'))
+  assert.ok(!matchesEncounterCategory(byName.get('Pyro'), 'Ability'))
+  assert.ok(matchesEncounterCategory(byName.get('Soldier'), 'Melee+'))
+  assert.ok(matchesEncounterCategory(byName.get('Soldier'), 'Ranged+'))
+  assert.ok(!matchesEncounterCategory({ name: 'Pacifist Controller', role: 'Controller', traits: ['Pacifist', 'Ability'] }, 'Controller'))
   assert.ok(matchesEncounterCategory(byName.get('Specter'), 'Melee+'))
   assert.ok(!matchesEncounterCategory(byName.get('Specter'), 'Ranged+'))
+})
+
+test('Elite Enemies uses at most one pacifist', () => {
   const elite = encounterTemplates.find((template) => template.name === 'Elite Enemies')
   const candidates = ['Mirage', 'Priest', 'Support', 'Ace', 'Bastion'].map((name) => byName.get(name))
   const groups = rollEncounter(elite, 5, candidates, () => 0)

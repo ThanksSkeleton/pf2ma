@@ -1,0 +1,2506 @@
+[
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.KHTYbQgR5hnFZdGL",
+    "name": "Guard Dog",
+    "level": -1,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 6,
+    "hp": 8,
+    "ac": 15,
+    "fortitude": 5,
+    "reflex": 7,
+    "will": 4,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 6,
+      "damage": "1d4+1"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 30
+    },
+    "abilities": [
+      "Pack Attack"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.TElwkEGZy1zgwoVg",
+    "name": "Sprigjack",
+    "level": -1,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 5,
+    "hp": 10,
+    "ac": 15,
+    "fortitude": 5,
+    "reflex": 7,
+    "will": 3,
+    "strike": {
+      "name": "Splinter",
+      "attackBonus": 7,
+      "damage": "1d4"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Bramble Jump"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.E2XL2egIA3QaSDBM",
+    "name": "Flash Beetle",
+    "level": -1,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 6,
+    "hp": 6,
+    "ac": 16,
+    "fortitude": 5,
+    "reflex": 8,
+    "will": 4,
+    "strike": {
+      "name": "Mandibles",
+      "attackBonus": 8,
+      "damage": "1d4+1"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 20
+    },
+    "abilities": [
+      "Luminescent Aura",
+      "Light Flash"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.DMoeZLBSXHO4nibR",
+    "name": "Badger",
+    "level": 0,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 6,
+    "hp": 15,
+    "ac": 15,
+    "fortitude": 8,
+    "reflex": 5,
+    "will": 6,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 8,
+      "damage": "1d8"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Ferocity"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.Ytp0kRaG8iexmPfN",
+    "name": "Hryngar Sharpshooter",
+    "level": 0,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 4,
+    "hp": 18,
+    "ac": 15,
+    "fortitude": 7,
+    "reflex": 7,
+    "will": 4,
+    "strike": {
+      "name": "Crossbow",
+      "attackBonus": 7,
+      "damage": "1d8"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 20
+    },
+    "abilities": [
+      "Light Blindness",
+      "Bola Bolt"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.aeOzCBpwnUVcpqxI",
+    "name": "Pugwampi",
+    "level": 0,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 6,
+    "hp": 17,
+    "ac": 14,
+    "fortitude": 5,
+    "reflex": 8,
+    "will": 6,
+    "strike": {
+      "name": "Shortbow",
+      "attackBonus": 8,
+      "damage": "1d6"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Unluck Aura"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.sA2dFdRUwiapo69Z",
+    "name": "Goblin Commando",
+    "level": 1,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 5,
+    "hp": 18,
+    "ac": 17,
+    "fortitude": 7,
+    "reflex": 8,
+    "will": 5,
+    "strike": {
+      "name": "Horsechopper",
+      "attackBonus": 8,
+      "damage": "1d8+3"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Goblin Scuttle"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.sd6BsHgVrw4FgR70",
+    "name": "Elf Ranger",
+    "level": 1,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 10,
+    "hp": 17,
+    "ac": 16,
+    "fortitude": 4,
+    "reflex": 10,
+    "will": 7,
+    "strike": {
+      "name": "Shortbow",
+      "attackBonus": 9,
+      "damage": "1d6+2"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 30
+    },
+    "abilities": [
+      "Double Shot",
+      "Elf Step",
+      "Unimpeded Journey"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.9XccneFB5DmMHig0",
+    "name": "Gnome Bard",
+    "level": 1,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 7,
+    "hp": 16,
+    "ac": 16,
+    "fortitude": 5,
+    "reflex": 7,
+    "will": 9,
+    "strike": null,
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Gnomish Shift",
+      "Do a Jig!"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.IyhbcdTVmkV4pSju",
+    "name": "Boar",
+    "level": 2,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 8,
+    "hp": 40,
+    "ac": 15,
+    "fortitude": 10,
+    "reflex": 5,
+    "will": 8,
+    "strike": {
+      "name": "Tusk",
+      "attackBonus": 10,
+      "damage": "2d6+4"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 40
+    },
+    "abilities": [
+      "Ferocity",
+      "Boar Charge"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-npc-core.Actor.fpwpA2JmpbwREa5a",
+    "name": "Archer Sentry",
+    "level": 2,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-npc-core",
+    "publication": "Pathfinder NPC Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 11,
+    "hp": 30,
+    "ac": 17,
+    "fortitude": 7,
+    "reflex": 10,
+    "will": 7,
+    "strike": {
+      "name": "Composite Longbow",
+      "attackBonus": 10,
+      "damage": "1d8+3"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Sentry's Aim"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.QIXc18xHrEWDmtKW",
+    "name": "Fey Dragonet",
+    "level": 2,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 8,
+    "hp": 30,
+    "ac": 18,
+    "fortitude": 5,
+    "reflex": 12,
+    "will": 11,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 10,
+      "damage": "1d4"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 40
+    },
+    "abilities": [
+      "Euphoric Breath"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.AFWmiIBJ7ypgydQD",
+    "name": "Dire Wolf",
+    "level": 3,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 10,
+    "hp": 50,
+    "ac": 18,
+    "fortitude": 11,
+    "reflex": 8,
+    "will": 8,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 12,
+      "damage": "1d10+5"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 35
+    },
+    "abilities": [
+      "Buck",
+      "Pack Attack",
+      "Worry",
+      "Grab",
+      "Knockdown"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.tbdfg5ayaoHcBYCV",
+    "name": "Kuribu",
+    "level": 3,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 11,
+    "hp": 45,
+    "ac": 17,
+    "fortitude": 6,
+    "reflex": 11,
+    "will": 9,
+    "strike": {
+      "name": "Composite Shortbow",
+      "attackBonus": 11,
+      "damage": "1d6+5"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Immobilizing Ambush",
+      "Sentinel's Aura",
+      "Blessed Aspect",
+      "Statue"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.F2Xhn4rqPAj55w3O",
+    "name": "Boggard Swampseer",
+    "level": 3,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 11,
+    "hp": 40,
+    "ac": 18,
+    "fortitude": 9,
+    "reflex": 7,
+    "will": 11,
+    "strike": {
+      "name": "Staff",
+      "attackBonus": 10,
+      "damage": "1d4+6"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 20
+    },
+    "abilities": [
+      "Destructive Croak",
+      "Drowning Drone",
+      "Swamp Passage",
+      "Terrifying Croak",
+      "Tongue Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.vN2alMciNlKpBpKN",
+    "name": "Minotaur Hunter",
+    "level": 4,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 12,
+    "hp": 70,
+    "ac": 20,
+    "fortitude": 13,
+    "reflex": 8,
+    "will": 10,
+    "strike": {
+      "name": "Greataxe",
+      "attackBonus": 14,
+      "damage": "1d12+8"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Perfect Orienteering",
+      "Axe Swipe",
+      "Hunted Fear",
+      "Powerful Charge"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.JwOlSrHk1pkAKMRn",
+    "name": "Hobgoblin Archer",
+    "level": 4,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 10,
+    "hp": 50,
+    "ac": 23,
+    "fortitude": 10,
+    "reflex": 12,
+    "will": 8,
+    "strike": {
+      "name": "Crossbow",
+      "attackBonus": 14,
+      "damage": "1d8+2"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Formation",
+      "Crossbow Precision",
+      "Perfect Aim",
+      "Running Reload"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.aj4ZJUULa7VoPYWy",
+    "name": "Satyr",
+    "level": 4,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 10,
+    "hp": 80,
+    "ac": 19,
+    "fortitude": 9,
+    "reflex": 11,
+    "will": 12,
+    "strike": {
+      "name": "Dagger",
+      "attackBonus": 14,
+      "damage": "1d4+6"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 35
+    },
+    "abilities": [
+      "Sylvan Wine",
+      "Fleet Performer",
+      "Play the Pipes"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.oZVeE7D70bHOrs1d",
+    "name": "Cyclops",
+    "level": 5,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 12,
+    "hp": 80,
+    "ac": 21,
+    "fortitude": 13,
+    "reflex": 8,
+    "will": 12,
+    "strike": {
+      "name": "Greataxe",
+      "attackBonus": 14,
+      "damage": "1d12+9"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 30
+    },
+    "abilities": [
+      "Ferocity",
+      "Flash of Insight",
+      "Swipe"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-npc-core.Actor.liMzj39g48s8ZtIf",
+    "name": "Sniper",
+    "level": 5,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-npc-core",
+    "publication": "Pathfinder NPC Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 15,
+    "hp": 65,
+    "ac": 21,
+    "fortitude": 10,
+    "reflex": 15,
+    "will": 11,
+    "strike": {
+      "name": "Arquebus",
+      "attackBonus": 15,
+      "damage": "1d8+6"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Silencer",
+      "Concussive Shot",
+      "Full Bore",
+      "Sniper's Edge",
+      "Surprise Attack"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.zpd6b6UPP72ZELCj",
+    "name": "Poltergeist",
+    "level": 5,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 11,
+    "hp": 55,
+    "ac": 22,
+    "fortitude": 9,
+    "reflex": 14,
+    "will": 13,
+    "strike": {
+      "name": "Telekinetic Object",
+      "attackBonus": 13,
+      "damage": "2d12"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 20
+    },
+    "abilities": [
+      "Site Bound",
+      "Natural Invisibility",
+      "Rejuvenation",
+      "Telekinetic Defense",
+      "Frighten",
+      "Telekinetic Storm"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.Bkr0soTDhQq1qjWx",
+    "name": "Hydra",
+    "level": 6,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 17,
+    "hp": 90,
+    "ac": 23,
+    "fortitude": 15,
+    "reflex": 12,
+    "will": 10,
+    "strike": {
+      "name": "Fangs",
+      "attackBonus": 16,
+      "damage": "2d6+7"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Hydra Regeneration",
+      "Head Regrowth",
+      "Reactive Heads",
+      "Focused Assault",
+      "Storm of Jaws"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-npc-core.Actor.SHQHNG2o1T172Qm4",
+    "name": "Rocketeer",
+    "level": 6,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-npc-core",
+    "publication": "Pathfinder NPC Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 14,
+    "hp": 85,
+    "ac": 23,
+    "fortitude": 12,
+    "reflex": 16,
+    "will": 14,
+    "strike": {
+      "name": "Slide Pistol",
+      "attackBonus": 17,
+      "damage": "1d6+6"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Fuel Tank Vulnerability",
+      "Explosive Liftoff",
+      "Mid-air Collision",
+      "Rocketing Strafe"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.KgJq51AeYrENo3Db",
+    "name": "Will-o'-Wisp",
+    "level": 6,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 16,
+    "hp": 50,
+    "ac": 27,
+    "fortitude": 10,
+    "reflex": 16,
+    "will": 14,
+    "strike": {
+      "name": "Shock",
+      "attackBonus": 17,
+      "damage": "2d8+4"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 50
+    },
+    "abilities": [
+      "Glow",
+      "Magic Immunity",
+      "Feed on Fear",
+      "Go Dark"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.1x0BdpVQLX7o3rrA",
+    "name": "Elephant",
+    "level": 7,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 13,
+    "hp": 130,
+    "ac": 23,
+    "fortitude": 18,
+    "reflex": 11,
+    "will": 13,
+    "strike": {
+      "name": "Tusk",
+      "attackBonus": 16,
+      "damage": "3d8+9"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 40
+    },
+    "abilities": [
+      "Trample",
+      "Grabbing Trunk"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-npc-core.Actor.ow76NqtsZUhZMf9f",
+    "name": "Gunwitch",
+    "level": 7,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-npc-core",
+    "publication": "Pathfinder NPC Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 13,
+    "hp": 90,
+    "ac": 23,
+    "fortitude": 12,
+    "reflex": 15,
+    "will": 15,
+    "strike": {
+      "name": "Musket Staff",
+      "attackBonus": 18,
+      "damage": "1d6+6+1d6"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Firearm Familiar",
+      "Acrobatic Dodge",
+      "Betwitched Shot",
+      "Bullet Storm",
+      "Hex Bullet",
+      "Recall Firearm"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.QCPpQya5TEUuIxQn",
+    "name": "Medusa",
+    "level": 7,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 16,
+    "hp": 105,
+    "ac": 25,
+    "fortitude": 15,
+    "reflex": 16,
+    "will": 14,
+    "strike": {
+      "name": "Composite Shortbow",
+      "attackBonus": 19,
+      "damage": "1d6+7"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "All-Around Vision",
+      "Biting Snakes",
+      "Petrifying Gaze",
+      "Focus Gaze",
+      "Serpent Venom"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.zAxKR8XWtQm2rqh4",
+    "name": "Triceratops",
+    "level": 8,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 16,
+    "hp": 140,
+    "ac": 26,
+    "fortitude": 18,
+    "reflex": 12,
+    "will": 14,
+    "strike": {
+      "name": "Horns",
+      "attackBonus": 19,
+      "damage": "2d8+9"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 30
+    },
+    "abilities": [
+      "Frill Defense",
+      "Lumbering Charge",
+      "Trample",
+      "Vicious Gore",
+      "Knockdown"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-npc-core.Actor.jOASgCgSyk3enLfP",
+    "name": "Assassin",
+    "level": 8,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-npc-core",
+    "publication": "Pathfinder NPC Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 16,
+    "hp": 130,
+    "ac": 26,
+    "fortitude": 12,
+    "reflex": 19,
+    "will": 14,
+    "strike": {
+      "name": "Composite Shortbow",
+      "attackBonus": 20,
+      "damage": "2d6+7"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Swift Sneak",
+      "Deny Advantage",
+      "Nimble Dodge",
+      "Assassin's Poison",
+      "Quick Draw",
+      "Sneak Attack",
+      "Surprise Attack"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.0qaGLx8ads9blcfS",
+    "name": "Lamia Matriarch",
+    "level": 8,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 15,
+    "hp": 135,
+    "ac": 27,
+    "fortitude": 13,
+    "reflex": 18,
+    "will": 17,
+    "strike": {
+      "name": "Scimitar",
+      "attackBonus": 19,
+      "damage": "2d6+10"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 30
+    },
+    "abilities": [
+      "Change Shape",
+      "Matriarch's Caress",
+      "Scimitar Storm"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.893mp411SdYren3H",
+    "name": "Frost Giant",
+    "level": 9,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 17,
+    "hp": 150,
+    "ac": 29,
+    "fortitude": 23,
+    "reflex": 16,
+    "will": 16,
+    "strike": {
+      "name": "Greataxe",
+      "attackBonus": 21,
+      "damage": "2d12+12"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 30
+    },
+    "abilities": [
+      "Reactive Strike",
+      "Chill Breath",
+      "Ice Stride",
+      "Wide Swing"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.cEHRuzsGF73PVT3P",
+    "name": "Hesperid",
+    "level": 9,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 19,
+    "hp": 175,
+    "ac": 27,
+    "fortitude": 15,
+    "reflex": 21,
+    "will": 19,
+    "strike": {
+      "name": "Sunset Ray",
+      "attackBonus": 21,
+      "damage": "2d12+6+1d6"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 60
+    },
+    "abilities": [
+      "Sunset Dependent",
+      "Create Golden Apple"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.Ro49rEZwBLkkoEKE",
+    "name": "Mummy Pharaoh",
+    "level": 9,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 20,
+    "hp": 175,
+    "ac": 27,
+    "fortitude": 19,
+    "reflex": 15,
+    "will": 20,
+    "strike": {
+      "name": "Longspear",
+      "attackBonus": 21,
+      "damage": "1d6+2d8+11"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 20
+    },
+    "abilities": [
+      "Reactive Strike (Special)",
+      "Rejuvenation",
+      "Sacred Wrappings",
+      "Undead Mastery",
+      "Sandstorm Wrath",
+      "Veil of Sand"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.tpNP1UooPPHMyZye",
+    "name": "Tyrannosaurus",
+    "level": 10,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 19,
+    "hp": 180,
+    "ac": 29,
+    "fortitude": 21,
+    "reflex": 15,
+    "will": 19,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 22,
+      "damage": "2d12+12"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 40
+    },
+    "abilities": [
+      "Fling",
+      "Pin Prey",
+      "Swallow Whole",
+      "Trample",
+      "Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.mPFQENrVt5xhML1T",
+    "name": "Zuishin",
+    "level": 10,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 21,
+    "hp": 180,
+    "ac": 30,
+    "fortitude": 19,
+    "reflex": 23,
+    "will": 17,
+    "strike": {
+      "name": "Holy Composite Longbow",
+      "attackBonus": 24,
+      "damage": "2d8+9"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 25
+    },
+    "abilities": [
+      "Ward",
+      "Reactive Strike",
+      "Healing Arrow",
+      "Holy Weaponry"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.LN7MXD38Zs2bDoW6",
+    "name": "Ghost Mage",
+    "level": 10,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 17,
+    "hp": 135,
+    "ac": 27,
+    "fortitude": 16,
+    "reflex": 19,
+    "will": 22,
+    "strike": {
+      "name": "Ghostly Hand",
+      "attackBonus": 21,
+      "damage": "2d8+12"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 25
+    },
+    "abilities": [
+      "Site Bound",
+      "Rejuvenation",
+      "Frightful Moan",
+      "Telekinetic Assault"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.Z5QezXy38ZHyt3O3",
+    "name": "Cloud Giant",
+    "level": 11,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 22,
+    "hp": 220,
+    "ac": 30,
+    "fortitude": 25,
+    "reflex": 18,
+    "will": 21,
+    "strike": {
+      "name": "Ranseur",
+      "attackBonus": 25,
+      "damage": "2d10+13"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 30
+    },
+    "abilities": [
+      "Cloudsight",
+      "Reactive Strike",
+      "Crushing Cloud",
+      "Wind Strike"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.0pdv7wgjpnDsVIV1",
+    "name": "Garadasura",
+    "level": 11,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 21,
+    "hp": 200,
+    "ac": 30,
+    "fortitude": 24,
+    "reflex": 20,
+    "will": 19,
+    "strike": {
+      "name": "Venom Spit",
+      "attackBonus": 28,
+      "damage": "2d6+6"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 40
+    },
+    "abilities": [
+      "Encircling Aura",
+      "Reactive Strike",
+      "Butchering Venom",
+      "Constrict",
+      "Glorious Visage",
+      "Slither",
+      "Swallow Whole",
+      "Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.6WgGNVcmuwNlGDJP",
+    "name": "Brainchild",
+    "level": 11,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 18,
+    "hp": 200,
+    "ac": 30,
+    "fortitude": 21,
+    "reflex": 22,
+    "will": 18,
+    "strike": {
+      "name": "Illusory Weapon",
+      "attackBonus": 24,
+      "damage": "4d6+10"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 30
+    },
+    "abilities": [
+      "Urban Legend",
+      "Persistence of Memory"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.6mdq7UV9gFXAEOpJ",
+    "name": "Great Cyclops",
+    "level": 12,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 22,
+    "hp": 235,
+    "ac": 32,
+    "fortitude": 25,
+    "reflex": 19,
+    "will": 22,
+    "strike": {
+      "name": "Greatclub",
+      "attackBonus": 25,
+      "damage": "3d10+13"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 40
+    },
+    "abilities": [
+      "Ferocity",
+      "Flash of Brutality",
+      "Powerful Charge",
+      "Throw Rock"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-npc-core.Actor.J6qH183OPXKfZ8qS",
+    "name": "Peerless Duelist",
+    "level": 12,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-npc-core",
+    "publication": "Pathfinder NPC Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 24,
+    "hp": 200,
+    "ac": 33,
+    "fortitude": 21,
+    "reflex": 25,
+    "will": 21,
+    "strike": {
+      "name": "Dueling Pistol",
+      "attackBonus": 26,
+      "damage": "2d6+13"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "I See You",
+      "Shoot First",
+      "Threatening Aura",
+      "Ace Shooter",
+      "Disarming Shot",
+      "Double Reload"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.smItqlbr0iuDJ8nL",
+    "name": "Lich",
+    "level": 12,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 20,
+    "hp": 190,
+    "ac": 31,
+    "fortitude": 17,
+    "reflex": 21,
+    "will": 23,
+    "strike": {
+      "name": "Hand",
+      "attackBonus": 24,
+      "damage": "4d8"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Counterspell",
+      "Frightful Presence",
+      "Rejuvenation",
+      "Drain Soul Cage",
+      "Siphon Life",
+      "Steady Spellcasting"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.vijBriZmbUJjbJNH",
+    "name": "Cave Worm",
+    "level": 13,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 20,
+    "hp": 270,
+    "ac": 32,
+    "fortitude": 28,
+    "reflex": 21,
+    "will": 21,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 28,
+      "damage": "3d10+15"
+    },
+    "speed": {
+      "type": "Burrow",
+      "feet": 40
+    },
+    "abilities": [
+      "Inexorable",
+      "Slough Skin",
+      "Cave Worm Venom",
+      "Fast Swallow",
+      "Rock Tunneler",
+      "Swallow Whole",
+      "Thrash",
+      "Improved Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.QkjZNv3kb7BErPHR",
+    "name": "Venator",
+    "level": 13,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 24,
+    "hp": 230,
+    "ac": 33,
+    "fortitude": 21,
+    "reflex": 25,
+    "will": 24,
+    "strike": {
+      "name": "Crossbow",
+      "attackBonus": 27,
+      "damage": "2d8+12+1d10"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Locate Target",
+      "Discharging Bolt",
+      "Mark Target",
+      "Overloaded Arc"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.gRy6Ci6zb1s4Nvy5",
+    "name": "Dryad Queen",
+    "level": 13,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 25,
+    "hp": 220,
+    "ac": 35,
+    "fortitude": 24,
+    "reflex": 26,
+    "will": 24,
+    "strike": {
+      "name": "Branch",
+      "attackBonus": 27,
+      "damage": "3d12+8"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 30
+    },
+    "abilities": [
+      "Nature Empathy",
+      "Tied to the Land",
+      "Nymph's Beauty",
+      "Change Shape",
+      "Focus Beauty",
+      "Inspiration",
+      "Tree Meld"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.JRBUBgJymEeEE4hm",
+    "name": "Crag Linnorm",
+    "level": 14,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 26,
+    "hp": 270,
+    "ac": 37,
+    "fortitude": 28,
+    "reflex": 24,
+    "will": 22,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 30,
+      "damage": "3d12+14"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 100
+    },
+    "abilities": [
+      "Regeneration 10 (Deactivated by Cold Iron)",
+      "Curse of Fire",
+      "Reactive Strike (Tail Only)",
+      "Constrict",
+      "Crag Linnorm Venom",
+      "Magma Breath",
+      "Improved Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-npc-core.Actor.yU434Ugr11tvU7TS",
+    "name": "Siegebreaker",
+    "level": 14,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-npc-core",
+    "publication": "Pathfinder NPC Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 24,
+    "hp": 300,
+    "ac": 34,
+    "fortitude": 25,
+    "reflex": 28,
+    "will": 23,
+    "strike": {
+      "name": "Alchemical Grenade",
+      "attackBonus": 27,
+      "damage": "3d6"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 25
+    },
+    "abilities": [
+      "Alchemical Grenades",
+      "Explosive Compounds",
+      "Expanded Splash",
+      "Quick Grenadier",
+      "The Wall Must Fall"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.VDm2XhfNwhgiJOxD",
+    "name": "Vidileth",
+    "level": 14,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 25,
+    "hp": 270,
+    "ac": 34,
+    "fortitude": 26,
+    "reflex": 22,
+    "will": 24,
+    "strike": {
+      "name": "Tentacle",
+      "attackBonus": 28,
+      "damage": "7d6"
+    },
+    "speed": {
+      "type": "Swim",
+      "feet": 80
+    },
+    "abilities": [
+      "Numbing Lights",
+      "Change Shape",
+      "Consume Memories",
+      "Delayed Suggestion",
+      "Shape Flesh",
+      "Tentacle Flurry",
+      "Thoughtlance"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.G0BuqHfjITO4ZLi3",
+    "name": "Animated Colossus",
+    "level": 15,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 23,
+    "hp": 245,
+    "ac": 39,
+    "fortitude": 31,
+    "reflex": 21,
+    "will": 19,
+    "strike": {
+      "name": "Fist",
+      "attackBonus": 32,
+      "damage": "3d12+17"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 50
+    },
+    "abilities": [
+      "Construct Armor (Hardness 15)",
+      "Enormous",
+      "Colossus's Grasp",
+      "Constrict",
+      "Trample",
+      "Improved Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.15EHktvYa21dENni",
+    "name": "Lampad Queen",
+    "level": 15,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 27,
+    "hp": 235,
+    "ac": 38,
+    "fortitude": 26,
+    "reflex": 29,
+    "will": 25,
+    "strike": {
+      "name": "Light Wisp",
+      "attackBonus": 29,
+      "damage": "2d8+9+2d6+2d6"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 30
+    },
+    "abilities": [
+      "Cavern Empathy",
+      "Tied to the Land",
+      "Nymph's Beauty",
+      "Change Shape",
+      "Despairing Weep",
+      "Focus Beauty",
+      "Inspiration"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.IrssIkWkW6fsbHJL",
+    "name": "Dybbuk",
+    "level": 15,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 27,
+    "hp": 175,
+    "ac": 35,
+    "fortitude": 21,
+    "reflex": 28,
+    "will": 29,
+    "strike": {
+      "name": "Ghostly Hand",
+      "attackBonus": 28,
+      "damage": "3d10+14+2d6"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 50
+    },
+    "abilities": [
+      "Frightful Presence",
+      "Malevolent Possession"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.YRyTBciVtCnO7J0Z",
+    "name": "Rune Giant",
+    "level": 16,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 28,
+    "hp": 330,
+    "ac": 38,
+    "fortitude": 33,
+    "reflex": 26,
+    "will": 28,
+    "strike": {
+      "name": "Greatsword",
+      "attackBonus": 33,
+      "damage": "3d12+17"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 45
+    },
+    "abilities": [
+      "Reactive Strike (Special)",
+      "Command Giants",
+      "Demand",
+      "Flashing Runes",
+      "Invoke Rune",
+      "Wide Swing"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.GmKNb1UIjAkTMDOt",
+    "name": "Giylea",
+    "level": 16,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 28,
+    "hp": 230,
+    "ac": 41,
+    "fortitude": 26,
+    "reflex": 31,
+    "will": 28,
+    "strike": {
+      "name": "Tongue of Flame",
+      "attackBonus": 33,
+      "damage": "7d6"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 50
+    },
+    "abilities": [
+      "All-Knowing Eyes",
+      "Archon's Protection",
+      "Fiery Spokes",
+      "Focus Gaze"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.oLfyxHNz8IX06ZcU",
+    "name": "Bythos",
+    "level": 16,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 30,
+    "hp": 245,
+    "ac": 39,
+    "fortitude": 25,
+    "reflex": 26,
+    "will": 30,
+    "strike": {
+      "name": "Fist",
+      "attackBonus": 32,
+      "damage": "3d8+16+2d8"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 35
+    },
+    "abilities": [
+      "Envisioning",
+      "Regeneration 15 (Deactivated by Spirit)",
+      "Confusing Gaze",
+      "Temporal Reversion",
+      "Aging Strikes",
+      "Focused Gaze",
+      "Temporal Flurry",
+      "Temporal Strike"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.Np5Z7RMQzvSNnH0h",
+    "name": "Ice Linnorm",
+    "level": 17,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 29,
+    "hp": 330,
+    "ac": 41,
+    "fortitude": 32,
+    "reflex": 28,
+    "will": 27,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 34,
+      "damage": "3d12+17"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 100
+    },
+    "abilities": [
+      "Regeneration 10 (Deactivated by Cold Iron)",
+      "Curse of Frost",
+      "Reactive Strike (Tail Only)",
+      "Constrict",
+      "Ice Linnorm Venom",
+      "Icemire Breath",
+      "Improved Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.nBTJHNrjvCOu43SJ",
+    "name": "Ninkonda",
+    "level": 17,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 29,
+    "hp": 350,
+    "ac": 39,
+    "fortitude": 30,
+    "reflex": 27,
+    "will": 33,
+    "strike": {
+      "name": "Nail Blast",
+      "attackBonus": 34,
+      "damage": "3d8+8"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 45
+    },
+    "abilities": [
+      "Aura of Refection",
+      "Reactive Strike",
+      "Refect Spell",
+      "Nail Barrage",
+      "Soul Reflection"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.XKOQ3ll9TGNso0uB",
+    "name": "Banshee",
+    "level": 17,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 32,
+    "hp": 250,
+    "ac": 39,
+    "fortitude": 25,
+    "reflex": 29,
+    "will": 32,
+    "strike": {
+      "name": "Hand",
+      "attackBonus": 32,
+      "damage": "4d10+14"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 60
+    },
+    "abilities": [
+      "Hears Heartbeats",
+      "Sunlight Powerlessness",
+      "Spectral Ripple",
+      "Terrifying Touch",
+      "Vengeful Spite",
+      "Wail"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.bgKwwvO0uDGD7XsG",
+    "name": "Kraken",
+    "level": 18,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 34,
+    "hp": 360,
+    "ac": 42,
+    "fortitude": 35,
+    "reflex": 28,
+    "will": 32,
+    "strike": {
+      "name": "Arm",
+      "attackBonus": 37,
+      "damage": "4d10+17"
+    },
+    "speed": {
+      "type": "Swim",
+      "feet": 40
+    },
+    "abilities": [
+      "Altered Weather",
+      "Constrict",
+      "Double Attack",
+      "Ink Cloud",
+      "Jet",
+      "Kraken Ink",
+      "Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.lost-omens-bestiary.Actor.iD32uhsjUGLvC2q6",
+    "name": "Bone Ship",
+    "level": 18,
+    "role": "Ranged",
+    "sourcePack": "lost-omens-bestiary",
+    "publication": "Pathfinder Lost Omens High Seas",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 32,
+    "hp": 415,
+    "ac": 42,
+    "fortitude": 33,
+    "reflex": 27,
+    "will": 30,
+    "strike": {
+      "name": "Bone Cannon",
+      "attackBonus": 35,
+      "damage": "2d12+12+2d10"
+    },
+    "speed": {
+      "type": "Swim",
+      "feet": 40
+    },
+    "abilities": [
+      "Trawl for Bones",
+      "Blood Wake",
+      "Cannonade",
+      "Chain Shot",
+      "Crew's Call",
+      "Keelhaul",
+      "Pressgang Soul"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.mEjCLVRt7iDiNZL6",
+    "name": "Thulgant",
+    "level": 18,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 30,
+    "hp": 305,
+    "ac": 42,
+    "fortitude": 30,
+    "reflex": 28,
+    "will": 32,
+    "strike": {
+      "name": "Stinger",
+      "attackBonus": 35,
+      "damage": "3d12+17+4d6"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 50
+    },
+    "abilities": [
+      "Demon Hunter",
+      "Greater Constrict",
+      "Mind-Rending Sting",
+      "Stunning Display",
+      "Thulgant Venom",
+      "Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.BPznJcLvfkpfeQ2q",
+    "name": "Guthallath",
+    "level": 19,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 30,
+    "hp": 325,
+    "ac": 43,
+    "fortitude": 38,
+    "reflex": 32,
+    "will": 30,
+    "strike": {
+      "name": "Fist",
+      "attackBonus": 38,
+      "damage": "4d12+18"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 40
+    },
+    "abilities": [
+      "Erosion Aura",
+      "Immunity to Magic",
+      "Annihilation Beams",
+      "Deadly Throw",
+      "Powerful Blows",
+      "Trample",
+      "Improved Grab",
+      "Improved Knockdown",
+      "Improved Push 20 feet"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.Ws6554On4eh2Blq7",
+    "name": "Tzitzimitl",
+    "level": 19,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 32,
+    "hp": 390,
+    "ac": 43,
+    "fortitude": 29,
+    "reflex": 32,
+    "will": 35,
+    "strike": {
+      "name": "Eye Beam",
+      "attackBonus": 34,
+      "damage": "4d12+10d6"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 60
+    },
+    "abilities": [
+      "Fast Healing 15",
+      "Light to Dark",
+      "Drain Life",
+      "Eclipse"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.dA6UaeIi9wFgBAQO",
+    "name": "Hesperid Queen",
+    "level": 19,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 34,
+    "hp": 305,
+    "ac": 44,
+    "fortitude": 31,
+    "reflex": 36,
+    "will": 34,
+    "strike": {
+      "name": "Sunset Ribbon",
+      "attackBonus": 36,
+      "damage": "4d10+13+1d6+1d6"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 90
+    },
+    "abilities": [
+      "Tied to the Land",
+      "Nymph's Beauty",
+      "Change Shape",
+      "Create Golden Apple",
+      "Focus Beauty",
+      "Inspiration"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.k0HUy6WdbZUNfG8X",
+    "name": "Tarn Linnorm",
+    "level": 20,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 35,
+    "hp": 400,
+    "ac": 46,
+    "fortitude": 36,
+    "reflex": 32,
+    "will": 31,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 38,
+      "damage": "4d12+18"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 100
+    },
+    "abilities": [
+      "Regeneration 15 (Deactivated by Cold Iron)",
+      "Curse of Death",
+      "Reactive Strike (Tail Only)",
+      "Constrict",
+      "Corrosive Breath",
+      "Double Bite",
+      "Double Breath",
+      "Tarn Linnorm Venom",
+      "Improved Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.Hk2cd4HlPbhBJKfx",
+    "name": "Baomal",
+    "level": 20,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 34,
+    "hp": 315,
+    "ac": 46,
+    "fortitude": 36,
+    "reflex": 30,
+    "will": 34,
+    "strike": {
+      "name": "Tsunami Jet",
+      "attackBonus": 38,
+      "damage": "4d10+18"
+    },
+    "speed": {
+      "type": "Swim",
+      "feet": 80
+    },
+    "abilities": [
+      "Doubled Reaction",
+      "Psychic Static Aura",
+      "Reactive Strike",
+      "Two Heads",
+      "Breath of the Sea",
+      "Shell Rake",
+      "Two-Headed Strike",
+      "Improved Grab",
+      "Push 40 feet"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.HLM55InRGOAUkqoH",
+    "name": "Pleroma",
+    "level": 20,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 37,
+    "hp": 335,
+    "ac": 45,
+    "fortitude": 32,
+    "reflex": 31,
+    "will": 37,
+    "strike": {
+      "name": "Touch of Creation",
+      "attackBonus": 36,
+      "damage": "5d8+16"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 40
+    },
+    "abilities": [
+      "Envisioning",
+      "Regeneration 20 (Deactivated by Spirit)",
+      "Reality Twist",
+      "Generate Sphere",
+      "Propel Sphere"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.0H54u83vZ1w3xHcD",
+    "name": "Tor Linnorm",
+    "level": 21,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 37,
+    "hp": 440,
+    "ac": 47,
+    "fortitude": 38,
+    "reflex": 35,
+    "will": 33,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 40,
+      "damage": "4d12+19"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 100
+    },
+    "abilities": [
+      "Regeneration 20 (Deactivated by Cold Iron)",
+      "Curse of Boiling Blood",
+      "Lava Affinity",
+      "Reactive Strike (Tail Only)",
+      "Constrict",
+      "Pyroclastic Breath",
+      "Slashing Claws",
+      "Tor Linnorm Venom",
+      "Improved Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.lost-omens-bestiary.Actor.Yj1WiNHrtwI09LqX",
+    "name": "Stormcrown Archdragon",
+    "level": 21,
+    "role": "Ranged",
+    "sourcePack": "lost-omens-bestiary",
+    "publication": "Pathfinder Lost Omens Draconic Codex",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 38,
+    "hp": 450,
+    "ac": 46,
+    "fortitude": 37,
+    "reflex": 39,
+    "will": 33,
+    "strike": {
+      "name": "Storm Bolt",
+      "attackBonus": 41,
+      "damage": "4d12+10"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 200
+    },
+    "abilities": [
+      "Frightful Presence",
+      "Superconductor",
+      "Command Lightning",
+      "Coronal Cloak",
+      "Draconic Frenzy",
+      "Draconic Momentum",
+      "Furious Cloudburst",
+      "Galvanic Barrage",
+      "Smooth Flying",
+      "Storm Howl"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.kKFfigxrJ2vbJazp",
+    "name": "Grim Reaper",
+    "level": 21,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core",
+    "publication": "Pathfinder Monster Core",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 41,
+    "hp": 320,
+    "ac": 47,
+    "fortitude": 37,
+    "reflex": 41,
+    "will": 38,
+    "strike": {
+      "name": "Keen Scythe",
+      "attackBonus": 40,
+      "damage": "4d10+23"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 75
+    },
+    "abilities": [
+      "Death's Grace",
+      "Aura of Misfortune",
+      "Lurking Death",
+      "Death Strike",
+      "Energy Drain",
+      "Final Death",
+      "Infuse Weapon"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.Ww4WnWmMJcfqZlCX",
+    "name": "Thanatotic Titan",
+    "level": 22,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 36,
+    "hp": 540,
+    "ac": 46,
+    "fortitude": 37,
+    "reflex": 34,
+    "will": 35,
+    "strike": {
+      "name": "Halberd",
+      "attackBonus": 42,
+      "damage": "4d10+25"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 40
+    },
+    "abilities": [
+      "Impossible Stature",
+      "Reactive Strike",
+      "Godslayer",
+      "Titanic Charge",
+      "Trample",
+      "Void Explosion",
+      "Wide Cleave"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.XVEpt8dz9fMBXROb",
+    "name": "Volnagur",
+    "level": 22,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 39,
+    "hp": 515,
+    "ac": 48,
+    "fortitude": 39,
+    "reflex": 36,
+    "will": 33,
+    "strike": {
+      "name": "Eye Beam",
+      "attackBonus": 41,
+      "damage": "6d12"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 80
+    },
+    "abilities": [
+      "Slumbering Armageddon",
+      "Absolute Regeneration",
+      "Alien Harmonics",
+      "Frightful Presence",
+      "Intercepting Eyes",
+      "Endsong",
+      "Gaze Upon",
+      "Scream of the End",
+      "Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.howl-of-the-wild-bestiary.Actor.ApQvWxwCc5vtDvFD",
+    "name": "Warden of Oceans and Rivers",
+    "level": 22,
+    "role": "Ability",
+    "sourcePack": "howl-of-the-wild-bestiary",
+    "publication": "Pathfinder Howl of the Wild",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 39,
+    "hp": 540,
+    "ac": 47,
+    "fortitude": 39,
+    "reflex": 36,
+    "will": 33,
+    "strike": {
+      "name": "Tentacle",
+      "attackBonus": 43,
+      "damage": "4d10+16"
+    },
+    "speed": {
+      "type": "Swim",
+      "feet": 100
+    },
+    "abilities": [
+      "Voice of Nature",
+      "Warden's Crown",
+      "Bioluminescent Maelstrom",
+      "All Are One",
+      "Arctic Embrace",
+      "Grasp of the Deep",
+      "I Am The Tide",
+      "What Lurks Beneath"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.l3ULL4wKnaoOZ51P",
+    "name": "Danava Titan",
+    "level": 23,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 41,
+    "hp": 470,
+    "ac": 49,
+    "fortitude": 41,
+    "reflex": 37,
+    "will": 37,
+    "strike": {
+      "name": "Greatclub",
+      "attackBonus": 43,
+      "damage": "2d12+4d10+20"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 50
+    },
+    "abilities": [
+      "Hadalic Presence",
+      "Impossible Stature",
+      "Relentless",
+      "Roiling Rebuke",
+      "Trample",
+      "Wide Cleave"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.war-of-immortals-bestiary.Actor.yQIro3136G7EUgLQ",
+    "name": "Agyra",
+    "level": 23,
+    "role": "Ranged",
+    "sourcePack": "war-of-immortals-bestiary",
+    "publication": "Pathfinder War of Immortals",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 38,
+    "hp": 475,
+    "ac": 49,
+    "fortitude": 37,
+    "reflex": 40,
+    "will": 34,
+    "strike": {
+      "name": "Spike",
+      "attackBonus": 42,
+      "damage": "7d6+10"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 40
+    },
+    "abilities": [
+      "Stormsight",
+      "Regeneration",
+      "Electrified Rebirth",
+      "Blinding Flash",
+      "Conjure Hurricane",
+      "Lightning Breath",
+      "Stormflight",
+      "Thunderous Departure"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.lost-omens-bestiary.Actor.9XM9f6ukMdzRi0vi",
+    "name": "Time Archdragon (Spellcaster)",
+    "level": 23,
+    "role": "Ability",
+    "sourcePack": "lost-omens-bestiary",
+    "publication": "Pathfinder Lost Omens Draconic Codex",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 38,
+    "hp": 570,
+    "ac": 48,
+    "fortitude": 44,
+    "reflex": 37,
+    "will": 40,
+    "strike": {
+      "name": "Jaws",
+      "attackBonus": 43,
+      "damage": "4d10+20"
+    },
+    "speed": {
+      "type": "Fly",
+      "feet": 200
+    },
+    "abilities": [
+      "Time Portal",
+      "Chronowarp Aura",
+      "Decelerating Dodge",
+      "Immortal",
+      "Starflight",
+      "Second Chance",
+      "Temporal Eddies",
+      "Timeshift Breath"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.TWr3kyBo1FhAX2oH",
+    "name": "Hekatonkheires Titan",
+    "level": 24,
+    "role": "Melee",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 43,
+    "hp": 500,
+    "ac": 52,
+    "fortitude": 44,
+    "reflex": 40,
+    "will": 37,
+    "strike": {
+      "name": "Empty Weapon",
+      "attackBonus": 45,
+      "damage": "4d12+18"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 60
+    },
+    "abilities": [
+      "Impossible Stature",
+      "Reactive Strike",
+      "Demolish Veil",
+      "Hundred-Dimension Grasp",
+      "Hundred-Handed Whirlwind",
+      "Send Beyond",
+      "Shape Emptiness"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.yRZhGvSBQSShp9HF",
+    "name": "Sorvuth-Ka",
+    "level": 24,
+    "role": "Ranged",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 42,
+    "hp": 550,
+    "ac": 52,
+    "fortitude": 42,
+    "reflex": 38,
+    "will": 36,
+    "strike": {
+      "name": "Crystallized Blood",
+      "attackBonus": 44,
+      "damage": "5d6+21"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 60
+    },
+    "abilities": [
+      "Slumbering Armageddon",
+      "Absolute Regeneration",
+      "Adaptive Defenses",
+      "Bleed Destruction",
+      "Frightful Presence",
+      "Amber Strikes",
+      "Detonate Blood",
+      "Rough Rampage",
+      "Improved Grab"
+    ]
+  },
+  {
+    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.vpXcLtLPWNRGSQWA",
+    "name": "Green Man",
+    "level": 24,
+    "role": "Ability",
+    "sourcePack": "pathfinder-monster-core-2",
+    "publication": "Pathfinder Monster Core 2",
+    "license": "ORC",
+    "remaster": true,
+    "perception": 42,
+    "hp": 525,
+    "ac": 51,
+    "fortitude": 43,
+    "reflex": 39,
+    "will": 42,
+    "strike": {
+      "name": "Vine",
+      "attackBonus": 46,
+      "damage": "4d10+27"
+    },
+    "speed": {
+      "type": "Land",
+      "feet": 40
+    },
+    "abilities": [
+      "Green Tongue",
+      "Green Caress",
+      "Root In Place",
+      "Absorb Magic",
+      "Embed",
+      "Focus Vines",
+      "Green Grab",
+      "Green Rituals",
+      "Vine Forest",
+      "Improved Grab"
+    ]
+  }
+]

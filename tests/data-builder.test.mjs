@@ -37,6 +37,23 @@ test('requested attack-mode traits appear on the listed archetypes', async () =>
   }
 })
 
+test('Ability marks the archetypes powered chiefly by special abilities', async () => {
+  const { buildArchetype } = await import('../src/data-builder.ts')
+  const expected = ['Aegis', 'Barricade', 'Bastion', 'Bombard', 'Mirage', 'Priest', 'Rainmaker', 'Saboteur', 'Summoner', 'Support', 'Trapper', 'Witch']
+  const rows = parseCsv(sources['RoadMaps_Prod.csv']).filter((row) => !row['Road Map'].startsWith('Special:'))
+  assert.deepEqual(rows.filter((row) => row.ArchetypeTraits.split(',').includes('Ability')).map((row) => row['Road Map']).sort(), expected.sort())
+  for (const name of expected) assert.ok(buildArchetype(sources, name).archetypeTraits?.includes('Ability'), name)
+})
+
+test('Unusual Attack marks fighters with nontraditional main attacks', async () => {
+  const { buildArchetype } = await import('../src/data-builder.ts')
+  const expected = ['Pyro', 'Soldier']
+  const rows = parseCsv(sources['RoadMaps_Prod.csv']).filter((row) => !row['Road Map'].startsWith('Special:'))
+  assert.deepEqual(rows.filter((row) => row.ArchetypeTraits.split(',').includes('Unusual Attack')).map((row) => row['Road Map']).sort(), expected.sort())
+  for (const name of expected) assert.ok(buildArchetype(sources, name).archetypeTraits?.includes('Unusual Attack'), name)
+  assert.ok(!buildArchetype(sources, 'Pyro').archetypeTraits?.includes('Ability'))
+})
+
 test('Summoner minions scale separately and keep their special movement', async () => {
   const { buildSummonerMinions } = await import('../src/summoner-minions.ts')
   for (let level = -1; level <= 24; level++) {

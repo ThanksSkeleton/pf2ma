@@ -1,34 +1,34 @@
 Road Map,Role,Size,Perception,Athletics,Stealth/Acrobatics,Escape,AC,HP,Fortitude,Reflex,Will,Speed,Ranged Or Melee,Ranged Attack,Ranged Damage,Range,Melee Attack,Melee Damage,Spell Attack,Spell DC,Special Abilities,ArchetypeTraits
 Ace,Striker,Medium,High,Low,Low,Low,Low,Low,Low,,,High,R,High,Moderate,Low,-,-,,,Mirror Image,Ranged
-Aegis,Support,Medium,,Low,Low,Low,,Moderate,Low,Low,High,,R,Low,Low,Low,-,-,,,Aegis Ward; Sustain,Ranged
+Aegis,Support,Medium,,Low,Low,Low,,Moderate,Low,Low,High,,R,Low,Low,Low,-,-,,,Aegis Ward; Sustain,"Ranged,Ability"
 Archer,Controller,Medium,High,Low,High,High,Low,Low,Low,,,,R,High,Moderate,Moderate,-,-,,,Overwatch,Ranged
 Assassin,Striker,Medium,,Low,High,High,Moderate,Low,Low,Moderate,Low,High,M,Low,Low,Low,High,Moderate,,,Leaping Knockdown; Downed Prey; Camp; Hide; Sneak,"Flexible,Stealth,Cover"
-Soldier,Striker,Medium,,High,High,High,,Moderate,,,Low,,Spell,Moderate,Low,Low,Moderate,Low,,,Glancing Blow; Glancing Shot,Modal
-Barricade,Controller,Medium,Moderate,Low,Low,Low,Moderate,Moderate,Low,Moderate,Moderate,,R,High,Low,Low,-,-,,High,Summon Obstacle; Sustain,"Ranged,Cover,Hazards,Shove"
-Bastion,Defender,Medium,Low,High,Low,High,Moderate,High,,Terrible,,Low,M,-,-,-,Moderate,Moderate,,,Guardian Field; Advanced Shove; Sustain,"Melee,Maneuvers,Shove"
+Soldier,Striker,Medium,,High,High,High,,Moderate,,,Low,,Spell,Moderate,Low,Low,Moderate,Low,,,Glancing Blow; Glancing Shot,"Modal,Unusual Attack"
+Barricade,Controller,Medium,Moderate,Low,Low,Low,Moderate,Moderate,Low,Moderate,Moderate,,R,High,Low,Low,-,-,,High,Summon Obstacle; Sustain,"Ranged,Cover,Hazards,Shove,Ability"
+Bastion,Defender,Medium,Low,High,Low,High,Moderate,High,,Terrible,,Low,M,-,-,-,Moderate,Moderate,,,Guardian Field; Advanced Shove; Sustain,"Melee,Maneuvers,Shove,Ability"
 Berserker,Striker,Medium,Low,Low,Low,Low,Low,Moderate,Low,Low,Low,Moderate,M,-,-,-,High,High,,,Berserker Rage; Mindless Rush; Battle-Mad Strike,Melee
-Bombard,Artillery,Medium,Low,Low,Low,Low,Low,Moderate,Moderate,High,Low,,R,Moderate,Low,Low,-,-,,High,Aim and Fire Artillery,"Ranged,Hazards"
+Bombard,Artillery,Medium,Low,Low,Low,Low,Low,Moderate,Moderate,High,Low,,R,Moderate,Low,Low,-,-,,High,Aim and Fire Artillery,"Ranged,Hazards,Ability"
 Breacher,Striker,Medium,,High,High,High,,Moderate,,,Low,,M,-,-,-,Moderate,Moderate,,,Charge; Shattering Charge,Melee
 Kidnapper,Striker,Medium,,High,High,High,,Moderate,,,Low,,M,Low,Low,Low,Moderate,Moderate,,,Advanced Grapple; Advanced Maintain Grapple; Kidnap,"Flexible,Maneuvers,Grapple"
 Demolisher,Defender,Medium,Low,High,Low,High,Low,High,,Low,Low,Low,M,-,-,-,Moderate,High,,,Overcommitted Slam,Melee
-Summoner,Striker,Medium,,Low,Low,Low,Low,Low,Low,,High,,R,Low,Low,Low,-,-,,,Minion Master,Ranged
+Summoner,Striker,Medium,,Low,Low,Low,Low,Low,Low,,High,,R,Low,Low,Low,-,-,,,Minion Master,"Ranged,Ability"
 Goliath,Defender,Medium,Low,High,Low,High,Moderate,High,,Terrible,,Low,M,Low,Low,Low,Moderate,Moderate,,,Chosen Rival; Advanced Grapple; Advanced Maintain Grapple,"Flexible,Grapple"
 Despoiler,Controller,Medium,Moderate,Low,Low,High,High,Low,Moderate,Moderate,Moderate,,M,Low,Low,Low,High,Moderate,,High,Elemental Upheaval,"Flexible,Hazards"
 Hornet,Controller,Medium,,Low,Low,Low,Extreme,Low,Low,Low,Low,High,M,Low,Low,Low,High,Low,,,,Modal
-Mirage,Support,Medium,High,Low,Low,Low,,,High,,High,,Nil,-,-,-,-,-,,,Swap; Veil; Hidden; Hide; Sneak,"Pacifist,Stealth,Cover"
+Mirage,Support,Medium,High,Low,Low,Low,,,High,,High,,Nil,-,-,-,-,-,,,Swap; Veil; Hidden; Hide; Sneak,"Pacifist,Stealth,Cover,Ability"
 Operator,Artillery,Medium,Extreme,Low,High,Low,Low,Low,Low,Low,Low,Low,R,Low,Moderate,Moderate,-,-,,,Cover Jaunt; Deploy Cover Screen; Camp; Hide; Sneak,"Ranged,Cover,Stealth"
-Priest,Support,Medium,High,Low,Low,Low,Low,High,High,Low,High,Low,Nil,-,-,-,-,-,,,Pariah Aura; Lifelink Donor; Lifelink Recipient; Communal Heal,Pacifist
-Pyro,Defender,Medium,,Low,Low,Low,,Moderate,,,Low,,R,Low,Terrible,Low,-,-,,,Instinctive Rebuke; Blast,Flexible
-Rainmaker,Artillery,Medium,High,Low,Low,Low,Low,Low,Low,,,,R,High,Moderate,Moderate,-,-,,,Delayed Magic Missile,Ranged
+Priest,Support,Medium,High,Low,Low,Low,Low,High,High,Low,High,Low,Nil,-,-,-,-,-,,,Pariah Aura; Lifelink Donor; Lifelink Recipient; Communal Heal,"Pacifist,Ability"
+Pyro,Defender,Medium,,Low,Low,Low,,Moderate,,,Low,,R,Low,Terrible,Low,-,-,,,Instinctive Rebuke; Blast,"Flexible,Unusual Attack"
+Rainmaker,Artillery,Medium,High,Low,Low,Low,Low,Low,Low,,,,R,High,Moderate,Moderate,-,-,,,Delayed Magic Missile,"Ranged,Ability"
 Ronin,Striker,Medium,,Extreme,High,Extreme,High,Moderate,Low,High,Low,High,M,Low,Low,Low,High,Moderate,,,Chosen Rival; Advanced Disarm; Advanced Trip,"Flexible,Maneuvers,Trip,Disarm"
 Scourer,Striker,Medium,,Low,Low,Low,,Moderate,,Low,Low,Low,M,-,-,-,Moderate,Low,,,Branding; Escalating Strike,Melee
 Scout,Support,Medium,Extreme,Low,Low,Low,,Low,Low,,High,High,R,Low,,Low,-,-,,,Revealing Light; Dispel Magic: Spell; Hide; Sneak; See Invisible,"Ranged,Cover,Stealth"
-Trapper,Controller,Medium,Moderate,Low,High,High,High,Moderate,Low,High,Moderate,,R,Moderate,Low,Low,-,-,,High,Set Instant Trap; Throw Cover Screens,"Ranged,Cover,Hazards"
-Saboteur,Controller,Medium,Moderate,Low,High,High,Moderate,Moderate,Moderate,High,Terrible,,R,,,Moderate,-,-,,High,Set Mine; Thrown Burst; Final Burst,"Ranged,Hazards"
+Trapper,Controller,Medium,Moderate,Low,High,High,High,Moderate,Low,High,Moderate,,R,Moderate,Low,Low,-,-,,High,Set Instant Trap; Throw Cover Screens,"Ranged,Cover,Hazards,Ability"
+Saboteur,Controller,Medium,Moderate,Low,High,High,Moderate,Moderate,Moderate,High,Terrible,,R,,,Moderate,-,-,,High,Set Mine; Thrown Burst; Final Burst,"Ranged,Hazards,Ability"
 Sentinel,Defender,Medium,Low,Extreme,Low,High,Moderate,High,,Terrible,,Low,M,Low,Low,Low,Moderate,Moderate,,,Reactive Strike; Reactive Trip; Tactical Reflexes; Advanced Trip,"Flexible,Maneuvers,Trip,Shove"
 Sniper,Artillery,Medium,Extreme,Low,High,Low,Low,Low,Low,Low,Low,Low,R,Extreme,Moderate,High,-,-,,High,Paint Target; Red Dot; Exposed,"Ranged,Cover"
 Specter,Striker,Medium,,Low,High,Low,Moderate,Low,Low,Moderate,Low,High,M,Low,Low,Low,High,Moderate,,,Shadow Prowl; Isolated Prey; Hidden; Hide; Sneak,"Flexible,Stealth,Cover"
-Support,Support,Medium,Low,Low,Low,Low,Low,Moderate,Moderate,Moderate,Low,,Nil,-,-,-,-,-,,Moderate,"Heal (once per day, rank half the creature's level rounded up, minimum 1, maximum 10); Red Buff: Force; Green Buff: Guard; Blue Buff: Motion",Pacifist
-Witch,Controller,Medium,,Low,Low,Low,,Low,Low,Low,High,,R,Low,Low,Low,-,-,,,Bound by Blood; Divided by Plague,Ranged
+Support,Support,Medium,Low,Low,Low,Low,Low,Moderate,Moderate,Moderate,Low,,Nil,-,-,-,-,-,,Moderate,"Heal (once per day, rank half the creature's level rounded up, minimum 1, maximum 10); Red Buff: Force; Green Buff: Guard; Blue Buff: Motion","Pacifist,Ability"
+Witch,Controller,Medium,,Low,Low,Low,,Low,Low,Low,High,,R,Low,Low,Low,-,-,,,Bound by Blood; Divided by Plague,"Ranged,Ability"
 Special: Melee Minion,N/A,Small,Terrible,Low,Low,Low,Low,Terrible,Terrible,Terrible,Terrible,15 feet,M,Low,Low,Low,Moderate,Terrible,,,,
 Special: Ranged Minion,N/A,Small,Terrible,Low,Low,Low,Low,Superterrible,Terrible,Terrible,Terrible,0 feet,R,Moderate,Terrible,Low,-,-,,,,
