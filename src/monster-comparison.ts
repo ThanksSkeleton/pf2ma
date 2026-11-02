@@ -19,12 +19,14 @@ export function matchingPublishedMonster<T extends { level: number; role: string
   return monsters.find((monster) => monster.level === level && monster.role === publishedType)
 }
 
-export type RankName = 'Superterrible' | 'Terrible' | 'Low' | 'Minimum' | 'Moderate' | 'High' | 'Maximum' | 'Extreme'
+export type RankName = 'Superterrible' | 'Terrible' | 'Low' | 'LowPlus' | 'Minimum' | 'Moderate'
+  | 'ModeratePlus' | 'High' | 'HighPlus' | 'Maximum' | 'Extreme' | 'ExtremePlus'
 export type RankBand = { lower: RankName; upper: RankName }
 
 export const rankColors: Record<RankName, string> = {
-  Superterrible: '#3F224D', Terrible: '#5C34AD', Low: '#0000FF', Minimum: '#0000FF',
-  Moderate: '#00FF00', High: '#FFFF00', Maximum: '#FF0000', Extreme: '#FF0000',
+  Superterrible: '#3F224D', Terrible: '#5C34AD', Low: '#0000FF', LowPlus: '#008080', Minimum: '#0000FF',
+  Moderate: '#00FF00', ModeratePlus: '#80FF00', High: '#FFFF00', HighPlus: '#FF8000',
+  Maximum: '#FF0000', Extreme: '#FF0000', ExtremePlus: '#B00000',
 }
 
 export function winnerFor(archetype: number | null, official: number | null): 'archetype' | 'official' | null {
@@ -33,7 +35,10 @@ export function winnerFor(archetype: number | null, official: number | null): 'a
   return archetype > official ? 'archetype' : 'official'
 }
 
-const rankOrder: RankName[] = ['Superterrible', 'Terrible', 'Low', 'Minimum', 'Moderate', 'High', 'Maximum', 'Extreme']
+const rankOrder: RankName[] = [
+  'Superterrible', 'Terrible', 'Low', 'LowPlus', 'Minimum', 'Moderate', 'ModeratePlus',
+  'High', 'HighPlus', 'Maximum', 'Extreme', 'ExtremePlus',
+]
 const rankNames = new Set<string>(rankOrder)
 
 /** Average of plain base-damage dice and flat modifiers. Conditional damage is not included. */

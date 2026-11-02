@@ -683,34 +683,33 @@
     ]
   },
   {
-    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.KgJq51AeYrENo3Db",
-    "name": "Will-o'-Wisp",
+    "id": "Compendium.pf2e.pathfinder-monster-core.Actor.9SNpsnwlzZjH4DQf",
+    "name": "Choral",
     "level": 6,
     "role": "Ability",
     "sourcePack": "pathfinder-monster-core",
     "publication": "Pathfinder Monster Core",
     "license": "ORC",
     "remaster": true,
-    "perception": 16,
-    "hp": 50,
-    "ac": 27,
+    "perception": 14,
+    "hp": 100,
+    "ac": 24,
     "fortitude": 10,
-    "reflex": 16,
-    "will": 14,
+    "reflex": 14,
+    "will": 16,
     "strike": {
-      "name": "Shock",
+      "name": "Piercing Hymn",
       "attackBonus": 17,
-      "damage": "2d8+4"
+      "damage": "4d6"
     },
     "speed": {
       "type": "Fly",
-      "feet": 50
+      "feet": 40
     },
     "abilities": [
-      "Glow",
-      "Magic Immunity",
-      "Feed on Fear",
-      "Go Dark"
+      "Harmonizing Aura",
+      "Deafening Aria",
+      "Harmonize"
     ]
   },
   {
@@ -1417,35 +1416,35 @@
     ]
   },
   {
-    "id": "Compendium.pf2e.pathfinder-npc-core.Actor.yU434Ugr11tvU7TS",
-    "name": "Siegebreaker",
+    "id": "Compendium.pf2e.pathfinder-bestiary-3.Actor.Lqm3acjjbLKuRUCf",
+    "name": "Peri",
     "level": 14,
     "role": "Ranged",
-    "sourcePack": "pathfinder-npc-core",
-    "publication": "Pathfinder NPC Core",
-    "license": "ORC",
-    "remaster": true,
-    "perception": 24,
-    "hp": 300,
-    "ac": 34,
-    "fortitude": 25,
-    "reflex": 28,
-    "will": 23,
+    "sourcePack": "pathfinder-bestiary-3",
+    "publication": "Pathfinder Bestiary 3",
+    "license": "OGL",
+    "remaster": false,
+    "perception": 26,
+    "hp": 255,
+    "ac": 36,
+    "fortitude": 22,
+    "reflex": 27,
+    "will": 26,
     "strike": {
-      "name": "Alchemical Grenade",
-      "attackBonus": 27,
-      "damage": "3d6"
+      "name": "Flame Ray",
+      "attackBonus": 29,
+      "damage": "8d6"
     },
     "speed": {
       "type": "Land",
-      "feet": 25
+      "feet": 0
     },
     "abilities": [
-      "Alchemical Grenades",
-      "Explosive Compounds",
-      "Expanded Splash",
-      "Quick Grenadier",
-      "The Wall Must Fall"
+      "Shining Blaze",
+      "Flame Jump",
+      "Flameheart Weapon",
+      "Flamewing Buffet",
+      "Wildfire Storm"
     ]
   },
   {
@@ -1914,34 +1913,35 @@
     ]
   },
   {
-    "id": "Compendium.pf2e.pathfinder-monster-core-2.Actor.Ws6554On4eh2Blq7",
-    "name": "Tzitzimitl",
+    "id": "Compendium.pf2e.pathfinder-bestiary-2.Actor.FRTpT9rLxUBKGdin",
+    "name": "Star Archon",
     "level": 19,
     "role": "Ranged",
-    "sourcePack": "pathfinder-monster-core-2",
-    "publication": "Pathfinder Monster Core 2",
-    "license": "ORC",
-    "remaster": true,
-    "perception": 32,
-    "hp": 390,
+    "sourcePack": "pathfinder-bestiary-2",
+    "publication": "Pathfinder Bestiary 2",
+    "license": "OGL",
+    "remaster": false,
+    "perception": 35,
+    "hp": 400,
     "ac": 43,
-    "fortitude": 29,
-    "reflex": 32,
-    "will": 35,
+    "fortitude": 31,
+    "reflex": 34,
+    "will": 34,
     "strike": {
-      "name": "Eye Beam",
-      "attackBonus": 34,
-      "damage": "4d12+10d6"
+      "name": "Starknife",
+      "attackBonus": 38,
+      "damage": "3d4+16+2d6+3d6"
     },
     "speed": {
       "type": "Fly",
-      "feet": 60
+      "feet": 75
     },
     "abilities": [
-      "Fast Healing 15",
-      "Light to Dark",
-      "Drain Life",
-      "Eclipse"
+      "Blinding Soul",
+      "Explosive Rebirth",
+      "Retributive Strike",
+      "Archon's Door",
+      "Prudent Asterism"
     ]
   },
   {

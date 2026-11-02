@@ -360,7 +360,10 @@ const displayDamage = (formula: string | undefined) => {
   const average = damageAverage(formula)
   return average === null ? formula : `${average} (${formula})`
 }
-const comparisonRankKey: RankName[] = ['Superterrible', 'Terrible', 'Low', 'Moderate', 'High', 'Extreme', 'Minimum', 'Maximum']
+const comparisonRankKey: RankName[] = [
+  'Superterrible', 'Terrible', 'Low', 'LowPlus', 'Moderate', 'ModeratePlus',
+  'High', 'HighPlus', 'Extreme', 'ExtremePlus', 'Minimum', 'Maximum',
+]
 
 const renderRankCell = (band: RankBand | null, side: string, wins: boolean) => {
   const winnerClass = wins ? ' comparison-winner-end' : ''

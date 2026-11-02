@@ -25,7 +25,9 @@ type LevelData = { level: number; published: number | null; values: Measurement[
 const benchmarkTables: Record<GraphMetric, { file: string; ranks: string[] }> = {
   AC: { file: 'table-2-5-armor-class.csv', ranks: ['Low', 'Moderate', 'High', 'Extreme'] },
   HP: { file: 'table-2-7-hit-points.csv', ranks: ['Superterrible', 'Terrible', 'Low', 'Moderate', 'High'] },
-  'Attack Bonus': { file: 'table-2-9-strike-attack-bonus.csv', ranks: ['Low', 'Moderate', 'High', 'Extreme'] },
+  'Attack Bonus': { file: 'table-2-9-strike-attack-bonus.csv', ranks: [
+    'Low', 'LowPlus', 'Moderate', 'ModeratePlus', 'High', 'HighPlus', 'Extreme', 'ExtremePlus',
+  ] },
   Damage: { file: 'table-2-10-strike-damage.csv', ranks: ['Terrible', 'Low', 'Moderate', 'High', 'Extreme'] },
 }
 

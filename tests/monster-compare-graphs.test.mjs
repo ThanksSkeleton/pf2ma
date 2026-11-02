@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { readFile, readdir } from 'node:fs/promises'
 import test from 'node:test'
 import { buildArchetype, parseCsv } from '../src/data-builder.ts'
-import { createGraphAnalysis, previewRankedValue } from '../src/monster-compare-graphs.ts'
+import { createGraphAnalysis, maxPreviewBump, previewRankedValue } from '../src/monster-compare-graphs.ts'
 import { comparisonAttack } from '../src/monster-comparison.ts'
 
 const directory = new URL('../csv/', import.meta.url)
@@ -63,6 +63,19 @@ test('preview steps through benchmark ranks and clamps each monster at the table
   assert.deepEqual(at('AC', 4), at('AC', 3))
   assert.deepEqual(analysis.seriesFor('Ability', 'Attack Bonus', 2).points.find((point) => point.level === 1),
     { level: 1, value: null, count: 0 })
+})
+
+test('attack preview advances through each Plus column', () => {
+  const row = parseCsv(sources['table-2-9-strike-attack-bonus.csv']).find((entry) => entry.Level === '1')
+  const ranks = ['Low', 'LowPlus', 'Moderate', 'ModeratePlus', 'High', 'HighPlus', 'Extreme', 'ExtremePlus']
+  const benchmarks = ranks.map((rank) => ({ rank, value: Number(row[rank]) }))
+  assert.equal(maxPreviewBump('Attack Bonus'), 7)
+  assert.equal(previewRankedValue({ value: Number(row.High) }, benchmarks, 1), Number(row.HighPlus))
+  assert.equal(previewRankedValue({ value: Number(row.High) }, benchmarks, 2), Number(row.Extreme))
+  assert.equal(previewRankedValue({ value: Number(row.Extreme) }, benchmarks, 1), Number(row.ExtremePlus))
+  assert.equal(previewRankedValue({ value: Number(row.Moderate) }, benchmarks, -1), Number(row.LowPlus))
+  assert.ok(analysis.seriesFor('Melee+', 'Attack Bonus', 1).points[2].value >
+    analysis.seriesFor('Melee+', 'Attack Bonus', 2).points[2].value)
 })
 
 test('Modal attack data follows the selected graph category', () => {
