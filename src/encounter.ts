@@ -65,8 +65,7 @@ export function rollEncounter(template: EncounterTemplate, partyLevel: number, a
     const chosen = candidates[index]
     remaining.splice(remaining.indexOf(chosen), 1)
     if (chosen.traits.includes('Pacifist')) pacifists++
-    const mode = chosen.traits.includes('Modal') && (entry.category === 'Melee+' || entry.category === 'Ranged+')
-      ? (entry.category === 'Melee+' ? 'Melee' : 'Ranged') : undefined
+    const mode = chosen.traits.includes('Modal') ? (entry.category === 'Ranged+' ? 'Ranged' : 'Melee') : undefined
     return { name: chosen.name, count: entry.count, level: partyLevel + entry.levelOffset, ...(mode ? { mode } : {}) }
   })
 }

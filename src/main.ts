@@ -244,11 +244,11 @@ app.innerHTML = `
   </nav>
   <section id="encounter-view" role="tabpanel" aria-labelledby="encounter-tab">
     <div class="builder-controls encounter-controls">
-      <label for="encounter-template">Quick adventure group<select id="encounter-template">${encounterTemplates.map((template, index) => `<option value="${index}">${escapeHtml(template.name)} (${template.xp} XP)</option>`).join('')}</select></label>
+      <label for="encounter-template">Encounter<select id="encounter-template">${encounterTemplates.map((template, index) => `<option value="${index}">${escapeHtml(template.name)} (${template.xp} XP)</option>`).join('')}</select></label>
       <label for="encounter-level">Party level<select id="encounter-level"></select></label>
       <button type="button" id="roll-encounter">Roll encounter</button>
     </div>
-    <div id="encounter-result" role="region" aria-live="polite" aria-label="Encounter result"><p class="encounter-prompt">Choose a group and party level, then roll an encounter.</p></div>
+    <div id="encounter-result" role="region" aria-live="polite" aria-label="Encounter result"><p class="encounter-prompt">Choose an encounter and party level, then roll it.</p></div>
   </section>
   <section id="monster-view" role="tabpanel" aria-labelledby="monster-tab" hidden>
   <div class="builder-controls builder-controls--top" aria-label="Archetype options">
@@ -286,7 +286,7 @@ const renderEncounterLevels = () => {
 }
 
 const clearEncounter = () => {
-  encounterResult.innerHTML = '<p class="encounter-prompt">Choose a group and party level, then roll an encounter.</p>'
+  encounterResult.innerHTML = '<p class="encounter-prompt">Choose an encounter and party level, then roll it.</p>'
   if (activeTab === 'encounter') document.title = 'Encounter | PF2E Monster Archetype Bank'
 }
 

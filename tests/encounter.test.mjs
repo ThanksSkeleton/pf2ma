@@ -48,6 +48,12 @@ test('pacifists are exclusive and Elite Enemies uses at most one', () => {
   assert.deepEqual(groups.map((group) => group.name), ['Mirage', 'Ace', 'Bastion'])
 })
 
+test('role-only encounters record the default mode for Modal archetypes', () => {
+  const controller = encounterTemplates.find((template) => template.name === 'Mook Squad : Controller')
+  assert.deepEqual(rollEncounter(controller, 5, [byName.get('Hornet')]),
+    [{ name: 'Hornet', count: 6, level: 1, mode: 'Melee' }])
+})
+
 test('unsupported levels and empty category pools fail clearly', () => {
   assert.throws(() => rollEncounter(encounterTemplates[0], 2, archetypes), /Unsupported party level/)
   assert.throws(() => rollEncounter(encounterTemplates[0], 5, []), /No archetypes available for Melee\+/)
