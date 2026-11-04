@@ -23,8 +23,8 @@ test('graph series use matching encounter pools and omit absent attacks', () => 
   const at = (category, metric, level) => series.find((entry) => entry.category === category && entry.metric === metric)
     .points.find((point) => point.level === level)
 
-  assert.deepEqual(at('Melee+', 'AC', 1), { level: 1, value: 1.8571428571428577, count: 14 })
-  assert.deepEqual(at('Ranged+', 'AC', 1), { level: 1, value: 1.5714285714285712, count: 7 })
+  assert.deepEqual(at('Melee+', 'AC', 1), { level: 1, value: 1.7857142857142865, count: 14 })
+  assert.deepEqual(at('Ranged+', 'AC', 1), { level: 1, value: 0.14285714285714235, count: 7 })
   assert.equal(at('Melee+', 'Attack Bonus', 1).count, 13)
   assert.equal(at('Ranged+', 'Attack Bonus', 1).count, 7)
   assert.equal(at('Ability', 'AC', 1).count, 12)

@@ -16,8 +16,8 @@ test('CSV parser preserves quoted commas, quotes, newlines, and empty trailing c
 })
 
 test('builder reads changed benchmarks and fails clearly for missing data or unsupported levels', () => {
-  const changed = { ...sources, 'table-2-5-armor-class.csv': sources['table-2-5-armor-class.csv'].replace('1,19,16,15,13', '1,19,16,15,12') }
-  assert.equal(buildAce(changed).statGroups[1][0].value, '12')
+  const changed = { ...sources, 'table-2-5-armor-class.csv': sources['table-2-5-armor-class.csv'].replace('1,19,16,15,13', '1,19,16,14,13') }
+  assert.equal(buildAce(changed).statGroups[1][0].value, '14')
   assert.throws(() => buildAce({}, 1), /Missing CSV/)
   assert.throws(() => buildAce(sources, 25), /Level must/)
 })
@@ -52,6 +52,33 @@ test('Unusual Attack marks fighters with nontraditional main attacks', async () 
   assert.deepEqual(rows.filter((row) => row.ArchetypeTraits.split(',').includes('Unusual Attack')).map((row) => row['Road Map']).sort(), expected.sort())
   for (const name of expected) assert.ok(buildArchetype(sources, name).archetypeTraits?.includes('Unusual Attack'), name)
   assert.ok(!buildArchetype(sources, 'Pyro').archetypeTraits?.includes('Ability'))
+})
+
+test('slot rank changes reach generated stats and active attacks', async () => {
+  const { buildArchetype } = await import('../src/data-builder.ts')
+  const { comparisonAttack } = await import('../src/monster-comparison.ts')
+  const ace = buildArchetype(sources, 'Ace')
+  assert.deepEqual(ace.statGroups[1].map((stat) => stat.value), ['15', '20'])
+  assert.equal(ace.attack.attack, '+11')
+
+  const aegis = buildArchetype(sources, 'Aegis')
+  assert.deepEqual(aegis.statGroups[1].map((stat) => stat.value), ['16', '20'])
+  assert.equal(aegis.attack.attack, '+6')
+
+  const soldier = buildArchetype(sources, 'Soldier')
+  assert.deepEqual(soldier.statGroups[1].map((stat) => stat.value), ['16', '25'])
+  assert.deepEqual([comparisonAttack(soldier, 'Melee')?.attack, comparisonAttack(soldier, 'Melee')?.damage],
+    ['+8', '1d6+2'])
+  assert.deepEqual([comparisonAttack(soldier, 'Ranged')?.attack, comparisonAttack(soldier, 'Ranged')?.damage],
+    ['+9', '1d4+2'])
+
+  const hornet = buildArchetype(sources, 'Hornet')
+  assert.deepEqual(hornet.statGroups[1].map((stat) => stat.value), ['19', '20'])
+  assert.equal(comparisonAttack(hornet, 'Melee')?.attack, '+10')
+  assert.equal(comparisonAttack(hornet, 'Ranged')?.attack, '+7')
+  assert.equal(buildArchetype(sources, 'Sniper').attack.attack, '+12')
+  assert.equal(buildArchetype(sources, 'Demolisher').statGroups[1][1].value, '25')
+  assert.equal(comparisonAttack(buildArchetype(sources, 'Pyro'), 'Melee'), undefined)
 })
 
 test('Summoner minions scale separately and keep their special movement', async () => {
